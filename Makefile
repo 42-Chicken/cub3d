@@ -23,7 +23,14 @@ FAIL				=	✗
 INFO				=	ⓘ
 
 # Sources and Objects
-SRCS				=	src/main.c
+SRCS				=	src/main.c\
+						src/parsing/parsing.c\
+						src/parsing/file.c\
+						src/parsing/data.c\
+						src/utils/endswith.c\
+						src/utils/ft_split_with_set.c\
+						src/utils/ft_is_only_digits.c\
+						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a
 MLX_LIB 			= ./libs/minilibx-linux/libmlx_Linux.a
@@ -66,7 +73,7 @@ $(FT_LIBC) :
 	@$(MAKE) $(shell dirname $@) SAFE=1
 
 dev	 : clean-objs all
-	valgrind --suppressions=/home/rguigneb/projects/minishell/readline.supp -s --track-fds=yes --trace-children=yes --show-leak-kinds=all --leak-check=full -q ./minishell
+	valgrind --track-fds=yes --trace-children=yes --show-leak-kinds=all --leak-check=full -q ./cub3d maps/valids/map.cub
 
 header:
 		@printf "\
