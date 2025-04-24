@@ -4,6 +4,7 @@
 		"libft.h": "c",
 		"ft_fprintf.h": "c",
 		"stdbool.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"garbage.h": "c"
 	}
 }

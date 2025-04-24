@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:50:29 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 12:58:27 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:25:52 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static int	parsing_get_identifier(char **line, char **buffer)
 static bool	parsing_set_and_read_id_value(char **target, char *value)
 {
 	*target = ft_strtrim(value, SPACES);
+	if (ft_strlen(*target) <= 0)
+		return (_error("invalid path in map data!"), *target = NULL, false);
 	send_pointer_to_main_context(*target);
 	return (true);
 }
@@ -50,35 +52,37 @@ static bool	parsing_set_and_read_color_id_value(t_color *target, char *value)
 	{
 		if (is_not_only_digits(splitted[i]) == false
 			|| ft_atoi(splitted[i]) > 255 || ft_strlen(splitted[i]) > 3)
-			return (false);
+			return (_error("invalid color value in the map data!"), false);
 		*target = ((*target << d) | ft_atoi(splitted[i]));
 		i++;
 		d += 8;
 	}
+	if (i != 3)
+		return (_error("missing color value in the map data!"), false);
 	return (true);
 }
 
 static bool	parsing_map_identifier(t_cub3d *cub3d, char *buffer, char *value)
 {
-	if (ft_strncmp("NO", buffer, ft_strlen(buffer)) == 0)
+	if (is_same_str("NO", buffer))
 		return (parsing_set_and_read_id_value(&cub3d->north_texture_path,
 				value));
-	if (ft_strncmp("SO", buffer, ft_strlen(buffer)) == 0)
+	if (is_same_str("SO", buffer))
 		return (parsing_set_and_read_id_value(&cub3d->south_texture_path,
 				value));
-	if (ft_strncmp("WE", buffer, ft_strlen(buffer)) == 0)
+	if (is_same_str("WE", buffer))
 		return (parsing_set_and_read_id_value(&cub3d->west_texture_path,
 				value));
-	if (ft_strncmp("EA", buffer, ft_strlen(buffer)) == 0)
+	if (is_same_str("EA", buffer))
 		return (parsing_set_and_read_id_value(&cub3d->east_texture_path,
 				value));
-	if (ft_strncmp("F", buffer, ft_strlen(buffer)) == 0)
+	if (is_same_str("F", buffer))
 		return (parsing_set_and_read_color_id_value(&cub3d->floor_color,
 				value));
-	if (ft_strncmp("C", buffer, ft_strlen(buffer)) == 0)
+	if (is_same_str("C", buffer))
 		return (parsing_set_and_read_color_id_value(&cub3d->ceiling_color,
 				value));
-	return (true);
+	return (_error("invalid map data!"), false);
 }
 
 bool	parse_data(t_cub3d *cub3d, int fd)
@@ -87,7 +91,8 @@ bool	parse_data(t_cub3d *cub3d, int fd)
 	char	*id;
 	int		offset;
 
-	while (true)
+	while (!cub3d->east_texture_path || !cub3d->west_texture_path
+		|| !cub3d->north_texture_path || !cub3d->south_texture_path)
 	{
 		line = get_next_line(fd);
 		if (!line)

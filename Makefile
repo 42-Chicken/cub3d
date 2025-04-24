@@ -27,9 +27,13 @@ SRCS				=	src/main.c\
 						src/parsing/parsing.c\
 						src/parsing/file.c\
 						src/parsing/data.c\
+						src/parsing/map.c\
+						src/parsing/map_checks.c\
 						src/utils/endswith.c\
+						src/utils/is_same_str.c\
 						src/utils/ft_split_with_set.c\
 						src/utils/ft_is_only_digits.c\
+						src/utils/is_not_only_spaces.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a
