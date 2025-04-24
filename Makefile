@@ -29,6 +29,7 @@ SRCS				=	src/main.c\
 						src/parsing/data.c\
 						src/parsing/map.c\
 						src/parsing/map_checks.c\
+						src/player/player.c\
 						src/utils/endswith.c\
 						src/utils/is_same_str.c\
 						src/utils/ft_split_with_set.c\

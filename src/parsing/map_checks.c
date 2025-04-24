@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:55:38 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 15:06:30 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:35:02 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,8 @@ bool	parsing_check_map(t_cub3d *cub3d)
 {
 	if (parsing_map_only_contains_allowed_chars(cub3d) == false)
 		return (_error("none supported characteres in map data!"), false);
+	// check doublon
+	// check walls
+	// 
 	return (true);
 }

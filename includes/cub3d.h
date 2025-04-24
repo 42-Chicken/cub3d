@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 15:02:43 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:29:14 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,18 @@
 # define SPACES " \t\n\v\f\r"
 # define CUB3D_MAP_SUPPORTED_CHARS "10NSEW"
 
+typedef struct s_uvec_2
+{
+	unsigned int		x;
+	unsigned int		y;
+}						t_uvec2;
+
+typedef struct s_dvec_2
+{
+	double				x;
+	double				y;
+}						t_dvec2;
+
 typedef enum e_cub3d_log_level
 {
 	CUB3D_LOG_DEBUG,
@@ -50,6 +62,12 @@ typedef struct s_map
 	char				**buffer;
 }						t_map;
 
+typedef struct s_player
+{
+	t_dvec2				position;
+	double				rotation_angle;
+}						t_player;
+
 typedef struct s_cub3d
 {
 	const char			**av;
@@ -62,7 +80,7 @@ typedef struct s_cub3d
 
 	t_color				floor_color;
 	t_color				ceiling_color;
-
+	t_player			player;
 	t_map				map;
 }						t_cub3d;
 
@@ -73,6 +91,10 @@ bool					parsing_check_map(t_cub3d *cub3d);
 int						parsing_open_file(t_cub3d *cub3d);
 bool					parse_data(t_cub3d *cub3d, int fd);
 bool					parse_map(t_cub3d *cub3d, int fd);
+
+// PLAYER
+void					set_player_position_angle(t_cub3d *cub3d, t_dvec2 pos,
+							double angle);
 
 // LOGS
 void					_info(const char *msg);

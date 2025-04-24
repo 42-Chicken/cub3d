@@ -6,11 +6,12 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:26:56 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 14:55:26 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:34:12 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <math.h>
 
 static t_list	*parsing_get_map_lines(int fd)
 {
@@ -65,6 +66,35 @@ static void	parsing_fill_map_buffer(t_cub3d *cub3d, t_list *head)
 	}
 }
 
+void	parsing_set_player_data(t_cub3d *cub3d)
+{
+	size_t	y;
+	size_t	x;
+
+	y = 0;
+	while (y < cub3d->map.height)
+	{
+		x = 0;
+		while (x < ft_strlen(cub3d->map.buffer[y]))
+		{
+			if (cub3d->map.buffer[y][x] == 'N')
+				set_player_position_angle(cub3d, (t_dvec2){(double)x,
+					(double)y}, M_PI / 2);
+			if (cub3d->map.buffer[y][x] == 'S')
+				set_player_position_angle(cub3d, (t_dvec2){(double)x,
+					(double)y}, M_PI + M_PI / 2);
+			if (cub3d->map.buffer[y][x] == 'E')
+				set_player_position_angle(cub3d, (t_dvec2){(double)x,
+					(double)y}, M_PI * 2);
+			if (cub3d->map.buffer[y][x] == 'W')
+				set_player_position_angle(cub3d, (t_dvec2){(double)x,
+					(double)y}, M_PI);
+			x++;
+		}
+		y++;
+	}
+}
+
 bool	parse_map(t_cub3d *cub3d, int fd)
 {
 	t_list	*head;
@@ -76,6 +106,10 @@ bool	parse_map(t_cub3d *cub3d, int fd)
 	cub3d->map.height = ft_lstsize(head);
 	cub3d->map.buffer = safe_malloc(sizeof(char *) * cub3d->map.height);
 	parsing_fill_map_buffer(cub3d, head);
+	cub3d->player.position = (t_dvec2){-1, -1};
+	parsing_set_player_data(cub3d);
+	if (cub3d->player.position.x == -1 || cub3d->player.position.y == -1)
+		return (_error("no player spawn position in the map!"), false);
 	if (parsing_check_map(cub3d) == false)
 		return (false);
 	return (true);
