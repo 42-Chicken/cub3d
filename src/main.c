@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 09:30:47 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:44:42 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char const *argv[])
 	cub3d.av = argv;
 	if (parse(&cub3d) == false)
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
+	if (init_mlx(&cub3d) == false)
+		return (free_all_contexts_garbage(), EXIT_FAILURE);
 	printf("F %x \n", cub3d.floor_color);
 	printf("C %x \n", cub3d.ceiling_color);
 	printf("NO %s \n", cub3d.north_texture_path);
@@ -29,6 +31,9 @@ int	main(int argc, char const *argv[])
 	printf("EA %s \n", cub3d.east_texture_path);
 	printf("MAP width %zu \n", cub3d.map.width);
 	printf("MAP height %zu \n", cub3d.map.height);
+	init_mlx_hooks(&cub3d);
+	mlx_loop(cub3d.mlx);
+	destroy_mlx(&cub3d);
 	free_all_contexts_garbage();
 	return (EXIT_SUCCESS);
 }

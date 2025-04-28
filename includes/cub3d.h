@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 09:29:33 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:45:26 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@
 # include "garbage.h"
 # include "get_next_line.h"
 # include "libft.h"
+# include "mlx.h"
+# include "mlx_int.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# define SCREEN_W 1550
+# define SCREEN_H 850
 
 # define CUB3D_LOG_PREFIX "CUB3D"
 # define CUB3D_MAX_MAP_ID_LENGTH 2
@@ -89,7 +94,19 @@ typedef struct s_cub3d
 	t_color				ceiling_color;
 	t_player			player;
 	t_map				map;
+
+	t_img				*rendering_buffer;
+
+	void				*mlx;
+	void				*win;
 }						t_cub3d;
+
+// MAIN
+bool					init_mlx(t_cub3d *cub3d);
+void					init_mlx_hooks(t_cub3d *cub3d);
+bool					destroy_mlx(t_cub3d *cub3d);
+void					loop(t_cub3d *cub3d);
+void					end_loop(t_cub3d *cub3d);
 
 // PARSING
 bool					parse(t_cub3d *cube3d);

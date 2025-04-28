@@ -2,7 +2,7 @@
 NAME				=	cub3d
 CC					=	clang
 
-CFLAGS				=	-Wall -Werror -Wextra -O3 -O2 -ffast-math -march=native -Ilibs/ft_libc/includes -Ilibs/minilibx_linux -Iincludes -fPIE -g
+CFLAGS				=	-Wall -Werror -Wextra -O3 -O2 -ffast-math -march=native -Ilibs/ft_libc/includes -Ilibs/minilibx-linux -Iincludes -fPIE -g
 RM					=	rm -rf
 MAKE				=	make --no-print-directory -C
 
@@ -24,6 +24,8 @@ INFO				=	ⓘ
 
 # Sources and Objects
 SRCS				=	src/main.c\
+						src/mlx.c\
+						src/loop.c\
 						src/parsing/parsing.c\
 						src/parsing/file.c\
 						src/parsing/data.c\
@@ -49,7 +51,7 @@ OBJ_DIR				=	objects
 all : $(NAME)
 
 $(NAME) : header $(MLX_LIB) $(FT_LIBC) $(OBJ_DIR)
-		@$(CC) $(CFLAGS) $(READLINE_FLAG) $(OBJS) $(FT_LIBC) $(MLX_LIB) -o $(NAME)
+		@$(CC) -lXext -lX11 -lm -lz $(CFLAGS) $(OBJS) $(FT_LIBC) $(MLX_LIB) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c
 		@mkdir -p $(dir $@)
