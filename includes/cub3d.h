@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 15:29:14 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:20:07 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ typedef struct s_dvec_2
 	double				x;
 	double				y;
 }						t_dvec2;
+
+typedef enum e_cub3d_map_values
+{
+	CUB3D_MAP_VOID = -1,
+	CUB3D_MAP_FLOOR = '0',
+	CUB3D_MAP_WALL = '1',
+}						t_e_cub3d_map_values;
 
 typedef enum e_cub3d_log_level
 {
@@ -95,6 +102,10 @@ bool					parse_map(t_cub3d *cub3d, int fd);
 // PLAYER
 void					set_player_position_angle(t_cub3d *cub3d, t_dvec2 pos,
 							double angle);
+
+// MAP
+bool					map_is_floor(t_cub3d *cub3d, size_t x, size_t y);
+bool					map_is_void(t_cub3d *cub3d, size_t x, size_t y);
 
 // LOGS
 void					_info(const char *msg);

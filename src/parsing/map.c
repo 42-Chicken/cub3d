@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:26:56 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 15:34:12 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:13:47 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,28 @@ static size_t	parsing_get_longest_line(t_list *head)
 static void	parsing_fill_map_buffer(t_cub3d *cub3d, t_list *head)
 {
 	t_list	*c;
-	size_t	i;
+	size_t	y;
+	size_t	x;
 
-	i = 0;
+	y = 0;
 	c = head;
 	while (c)
 	{
-		cub3d->map.buffer[i++] = (char *)c->content;
+		cub3d->map.buffer[y++] = (char *)c->content;
 		send_pointer_to_main_context(c->content);
 		c = c->next;
+	}
+	y = 0;
+	while (y < cub3d->map.height)
+	{
+		x = 0;
+		while (x < ft_strlen(cub3d->map.buffer[y]))
+		{
+			if (ft_isspace(cub3d->map.buffer[y][x]) == true)
+				cub3d->map.buffer[y][x] = CUB3D_MAP_VOID;
+			x++;
+		}
+		y++;
 	}
 }
 
@@ -110,6 +123,7 @@ bool	parse_map(t_cub3d *cub3d, int fd)
 	parsing_set_player_data(cub3d);
 	if (cub3d->player.position.x == -1 || cub3d->player.position.y == -1)
 		return (_error("no player spawn position in the map!"), false);
+	cub3d->map.buffer[(int)cub3d->player.position.y][(int)cub3d->player.position.x] = CUB3D_MAP_FLOOR;
 	if (parsing_check_map(cub3d) == false)
 		return (false);
 	return (true);
