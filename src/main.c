@@ -6,15 +6,15 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 14:46:22 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:30:47 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int main(int argc, char const *argv[])
+int	main(int argc, char const *argv[])
 {
-	t_cub3d cub3d;
+	t_cub3d	cub3d;
 
 	ft_bzero(&cub3d, sizeof(t_cub3d));
 	cub3d.ac = argc;

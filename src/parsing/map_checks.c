@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:55:38 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 09:23:30 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:26:31 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,5 @@ bool	parsing_check_map(t_cub3d *cub3d)
 		return (_error("multiples player spawn point in map data!"), false);
 	if (parsing_check_if_map_is_enclosed(cub3d) == false)
 		return (_error("map is not surronded by walls correcly!"), false);
-	// check walls
 	return (true);
 }

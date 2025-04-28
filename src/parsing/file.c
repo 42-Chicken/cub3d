@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:26:12 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 14:14:23 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:30:44 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ bool	parsing_is_correct_file_path(t_cub3d *cub3d)
 	if (path == NULL || endswith((char *)path, (char *)".cub") == false
 		|| endswith((char *)path, (char *)"/.cub") == true)
 		return (_error("please provide a valid map path, \
-only <.cub> maps are supported!"),
-				false);
+only <.cub> maps are supported!"), false);
 	return (true);
 }
 

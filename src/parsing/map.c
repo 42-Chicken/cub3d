@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:26:56 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 09:13:47 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:33:30 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	parsing_set_player_data(t_cub3d *cub3d)
 bool	parse_map(t_cub3d *cub3d, int fd)
 {
 	t_list	*head;
+	t_uvec2	p_pos;
 
 	head = parsing_get_map_lines(fd);
 	if (!head)
@@ -121,9 +122,10 @@ bool	parse_map(t_cub3d *cub3d, int fd)
 	parsing_fill_map_buffer(cub3d, head);
 	cub3d->player.position = (t_dvec2){-1, -1};
 	parsing_set_player_data(cub3d);
+	p_pos = (t_uvec2){cub3d->player.position.x, cub3d->player.position.y};
 	if (cub3d->player.position.x == -1 || cub3d->player.position.y == -1)
 		return (_error("no player spawn position in the map!"), false);
-	cub3d->map.buffer[(int)cub3d->player.position.y][(int)cub3d->player.position.x] = CUB3D_MAP_FLOOR;
+	cub3d->map.buffer[p_pos.y][p_pos.x] = CUB3D_MAP_FLOOR;
 	if (parsing_check_map(cub3d) == false)
 		return (false);
 	return (true);

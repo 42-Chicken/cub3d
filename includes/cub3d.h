@@ -6,13 +6,13 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 09:20:07 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/28 09:29:33 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#ifndef CUB3D_H
 
-# define MINISHELL_H
+# define CUB3D_H
 
 # include "colors.h"
 # include "ft_fprintf.h"
