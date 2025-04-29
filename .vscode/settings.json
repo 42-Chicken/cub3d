@@ -5,7 +5,12 @@
 		"ft_fprintf.h": "c",
 		"stdbool.h": "c",
 		"stdio.h": "c",
-		"garbage.h": "c"
+		"garbage.h": "c",
+		"mlx_int.h": "c",
+		"math.h": "c",
+		"fcntl.h": "c",
+		"mlx.h": "c",
+		"textures.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

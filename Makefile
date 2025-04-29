@@ -26,10 +26,17 @@ INFO				=	ⓘ
 SRCS				=	src/main.c\
 						src/mlx.c\
 						src/loop.c\
+						src/exit_error.c\
+						src/images/shapes/line.c\
+						src/images/shapes/rectangle.c\
+						src/images/shapes/circle.c\
+						src/images/put_pixel_to_buffer.c\
 						src/parsing/parsing.c\
 						src/parsing/file.c\
 						src/parsing/data.c\
 						src/parsing/map.c\
+						src/textures/textures_loader.c\
+						src/textures/textures.c\
 						src/parsing/map_checks.c\
 						src/map/map_utils.c\
 						src/player/player.c\
@@ -41,6 +48,7 @@ SRCS				=	src/main.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a
+# IGMLX_LIB 			= ./libs/im-gui-minilibx/im-gui-minilibx.a
 MLX_LIB 			= ./libs/minilibx-linux/libmlx_Linux.a
 MLX_LIB_PATH 		= ./libs/minilibx-linux/
 
@@ -103,6 +111,7 @@ clean-objs :
 clean : clean-objs
 		@$(MAKE) $(shell dirname $(FT_LIBC)) fclean
 		@$(MAKE) $(shell dirname $(MLX_LIB)) clean
+		@$(MAKE) $(shell dirname $(IGMLX_LIB)) fclean
 
 fclean : clean
 		@$(RM) $(NAME)

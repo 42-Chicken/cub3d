@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 15:45:26 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/29 12:32:44 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "libft.h"
 # include "mlx.h"
 # include "mlx_int.h"
+# include "textures.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>
@@ -107,6 +108,7 @@ void					init_mlx_hooks(t_cub3d *cub3d);
 bool					destroy_mlx(t_cub3d *cub3d);
 void					loop(t_cub3d *cub3d);
 void					end_loop(t_cub3d *cub3d);
+void					exit_error(const char *msg);
 
 // PARSING
 bool					parse(t_cub3d *cube3d);
@@ -115,6 +117,14 @@ bool					parsing_check_map(t_cub3d *cub3d);
 int						parsing_open_file(t_cub3d *cub3d);
 bool					parse_data(t_cub3d *cub3d, int fd);
 bool					parse_map(t_cub3d *cub3d, int fd);
+
+// IMAGES
+void					put_pixel_to_buffer(t_img *buffer, t_uvec2 pos,
+							t_color color);
+void					draw_line(t_img *buffer, int color, t_uvec2 start,
+							t_uvec2 end);
+void					draw_rect(t_img *buffer, int color, t_uvec2 start,
+							t_uvec2 end);
 
 // PLAYER
 void					set_player_position_angle(t_cub3d *cub3d, t_dvec2 pos,
