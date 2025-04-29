@@ -10,7 +10,15 @@
 		"math.h": "c",
 		"fcntl.h": "c",
 		"mlx.h": "c",
-		"textures.h": "c"
+		"textures.h": "c",
+		"random": "c",
+		"limits": "c",
+		"algorithm": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"ranges": "c",
+		"span": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

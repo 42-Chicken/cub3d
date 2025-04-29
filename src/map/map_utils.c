@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 09:04:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 09:29:35 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:38:58 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static bool	map_is_outside_map_buffer(t_cub3d *cub3d, size_t x, size_t y)
 {
-	return (x < 0 || y < 0 || y >= cub3d->map.height
+	return (!cub3d->map.buffer || x < 0 || y < 0 || y >= cub3d->map.height
 		|| x >= ft_strlen(cub3d->map.buffer[y]));
 }
 

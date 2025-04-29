@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 12:32:44 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:31:07 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 
 # define SPACES " \t\n\v\f\r"
 # define CUB3D_MAP_SUPPORTED_CHARS "10NSEW"
+
+# define MINIMAP_OFFSET 25
+# define MINIMAP_TILE_SIZE 25
 
 typedef struct s_uvec_2
 {
@@ -81,10 +84,18 @@ typedef struct s_player
 	double				rotation_angle;
 }						t_player;
 
+typedef struct s_minimap
+{
+	t_uvec2				border_pos;
+	t_uvec2				north_pos;
+}						t_minimap;
+
 typedef struct s_cub3d
 {
 	const char			**av;
 	int					ac;
+
+	bool				error;
 
 	char				*north_texture_path;
 	char				*south_texture_path;
@@ -97,6 +108,9 @@ typedef struct s_cub3d
 	t_map				map;
 
 	t_img				*rendering_buffer;
+
+	t_minimap			minimap;
+	t_textures_atlas	textures_atlas;
 
 	void				*mlx;
 	void				*win;
@@ -118,6 +132,10 @@ int						parsing_open_file(t_cub3d *cub3d);
 bool					parse_data(t_cub3d *cub3d, int fd);
 bool					parse_map(t_cub3d *cub3d, int fd);
 
+// MINIMAP
+void					render_minimap(t_cub3d *cub3d);
+bool					init_minimap(t_cub3d *cub3d);
+
 // IMAGES
 void					put_pixel_to_buffer(t_img *buffer, t_uvec2 pos,
 							t_color color);
@@ -126,6 +144,19 @@ void					draw_line(t_img *buffer, int color, t_uvec2 start,
 void					draw_rect(t_img *buffer, int color, t_uvec2 start,
 							t_uvec2 end);
 
+t_color					*get_pixel(t_img *img, t_uvec2 pos);
+t_color					get_pixel_color(t_img *img, t_uvec2 pos);
+t_color					igmlx_melt_colors(t_color input, t_color filter);
+void					igmlx_apply_color_filter(t_img *img, t_color filter);
+void					igmlx_copy_to_dest_ignore_null(t_img *origin,
+							t_uvec2 origin_pos, t_uvec2 length, t_img *dest,
+							t_uvec2 dest_pos);
+void					igmlx_copy_to_dest(t_img *origin, t_uvec2 origin_pos,
+							t_uvec2 length, t_img *dest, t_uvec2 dest_pos);
+void					igmlx_set_to_null(t_img *origin, t_uvec2 origin_pos,
+							t_uvec2 length);
+void					igmlx_simple_copy_to_dest_ignore_null(t_img *origin,
+							t_img *dest, t_uvec2 dest_pos);
 // PLAYER
 void					set_player_position_angle(t_cub3d *cub3d, t_dvec2 pos,
 							double angle);

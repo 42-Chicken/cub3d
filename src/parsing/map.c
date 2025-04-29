@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:26:56 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 09:33:30 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:27:37 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ bool	parse_map(t_cub3d *cub3d, int fd)
 	cub3d->map.width = parsing_get_longest_line(head);
 	cub3d->map.height = ft_lstsize(head);
 	cub3d->map.buffer = safe_malloc(sizeof(char *) * cub3d->map.height);
+	send_pointer_to_main_context(cub3d->map.buffer);
 	parsing_fill_map_buffer(cub3d, head);
 	cub3d->player.position = (t_dvec2){-1, -1};
 	parsing_set_player_data(cub3d);

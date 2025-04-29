@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 12:37:05 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:48:20 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,21 @@
 
 # define MAX_TEXTURES 256
 
-typedef t_img		t_texture;
+typedef t_img			t_texture;
+typedef struct s_cub3d	t_cub3d;
 
 typedef enum e_textures
 {
-	MAP,
+	TEXTURE_MINIMAP,
 	TEXTURE_MINIMAP_BORDER,
 	TEXTURE_MINIMAP_NORTH_INDICATION,
 	TEXTURE_MINIMAP_PLAYER,
-}					t_textures_definition;
+}						t_textures_definition;
 
 typedef struct s_textures_atlas
 {
-	t_texture		*atlas[MAX_TEXTURES];
-}					t_textures_atlas;
+	t_texture			*atlas[MAX_TEXTURES];
+}						t_textures_atlas;
 
 // -----------------------------------------
 //
@@ -41,8 +42,7 @@ typedef struct s_textures_atlas
 //
 // -----------------------------------------
 
-t_texture			*get_texture(int id);
-t_textures_atlas	*get_textures_atlas(void);
+t_texture				*get_texture(t_cub3d *cub3d, int id);
 
 // -----------------------------------------
 //
@@ -50,9 +50,9 @@ t_textures_atlas	*get_textures_atlas(void);
 //
 // -----------------------------------------
 
-bool				load_texture(void *mlx, const char *path, int id);
-bool				load_assets(void *mlx);
-void				unload_assets(void *mlx);
-void				add_asset(int id, t_img *img);
+bool					load_texture(t_cub3d *cub3d, const char *path, int id);
+bool					load_assets(t_cub3d *cub3d);
+void					unload_assets(t_cub3d *cub3d);
+void					add_asset(t_cub3d *cub3d, int id, t_img *img);
 
 #endif

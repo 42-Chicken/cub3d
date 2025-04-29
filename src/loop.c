@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:37:33 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 12:29:49 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:32:41 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void loop(t_cub3d *cub3d)
 	draw_rect(cub3d->rendering_buffer, 0xFFFFFF, (t_uvec2){0, 0}, (t_uvec2){SCREEN_W, SCREEN_H});
 	// draw_line(cub3d->rendering_buffer, 0xFF0000, (t_uvec2){0, 0}, (t_uvec2){150, 150});
 	// draw_minimap(cub3d);
+	render_minimap(cub3d);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->rendering_buffer, 0, 0);
 }
