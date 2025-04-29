@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:15 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 15:24:21 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:39:02 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,34 @@ static void	draw_background(t_cub3d *cub3d, t_texture *border)
 {
 	size_t	x;
 	size_t	y;
+
+	size_t	x1;
+	size_t	y1;
 	t_color	color;
 
-	y = (size_t)cub3d->player.position.y - (MINIMAP_TILE_SIZE / 4) + 1;
-	while (y < (size_t)cub3d->player.position.y + (MINIMAP_TILE_SIZE / 4))
+	y = cub3d->minimap.border_pos.y;
+	y1 = (size_t)cub3d->player.position.y - 4;
+	while (y < (size_t)border->height + cub3d->minimap.border_pos.y)
 	{
-		x = (size_t)cub3d->player.position.x - (MINIMAP_TILE_SIZE / 4 ) + 1;
-		while (x < (size_t)cub3d->player.position.x + (MINIMAP_TILE_SIZE / 4))
+		x = cub3d->minimap.border_pos.x;
+		x1 = (size_t)cub3d->player.position.x - 4;
+		while (x < (size_t)border->width + cub3d->minimap.border_pos.x)
 		{
-			if (map_is_floor(cub3d, x, y))
+			if (map_is_floor(cub3d, (x - border->width), y - cub3d->minimap.border_pos.y))
 				color = 0xFF0000;
-			else if (map_is_void(cub3d, x, y))
+			else if (map_is_void(cub3d, (x - border->width), y - cub3d->minimap.border_pos.y))
 				color = 0x0000FF;
 			else
 				color = 0x00FF00;
-			if (x == (size_t)cub3d->player.position.x
-				&& y == (size_t)cub3d->player.position.y)
+			if (x1 == (size_t)cub3d->player.position.x
+				&& y1 == (size_t)cub3d->player.position.y)
 				color = 0xFF00FF;
-			draw_rect(cub3d->rendering_buffer, color,
-				(t_uvec2){
-					(cub3d->minimap.border_pos.x + border->width / 2 + ((x - (size_t)cub3d->player.position.x)) * MINIMAP_TILE_SIZE) - MINIMAP_TILE_SIZE / 2 + 1,
-					(cub3d->minimap.border_pos.y + border->height / 2 + ((y - (size_t)cub3d->player.position.y)) * MINIMAP_TILE_SIZE) - MINIMAP_TILE_SIZE / 2 + 1
-				},
-				(t_uvec2){
-					(cub3d->minimap.border_pos.x + border->width / 2 + ((x - (size_t)cub3d->player.position.x)) * MINIMAP_TILE_SIZE) + MINIMAP_TILE_SIZE / 2 + 1,
-					(cub3d->minimap.border_pos.y + border->height / 2 + ((y - (size_t)cub3d->player.position.y)) * MINIMAP_TILE_SIZE) + MINIMAP_TILE_SIZE / 2 + 1
-				});
+			put_pixel_to_buffer(cub3d->rendering_buffer, (t_uvec2){x, y}, color);
 			x++;
+			x1++;
 		}
 		y++;
+		y1++;
 	}
 }
 
