@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 13:28:10 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/30 09:01:30 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char const *argv[])
 	ft_bzero(&cub3d, sizeof(t_cub3d));
 	cub3d.ac = argc;
 	cub3d.av = argv;
+	cub3d.settings.fov = 60;
 	if (parse(&cub3d) == false)
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
 	if (init_mlx(&cub3d) == false)

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 14:31:07 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/30 09:01:17 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,12 @@ typedef struct s_minimap
 	t_uvec2				north_pos;
 }						t_minimap;
 
+typedef struct s_settings
+{
+	bool debug;
+	unsigned char fov;
+}	t_settings;
+
 typedef struct s_cub3d
 {
 	const char			**av;
@@ -106,6 +112,8 @@ typedef struct s_cub3d
 	t_color				ceiling_color;
 	t_player			player;
 	t_map				map;
+
+	t_settings			settings;
 
 	t_img				*rendering_buffer;
 
