@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/30 09:01:17 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/30 10:57:06 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@
 # define MINIMAP_OFFSET 25
 # define MINIMAP_TILE_SIZE 25
 
+typedef struct s_vec_2
+{
+	int					x;
+	int					y;
+}						t_vec2;
+
 typedef struct s_uvec_2
 {
 	unsigned int		x;
@@ -53,6 +59,12 @@ typedef struct s_dvec_2
 	double				x;
 	double				y;
 }						t_dvec2;
+
+typedef struct s_fvec2
+{
+	float				x;
+	float				y;
+}						t_fvec2;
 
 typedef enum e_cub3d_map_values
 {
@@ -82,6 +94,8 @@ typedef struct s_player
 {
 	t_dvec2				position;
 	double				rotation_angle;
+	double				rotation_angle_add;
+	t_dvec2				direction;
 }						t_player;
 
 typedef struct s_minimap
@@ -92,9 +106,11 @@ typedef struct s_minimap
 
 typedef struct s_settings
 {
-	bool debug;
-	unsigned char fov;
-}	t_settings;
+	bool				debug;
+	double				fNear;
+	double				fFar;
+	unsigned char		fov;
+}						t_settings;
 
 typedef struct s_cub3d
 {
@@ -144,9 +160,15 @@ bool					parse_map(t_cub3d *cub3d, int fd);
 void					render_minimap(t_cub3d *cub3d);
 bool					init_minimap(t_cub3d *cub3d);
 
+// CONTROLS
+void					on_key_pressed(int key, t_cub3d *cub3d);
+void					on_key_released(int key, t_cub3d *cub3d);
+
 // IMAGES
 void					put_pixel_to_buffer(t_img *buffer, t_uvec2 pos,
 							t_color color);
+void					put_pixel_to_buffer_inside_shape(t_img *buffer,
+							t_uvec2 pos, t_color color);
 void					draw_line(t_img *buffer, int color, t_uvec2 start,
 							t_uvec2 end);
 void					draw_rect(t_img *buffer, int color, t_uvec2 start,
@@ -168,6 +190,7 @@ void					igmlx_simple_copy_to_dest_ignore_null(t_img *origin,
 // PLAYER
 void					set_player_position_angle(t_cub3d *cub3d, t_dvec2 pos,
 							double angle);
+void					handle_player_movement(t_cub3d *cub3d);
 
 // MAP
 bool					map_is_floor(t_cub3d *cub3d, size_t x, size_t y);

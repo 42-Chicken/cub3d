@@ -6,13 +6,13 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:40:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 14:40:21 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:03:40 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	fill_minimap_texture(t_cub3d *cub3d, t_texture *minimap)
+ void	fill_minimap_texture(t_cub3d *cub3d, t_texture *minimap)
 {
 	size_t	x;
 	size_t	y;
@@ -46,12 +46,13 @@ static void	fill_minimap_texture(t_cub3d *cub3d, t_texture *minimap)
 static bool	create_minimap_texture(t_cub3d *cub3d)
 {
 	t_img	*minimap;
-
+	// int y;
 	minimap = mlx_new_image(cub3d->mlx, cub3d->map.width * MINIMAP_TILE_SIZE,
 			cub3d->map.height * MINIMAP_TILE_SIZE);
 	if (!minimap)
 		return (_error("failed to create minimap image !"), true);
 	fill_minimap_texture(cub3d, minimap);
+	// add_asset(cub3d, TEXTURE_MINIMAP, mlx_xpm_file_to_image(cub3d->mlx, "assets/floor.xpm", (int *)&y, (int *)&y));
 	add_asset(cub3d, TEXTURE_MINIMAP, minimap);
 	return (false);
 }
