@@ -6,13 +6,13 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:42 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 11:08:44 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:58:14 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_line(t_img *buffer, int color, t_uvec2 start, t_uvec2 end)
+void	draw_line(t_img *buffer, int color, t_vec2 start, t_vec2 end)
 {
 	double		distance_x;
 	double		distance_y;
@@ -20,7 +20,7 @@ void	draw_line(t_img *buffer, int color, t_uvec2 start, t_uvec2 end)
 	double		stepX;
 	double		stepY;
 	int			i;
-	t_uvec2	tmp;
+	t_vec2	tmp;
 	int			y;
 	int			x;
 

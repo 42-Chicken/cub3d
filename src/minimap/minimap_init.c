@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:40:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/30 11:03:40 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:19:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,16 @@ static bool	create_minimap_texture(t_cub3d *cub3d)
 bool	init_minimap(t_cub3d *cub3d)
 {
 	t_texture	*border;
+	t_texture	*player;
 
 	border = get_texture(cub3d, TEXTURE_MINIMAP_BORDER);
+	player = get_texture(cub3d, TEXTURE_MINIMAP_PLAYER);
 	cub3d->minimap.border_pos = (t_uvec2){MINIMAP_OFFSET, SCREEN_H
 		- border->height - MINIMAP_OFFSET};
+	cub3d->minimap.player_pos = (t_uvec2){
+		MINIMAP_OFFSET + border->width / 2 -player->width /2 , SCREEN_H
+		- border->height / 2 - MINIMAP_OFFSET - player->height / 2
+	};
 	if (create_minimap_texture(cub3d) == true)
 		return (true);
 	return (false);

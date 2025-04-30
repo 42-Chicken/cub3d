@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/30 10:57:06 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/04/30 14:58:06 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_minimap
 {
 	t_uvec2				border_pos;
 	t_uvec2				north_pos;
+	t_uvec2				player_pos;
 }						t_minimap;
 
 typedef struct s_settings
@@ -169,8 +170,8 @@ void					put_pixel_to_buffer(t_img *buffer, t_uvec2 pos,
 							t_color color);
 void					put_pixel_to_buffer_inside_shape(t_img *buffer,
 							t_uvec2 pos, t_color color);
-void					draw_line(t_img *buffer, int color, t_uvec2 start,
-							t_uvec2 end);
+void					draw_line(t_img *buffer, int color, t_vec2 start,
+							t_vec2 end);
 void					draw_rect(t_img *buffer, int color, t_uvec2 start,
 							t_uvec2 end);
 
