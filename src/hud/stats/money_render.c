@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:51:26 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 15:52:48 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:00:09 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t	get_number_len(long n)
 	return (i);
 }
 
-static char *custom_itoa(int n)
+static char	*custom_itoa(int n)
 {
 	size_t	i;
 	size_t	is_negative;
@@ -58,11 +58,12 @@ static char *custom_itoa(int n)
 	return (result);
 }
 
-void render_stats_money(t_cub3d *cub3d)
+void	render_stats_money(t_cub3d *cub3d)
 {
 	char	*money;
 
 	money = custom_itoa(cub3d->player.money);
-	render_text(cub3d, GTA_FONT_BLUE_NAME, money, (t_uvec2){SCREEN_W - 275 - ft_strlen(money) * 19, 50});
+	render_text(cub3d, GTA_FONT_BLUE_NAME, money, (t_uvec2){SCREEN_W - 275
+		- ft_strlen(money) * 19, 50});
 	safe_free(money);
 }

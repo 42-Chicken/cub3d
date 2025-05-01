@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:12:20 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 15:05:12 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:00:05 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	init_letters_images(t_cub3d *igmlx, t_igmlx_font *font,
 	int		x;
 	t_img	*tmp;
 
-	// t_img *upscaled;
 	c = -1;
 	y = 0;
 	x = 0;
@@ -41,16 +40,13 @@ static void	init_letters_images(t_cub3d *igmlx, t_igmlx_font *font,
 		igmlx_copy_to_dest(font_img, (t_uvec2){x * 48, y * 48}, (t_uvec2){48,
 			48}, tmp, (t_uvec2){0, 0});
 		igmlx_apply_color_filter(tmp, font->color);
-		// upscaled = igmlx_upscale_img(igmlx, tmp, font->size_mutliplier);
-		// if (upscaled != tmp)
-		// 	mlx_destroy_image(igmlx->mlx, tmp);
 		font->letters[(int)c] = tmp;
-		// mlx_destroy_image(igmlx->mlx, upscaled);
 		x++;
 	}
 }
 
-void	igmlx_load_font(t_cub3d *igmlx, char *path, char *name, t_igmlx_font_params params)
+void	igmlx_load_font(t_cub3d *igmlx, char *path, char *name,
+		t_igmlx_font_params params)
 {
 	t_igmlx_font	*font;
 	t_img			*img;

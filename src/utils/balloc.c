@@ -6,15 +6,15 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 14:53:02 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 15:04:04 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:59:44 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void *balloc(size_t size)
+void	*balloc(size_t size)
 {
-	void *ptr;
+	void	*ptr;
 
 	ptr = safe_malloc(size);
 	if (!ptr)
@@ -26,9 +26,9 @@ void *balloc(size_t size)
 	return (ptr);
 }
 
-void *balloc_(size_t size)
+void	*balloc_(size_t size)
 {
-	void *ptr;
+	void	*ptr;
 
 	ptr = malloc(size);
 	if (!ptr)
