@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 13:47:47 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:29:47 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ bool	load_assets(t_cub3d *cub3d)
 	error = false;
 	error |= load_texture(cub3d, "assets/minimap/minimap_border.xpm",
 			TEXTURE_MINIMAP_BORDER);
+	error |= load_texture(cub3d, "assets/minimap/minimap_house.xpm",
+			TEXTURE_MINIMAP_HOUSE);
 	error |= load_texture(cub3d,
 			"assets/minimap/minimap_north_indication.xpm",
 			TEXTURE_MINIMAP_NORTH_INDICATION);

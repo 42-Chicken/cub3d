@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 13:48:20 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:29:43 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef enum e_textures
 {
 	TEXTURE_MINIMAP,
 	TEXTURE_MINIMAP_BORDER,
+	TEXTURE_MINIMAP_HOUSE,
 	TEXTURE_MINIMAP_NORTH_INDICATION,
 	TEXTURE_MINIMAP_PLAYER,
 }						t_textures_definition;

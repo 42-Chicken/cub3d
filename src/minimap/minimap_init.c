@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:40:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 09:55:16 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:10:27 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 static t_color	get_color_at_location(t_cub3d *cub3d, size_t x, size_t y)
 {
 	if (map_is_floor(cub3d, x, y))
-		return (0xFF0000);
+		return (0x606060);
 	else if (map_is_void(cub3d, x, y))
-		return (0x0000FF);
+		return (0xFF000000);
 	else
-		return (0x00FF00);
-	if (x == (size_t)cub3d->player.position.x
-		&& y == (size_t)cub3d->player.position.y)
-		return (0xFF00FF);
+		return (0xdeb887);
 }
 
 void	fill_minimap_texture(t_cub3d *cub3d, t_texture *minimap)

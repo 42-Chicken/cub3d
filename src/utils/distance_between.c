@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel_to_buffer.c                              :+:      :+:    :+:   */
+/*   distance_between.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 11:07:13 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 12:15:31 by rguigneb         ###   ########.fr       */
+/*   Created: 2025/05/01 12:32:35 by rguigneb          #+#    #+#             */
+/*   Updated: 2025/05/01 12:32:48 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_pixel_to_buffer(t_img *buffer, t_uvec2 pos, t_color color)
+double	distance_between(t_vec2 vec1, t_vec2 vec2)
 {
-	if (color == 0xFF000000)
-		return ;
-	if (pos.x < 0)
-		pos.x = 0;
-	if (pos.x > (unsigned int)buffer->width)
-		pos.x = (unsigned int)buffer->width;
-	if (pos.y < 0)
-		pos.y = 0;
-	if (pos.y > (unsigned int)buffer->height)
-		pos.y = (unsigned int)buffer->height;
-	((t_color *)buffer->data)[(pos.y * (buffer->size_line / 4))
-		+ pos.x] = color;
+	double	mx;
+	double	my;
+
+	mx = vec2.x - vec1.x;
+	my = vec2.y - vec1.y;
+	return (sqrt(mx * mx + my * my));
 }

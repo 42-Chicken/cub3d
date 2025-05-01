@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:26:56 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 08:52:18 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:33:29 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ bool	parse_map(t_cub3d *cub3d, int fd)
 	p_pos = (t_uvec2){cub3d->player.position.x, cub3d->player.position.y};
 	if (cub3d->player.position.x == -1 || cub3d->player.position.y == -1)
 		return (_error("no player spawn position in the map!"), false);
+	cub3d->spawn_point = p_pos;
 	cub3d->map.buffer[p_pos.y][p_pos.x] = CUB3D_MAP_FLOOR;
 	if (parsing_check_map(cub3d) == false)
 		return (false);

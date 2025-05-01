@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 09:53:56 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:39:34 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ typedef struct s_cub3d
 
 	t_img				*rendering_buffer;
 
+	t_uvec2				spawn_point;
+
 	t_minimap			minimap;
 	t_textures_atlas	textures_atlas;
 
@@ -162,6 +164,8 @@ bool					parse_map(t_cub3d *cub3d, int fd);
 // MINIMAP
 void					render_minimap(t_cub3d *cub3d);
 bool					init_minimap(t_cub3d *cub3d);
+void					minimap_handle_background(t_cub3d *cub3d,
+							t_texture *border);
 
 // CONTROLS
 void					on_key_pressed(int key, t_cub3d *cub3d);
@@ -206,6 +210,9 @@ void					_warning(const char *msg);
 void					_error(const char *msg);
 
 // UTILS
+double					ft_clamp(double d, double min, double max);
+double					distance_between(t_vec2 vec1, t_vec2 vec2);
+t_dvec2					normalize_vector(t_dvec2 vec);
 bool					is_not_only_digits(const char *str);
 char					**ft_split_with_set(char const *s, char *set);
 bool					endswith(char *str, char *substr);

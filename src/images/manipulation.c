@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:11:32 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 10:15:09 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 12:15:35 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ t_color	igmlx_melt_colors(t_color input, t_color filter)
 	t_color	result;
 	double	filter_weight;
 	double	input_weight;
+
 	t_color alpha, red, green, blue;
 	t_color f_alpha, f_red, f_green, f_blue;
-
 	filter_weight = 0.7;
 	input_weight = 1.0 - filter_weight;
 	alpha = (input >> 24) & 0xFF;

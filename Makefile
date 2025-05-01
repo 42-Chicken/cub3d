@@ -29,6 +29,7 @@ SRCS				=	src/main.c\
 						src/exit_error.c\
 						src/minimap/minimap_init.c\
 						src/minimap/minimap_render.c\
+						src/minimap/minimap_background.c\
 						src/controls/controls.c\
 						src/images/manipulation.c\
 						src/images/shapes/line.c\
@@ -45,6 +46,9 @@ SRCS				=	src/main.c\
 						src/map/map_utils.c\
 						src/player/player.c\
 						src/utils/endswith.c\
+						src/utils/distance_between.c\
+						src/utils/normalize_vector.c\
+						src/utils/ft_clamp.c\
 						src/utils/is_same_str.c\
 						src/utils/ft_split_with_set.c\
 						src/utils/ft_is_only_digits.c\
