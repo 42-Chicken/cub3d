@@ -28,6 +28,7 @@ SRCS				=	src/main.c\
 						src/loop.c\
 						src/exit_error.c\
 						src/minimap/minimap_init.c\
+						src/minimap/minimap_house.c\
 						src/minimap/minimap_render.c\
 						src/minimap/minimap_background.c\
 						src/controls/controls.c\

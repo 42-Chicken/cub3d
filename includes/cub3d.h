@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 12:39:34 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:08:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,8 @@ bool					parse_map(t_cub3d *cub3d, int fd);
 // MINIMAP
 void					render_minimap(t_cub3d *cub3d);
 bool					init_minimap(t_cub3d *cub3d);
+void					handle_house(t_cub3d *cub3d, t_texture *border,
+							t_texture *house);
 void					minimap_handle_background(t_cub3d *cub3d,
 							t_texture *border);
 
