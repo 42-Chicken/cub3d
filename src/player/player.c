@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 10:01:54 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:49:32 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ void	handle_player_movement(t_cub3d *cub3d)
 			* M_PI);
 	if (cub3d->player.rotation_angle < 0)
 		cub3d->player.rotation_angle += (2.0f * M_PI);
+	if (cub3d->player.money > 999999)
+		cub3d->player.money = 999999;
 }

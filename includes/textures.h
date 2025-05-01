@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 10:29:43 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:54:29 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef enum e_textures
 	TEXTURE_MINIMAP_HOUSE,
 	TEXTURE_MINIMAP_NORTH_INDICATION,
 	TEXTURE_MINIMAP_PLAYER,
+	TEXTURE_HUD_PISTOL,
+	TEXTURE_HUD_HAND,
+	TEXTURE_HUD_SHOTGUN,
 }						t_textures_definition;
 
 typedef struct s_textures_atlas

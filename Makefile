@@ -27,10 +27,12 @@ SRCS				=	src/main.c\
 						src/mlx.c\
 						src/loop.c\
 						src/exit_error.c\
-						src/minimap/minimap_init.c\
-						src/minimap/minimap_house.c\
-						src/minimap/minimap_render.c\
-						src/minimap/minimap_background.c\
+						src/hud/minimap/minimap_init.c\
+						src/hud/minimap/minimap_house.c\
+						src/hud/minimap/minimap_render.c\
+						src/hud/minimap/minimap_background.c\
+						src/hud/stats/stats_render.c\
+						src/hud/stats/money_render.c\
 						src/controls/controls.c\
 						src/images/manipulation.c\
 						src/images/shapes/line.c\
@@ -51,6 +53,7 @@ SRCS				=	src/main.c\
 						src/map/map_utils.c\
 						src/player/player.c\
 						src/utils/balloc.c\
+						src/utils/render_text.c\
 						src/utils/ft_lstget.c\
 						src/utils/endswith.c\
 						src/utils/distance_between.c\

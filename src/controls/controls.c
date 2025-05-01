@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 14:35:53 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:57:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ void	on_key_pressed(int key, t_cub3d *cub3d)
 {
 	if (key == XK_Escape)
 		mlx_loop_end(cub3d->mlx);
+	if (key == XK_Up)
+		cub3d->player.money += 5;
+	if (key == XK_l)
+	{
+		cub3d->player.item++;
+		if (cub3d->player.item > TEXTURE_HUD_SHOTGUN)
+			cub3d->player.item = TEXTURE_HUD_PISTOL;
+	}
 	if (key == 'w')
 	{
 		cub3d->player.direction.x = cub3d->player.cos_r * 0.7f;

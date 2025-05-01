@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   fonts_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:04:27 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 14:47:24 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:28:45 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void	igmlx_put_str_to_buffer(t_cub3d *igmlx, char *str, char *font_name,
 	i = -1;
 	font = get_font(igmlx, font_name);
 	if (!font)
-	{
-		_warning("tried to print with unknown font!");
-		return ;
-	}
+		return (_warning("tried to print with unknown font!"), (void)0);
 	while (str[++i])
 	{
 		if (str[i] == '\n')
@@ -44,5 +41,4 @@ void	igmlx_put_str_to_buffer(t_cub3d *igmlx, char *str, char *font_name,
 				(t_uvec2){0, 0}, (t_uvec2){48, 48}, buffer, (t_uvec2){pos.x
 				+ (48 * i) - font->inner_offset.x * i, pos.y + (y * 48)});
 	}
-	_debug("printed");
 }

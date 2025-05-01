@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:37:33 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 15:20:16 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:25:10 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,7 @@ void	loop(t_cub3d *cub3d)
 	draw_rect(cub3d->rendering_buffer, 0xFFFFFF, (t_uvec2){0, 0},
 		(t_uvec2){SCREEN_W, SCREEN_H});
 	render_minimap(cub3d);
-	igmlx_put_str_to_buffer(cub3d, "12:06 123456789", GTA_FONT_BLACK_NAME, cub3d->rendering_buffer, (t_uvec2){2, 2});
-	igmlx_put_str_to_buffer(cub3d, "12:06", GTA_FONT_BLUE_NAME, cub3d->rendering_buffer, (t_uvec2){0, 0});
-	igmlx_put_str_to_buffer(cub3d, "test", GTA_FONT_RED_NAME, cub3d->rendering_buffer, (t_uvec2){0, 50});
-	igmlx_put_str_to_buffer(cub3d, "test", GTA_FONT_YELLOW_NAME, cub3d->rendering_buffer, (t_uvec2){0, 100});
-	igmlx_put_str_to_buffer(cub3d, "test", GTA_FONT_BLACK_NAME, cub3d->rendering_buffer, (t_uvec2){0, 150});
+	render_stats(cub3d);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->rendering_buffer, 0,
 		0);
 }
