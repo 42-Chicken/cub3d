@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/30 14:58:06 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:34:15 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef struct s_player
 	double				rotation_angle;
 	double				rotation_angle_add;
 	t_dvec2				direction;
+	double				cos_r;
+	double				sin_r;
 }						t_player;
 
 typedef struct s_minimap

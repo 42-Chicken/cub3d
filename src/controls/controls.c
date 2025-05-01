@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 09:17:53 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:35:03 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void on_key_pressed(int key, t_cub3d *cub3d)
 {
 	if (key == 'w')
 	{
-		cub3d->player.direction.x = cos(cub3d->player.rotation_angle) * 1.5f;
-		cub3d->player.direction.y = sin(cub3d->player.rotation_angle) * 1.5f;
+		cub3d->player.direction.x = cub3d->player.cos_r * 1.5f;
+		cub3d->player.direction.y = cub3d->player.sin_r * 1.5f;
 	}
 	if (key == 's')
 	{
-		cub3d->player.direction.x = -cos(cub3d->player.rotation_angle) * 1.5f;
-		cub3d->player.direction.y = -sin(cub3d->player.rotation_angle) * 1.5f;
+		cub3d->player.direction.x = -cub3d->player.cos_r * 1.5f;
+		cub3d->player.direction.y = -cub3d->player.sin_r * 1.5f;
 	}
 	if (key == 'a')
 	{

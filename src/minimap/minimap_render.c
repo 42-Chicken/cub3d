@@ -6,32 +6,11 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:15 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 09:32:29 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:36:10 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	find_black_pixel_before_and_after(t_cub3d *cub3d, int x, int y)
-{
-	t_texture	*border;
-
-	border = get_texture(cub3d, TEXTURE_MINIMAP_BORDER);
-	x -= cub3d->minimap.border_pos.x;
-	y -= cub3d->minimap.border_pos.y;
-	if (y > border->height - 5 || y < 5)
-		return (false);
-	while (x > 0 && *get_pixel(border, (t_uvec2){x, y}) != 0x000000)
-		x--;
-	if (*get_pixel(border, (t_uvec2){x, y}) != 0x000000)
-		return (false);
-	x++;
-	while (x < border->width && *get_pixel(border, (t_uvec2){x, y}) != 0x000000)
-		x++;
-	if (*get_pixel(border, (t_uvec2){x, y}) != 0x000000)
-		return (false);
-	return (true);
-}
 
 void	draw_background(t_cub3d *cub3d, t_texture *border)
 {
@@ -39,11 +18,9 @@ void	draw_background(t_cub3d *cub3d, t_texture *border)
 	int y;
 	int x;
 
-	(void)border;
-
 	minimap = get_texture(cub3d, TEXTURE_MINIMAP);
-	float	cos_a = cos(cub3d->player.rotation_angle);
-	float	sin_a = sin(cub3d->player.rotation_angle);
+	float	cos_a = cub3d->player.cos_r;
+	float	sin_a = cub3d->player.sin_r;
 
 	t_dvec2 player_minimap_pos;
 	player_minimap_pos = (t_dvec2){
@@ -126,10 +103,10 @@ void	render_minimap(t_cub3d *cub3d)
 		(t_vec2){cub3d->minimap.player_pos.x + player->width / 2,
 		cub3d->minimap.player_pos.y + player->height / 2},
 		(t_vec2){cub3d->minimap.player_pos.x + player->width / 2
-		+ cos(cub3d->player.rotation_angle) * 25, cub3d->minimap.player_pos.y
-		+ player->height / 2 + sin(cub3d->player.rotation_angle) * 25});
+		+ cub3d->player.cos_r * 25, cub3d->minimap.player_pos.y
+		+ player->height / 2 + cub3d->player.sin_r * 25});
 	igmlx_simple_copy_to_dest_ignore_null(north, cub3d->rendering_buffer,
-		(t_uvec2){(border->width / 2 + 5) + cos(cub3d->player.rotation_angle)
+		(t_uvec2){(border->width / 2 + 5) + cub3d->player.cos_r
 		* border->width / 2, SCREEN_H - (border->height / 2) - (north->height
-			+ 5) + sin(cub3d->player.rotation_angle) * border->height / 2});
+			+ 5) + cub3d->player.sin_r * border->height / 2});
 }
