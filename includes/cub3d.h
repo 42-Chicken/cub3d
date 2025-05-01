@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 14:28:06 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:12:23 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # include "mlx.h"
 # include "mlx_int.h"
 # include "textures.h"
+# include "vectors.h"
 # include <fcntl.h>
+# include <limits.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -39,33 +41,23 @@
 # define SPACES " \t\n\v\f\r"
 # define CUB3D_MAP_SUPPORTED_CHARS "10NSEW"
 
+# define GTA_FONT "assets/fonts/pricedown.xpm"
+
+# define GTA_FONT_BLUE_NAME "BLUE"
+# define GTA_FONT_BLUE_COLOR 0x6B9AAF
+
+# define GTA_FONT_RED_NAME "RED"
+# define GTA_FONT_RED_COLOR 0xfb8457
+
+# define GTA_FONT_YELLOW_NAME "YELLOW"
+# define GTA_FONT_YELLOW_COLOR 0xdeba8b
+
+# define GTA_FONT_BLACK_NAME "BLACK"
+# define GTA_FONT_BLACK_COLOR 0x000000
+
 # define MINIMAP_OFFSET 25
 # define MINIMAP_TILE_SIZE 25
 # define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
-
-typedef struct s_vec_2
-{
-	int					x;
-	int					y;
-}						t_vec2;
-
-typedef struct s_uvec_2
-{
-	unsigned int		x;
-	unsigned int		y;
-}						t_uvec2;
-
-typedef struct s_dvec_2
-{
-	double				x;
-	double				y;
-}						t_dvec2;
-
-typedef struct s_fvec2
-{
-	float				x;
-	float				y;
-}						t_fvec2;
 
 typedef enum e_cub3d_map_values
 {
@@ -131,6 +123,8 @@ typedef struct s_cub3d
 	t_color				ceiling_color;
 	t_player			player;
 	t_map				map;
+
+	t_list				*fonts;
 
 	t_settings			settings;
 
@@ -212,7 +206,8 @@ void					_warning(const char *msg);
 void					_error(const char *msg);
 
 // UTILS
-
+t_list					*ft_lstget(t_list *lst, bool (*f)(void *, void *),
+							void *data);
 size_t					get_char_count(char *str, char c);
 double					ft_clamp(double d, double min, double max);
 double					distance_between(t_vec2 vec1, t_vec2 vec2);
@@ -222,5 +217,7 @@ char					**ft_split_with_set(char const *s, char *set);
 bool					endswith(char *str, char *substr);
 bool					is_same_str(char *str1, char *str2);
 bool					is_not_only_spaces(char *str);
+void					*balloc(size_t size);
+void					*balloc_(size_t size);
 
 #endif

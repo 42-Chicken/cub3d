@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:40:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 12:10:27 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:34:37 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_color	get_color_at_location(t_cub3d *cub3d, size_t x, size_t y)
 		return (0xdeb887);
 }
 
-void	fill_minimap_texture(t_cub3d *cub3d, t_texture *minimap)
+static void	fill_minimap_texture(t_cub3d *cub3d, t_texture *minimap)
 {
 	size_t	x;
 	size_t	y;

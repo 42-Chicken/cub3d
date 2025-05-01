@@ -19,7 +19,10 @@
 		"string_view": "c",
 		"ranges": "c",
 		"span": "c",
-		"cmath": "c"
+		"cmath": "c",
+		"get_next_line.h": "c",
+		"stdlib.h": "c",
+		"fonts.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }
