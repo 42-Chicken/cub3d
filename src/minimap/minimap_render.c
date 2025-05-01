@@ -6,15 +6,15 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:15 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/30 15:00:12 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:32:29 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool find_black_pixel_before_and_after(t_cub3d *cub3d, int x, int y)
+bool	find_black_pixel_before_and_after(t_cub3d *cub3d, int x, int y)
 {
-	t_texture *border;
+	t_texture	*border;
 
 	border = get_texture(cub3d, TEXTURE_MINIMAP_BORDER);
 	x -= cub3d->minimap.border_pos.x;
@@ -35,52 +35,59 @@ bool find_black_pixel_before_and_after(t_cub3d *cub3d, int x, int y)
 
 void	draw_background(t_cub3d *cub3d, t_texture *border)
 {
-	t_texture	*minimap = get_texture(cub3d, TEXTURE_MINIMAP);
-	int			mid_screen_x;
-	int			mid_screen_y;
-	float		rel_x;
-	float		rel_y;
-	float		rot_x;
-	float		rot_y;
-	int			tex_x;
-	int			tex_y;
-	int			rd = 400;
+	t_texture	*minimap;
+	int y;
+	int x;
 
 	(void)border;
-	float angle = cub3d->player.rotation_angle; // rotation in radians (e.g. 0.5 = ~28 degrees)
-    mid_screen_x = SCREEN_W / 2;// (cub3d->minimap.border_pos.x) + border->width / 2;
-    mid_screen_y = SCREEN_H / 4;// (cub3d->minimap.border_pos.y) + border->height / 2;
-	// for (int y = cub3d->minimap.border_pos.y; y < (int)cub3d->minimap.border_pos.y + border->height; y++)
-	// {
-	// 	for (int x = cub3d->minimap.border_pos.x; x < (int)cub3d->minimap.border_pos.x + border->width; x++)
-	// 	{
-	for (int y = 0; y < SCREEN_H; y++)
+
+	minimap = get_texture(cub3d, TEXTURE_MINIMAP);
+	float	cos_a = cos(cub3d->player.rotation_angle);
+	float	sin_a = sin(cub3d->player.rotation_angle);
+
+	t_dvec2 player_minimap_pos;
+	player_minimap_pos = (t_dvec2){
+		cub3d->player.position.x * MINIMAP_TILE_SIZE,
+		cub3d->player.position.y * MINIMAP_TILE_SIZE,
+	};
+	t_dvec2 offset;
+	offset = (t_dvec2){
+		-player_minimap_pos.x + cub3d->minimap.border_pos.x + border->width / 2,
+		-player_minimap_pos.y + cub3d->minimap.border_pos.y + border->height / 2,
+	};
+
+	t_dvec2 direction;
+	t_dvec2 rotated;
+
+	double circle_rayon = 95; // px
+	t_vec2	center;
+	center = (t_vec2){
+		cub3d->minimap.border_pos.x + border->width / 2,
+		cub3d->minimap.border_pos.y + border->height / 2,
+	};
+
+	y = player_minimap_pos.y - 4 * MINIMAP_TILE_SIZE;
+	while (y < player_minimap_pos.y + 4 * MINIMAP_TILE_SIZE)
 	{
-		for (int x = 0; x < SCREEN_W; x++)
+		x = player_minimap_pos.x - 4 * MINIMAP_TILE_SIZE;;
+		while (x < player_minimap_pos.x + 4 * MINIMAP_TILE_SIZE)
 		{
-			int dx = x - mid_screen_x;
-			int dy = y - mid_screen_y;
-			if (dx * dx + dy * dy > rd * rd)
-				continue; // Skip pixels outside the circl
-			// Map screen to texture space (linearly)
-			float tex_coord_x = (float)(x) * minimap->width / SCREEN_W;
-			float tex_coord_y = (float)(y) * minimap->height / (SCREEN_H / 2);
+			if (!(pow((x + offset.x)- center.x, 2) + pow((y + offset.y) - center.y, 2) < circle_rayon * circle_rayon))
+			{
+				x++;
+				continue;
+			}
+			direction.x = x - player_minimap_pos.x;
+			direction.y = y - player_minimap_pos.y;
 
-			// Rotate around texture point (10, 10)
-			rel_x = tex_coord_x- (cub3d->player.position.x * MINIMAP_TILE_SIZE) / 2;;
-			rel_y = tex_coord_y- (cub3d->player.position.y * MINIMAP_TILE_SIZE);;
+			rotated.x = direction.x * cos_a + direction.y * sin_a + player_minimap_pos.x;
+			rotated.y = -direction.x * sin_a + direction.y * cos_a + player_minimap_pos.y;
 
-			rot_x = cosf(angle) * rel_x - sinf(angle) * rel_y + (cub3d->player.position.x * MINIMAP_TILE_SIZE);
-			rot_y = sinf(angle) * rel_x + cosf(angle) * rel_y+ (cub3d->player.position.y* MINIMAP_TILE_SIZE);
-
-			// Wrap or clamp
-			tex_x = ((int)rot_x + minimap->width) % minimap->width;
-			tex_y = ((int)rot_y + minimap->height)  % minimap->height;
-
-			// Draw the pixel
-			put_pixel_to_buffer(cub3d->rendering_buffer, (t_uvec2){x + cub3d->minimap.border_pos.x - border->width , y + cub3d->minimap.border_pos.y - border->height},
-					*get_pixel(minimap, (t_uvec2){tex_x, tex_y}));
+			put_pixel_to_buffer(cub3d->rendering_buffer,
+				(t_uvec2){x + offset.x, y + offset.y}, get_pixel_color(minimap, (t_uvec2){(int)rotated.x, (int)rotated.y}));
+			x++;
 		}
+		y++;
 	}
 }
 
@@ -95,7 +102,7 @@ void	render_minimap(t_cub3d *cub3d)
 	border = get_texture(cub3d, TEXTURE_MINIMAP_BORDER);
 	north = get_texture(cub3d, TEXTURE_MINIMAP_NORTH_INDICATION);
 	player = get_texture(cub3d, TEXTURE_MINIMAP_PLAYER);
-	// draw_background(cub3d, border);
+	draw_background(cub3d, border);
 	// igmlx_simple_copy_to_dest_ignore_null(minimap, cub3d->rendering_buffer,
 	// (t_uvec2){0, 0});
 	// igmlx_simple_copy_to_dest_ignore_null(minimap, cub3d->rendering_buffer,
@@ -115,13 +122,14 @@ void	render_minimap(t_cub3d *cub3d)
 	// cub3d->player.rotation_angle += 0.05f;
 	// if (cub3d->player.rotation_angle > 180)
 	// 	cub3d->player.rotation_angle = 0;
-	draw_line(cub3d->rendering_buffer, 0xFF0000, (t_vec2){
-		cub3d->minimap.player_pos.x + player->width / 2,
-		cub3d->minimap.player_pos.y + player->height / 2
-	}, (t_vec2){cub3d->minimap.player_pos.x + player->width / 2 + cos(cub3d->player.rotation_angle) * 25, cub3d->minimap.player_pos.y + player->height / 2 + sin(cub3d->player.rotation_angle) * 25});
-
+	draw_line(cub3d->rendering_buffer, 0xFF0000,
+		(t_vec2){cub3d->minimap.player_pos.x + player->width / 2,
+		cub3d->minimap.player_pos.y + player->height / 2},
+		(t_vec2){cub3d->minimap.player_pos.x + player->width / 2
+		+ cos(cub3d->player.rotation_angle) * 25, cub3d->minimap.player_pos.y
+		+ player->height / 2 + sin(cub3d->player.rotation_angle) * 25});
 	igmlx_simple_copy_to_dest_ignore_null(north, cub3d->rendering_buffer,
 		(t_uvec2){(border->width / 2 + 5) + cos(cub3d->player.rotation_angle)
 		* border->width / 2, SCREEN_H - (border->height / 2) - (north->height
-			+ 5) + sin(cub3d->player.rotation_angle)  * border->height / 2});
+			+ 5) + sin(cub3d->player.rotation_angle) * border->height / 2});
 }
