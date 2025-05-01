@@ -50,6 +50,7 @@ SRCS				=	src/main.c\
 						src/utils/distance_between.c\
 						src/utils/normalize_vector.c\
 						src/utils/ft_clamp.c\
+						src/utils/get_char_count.c\
 						src/utils/is_same_str.c\
 						src/utils/ft_split_with_set.c\
 						src/utils/ft_is_only_digits.c\

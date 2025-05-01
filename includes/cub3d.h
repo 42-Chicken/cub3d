@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 13:08:55 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:28:06 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,8 @@ void					_warning(const char *msg);
 void					_error(const char *msg);
 
 // UTILS
+
+size_t					get_char_count(char *str, char c);
 double					ft_clamp(double d, double min, double max);
 double					distance_between(t_vec2 vec1, t_vec2 vec2);
 t_dvec2					normalize_vector(t_dvec2 vec);

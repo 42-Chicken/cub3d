@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:50:29 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/24 14:25:52 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:30:10 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static bool	parsing_set_and_read_color_id_value(t_color *target, char *value)
 	int		d;
 
 	i = 0;
+	if (get_char_count(value, ',') >= 3)
+		return (_error("too many comas in rgb format!"), false);
 	splitted = ft_split_with_set(value, SPACES ",");
 	if (!splitted)
 		return (false);
