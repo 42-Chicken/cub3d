@@ -6,13 +6,13 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 09:35:03 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:53:45 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void on_key_pressed(int key, t_cub3d *cub3d)
+void	on_key_pressed(int key, t_cub3d *cub3d)
 {
 	if (key == 'w')
 	{
@@ -32,27 +32,9 @@ void on_key_pressed(int key, t_cub3d *cub3d)
 	{
 		cub3d->player.rotation_angle_add = -0.04f;
 	}
-
-	if (key == 'i')
-	{
-		cub3d->settings.fFar += .5f;
-	}
-	if (key == 'k')
-	{
-		cub3d->settings.fFar -= .5f;
-	}
-
-	if (key == 'j')
-	{
-		cub3d->settings.fNear += .5f;
-	}
-	if (key == 'l')
-	{
-		cub3d->settings.fNear -= .5f;
-	}
 }
 
-void on_key_released(int key, t_cub3d *cub3d)
+void	on_key_released(int key, t_cub3d *cub3d)
 {
 	if (key == 'w')
 	{

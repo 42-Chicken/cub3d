@@ -6,44 +6,48 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:45:42 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/30 14:58:14 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 10:00:18 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_line(t_img *buffer, int color, t_vec2 start, t_vec2 end)
+static void	rotate_locations(t_vec2 start, t_vec2 end)
 {
-	double		distance_x;
-	double		distance_y;
-	double		step;
-	double		stepX;
-	double		stepY;
-	int			i;
 	t_vec2	tmp;
-	int			y;
-	int			x;
 
-	i = 0;
-	if (end.y < 0 && abs((int)end.y - (int)start.y) > abs((int)end.x - (int)start.x))
+	if (end.y < 0 && abs((int)end.y - (int)start.y) > abs((int)end.x
+			- (int)start.x))
 	{
 		tmp = start;
 		start = end;
 		end = tmp;
 	}
-	distance_x = end.x - start.x;
-	distance_y = end.y - start.y;
-	step = fmax(fabs(distance_x), fabs(distance_y));
-	if (step != 0)
+}
+
+void	draw_line(t_img *buffer, int color, t_vec2 start, t_vec2 end)
+{
+	t_dvec2	distance;
+	double	step_value;
+	t_dvec2	step;
+	int		i;
+	t_vec2	c;
+
+	i = 0;
+	rotate_locations(start, end);
+	distance.x = end.x - start.x;
+	distance.y = end.y - start.y;
+	step_value = fmax(fabs(distance.x), fabs(distance.y));
+	if (step_value != 0)
 	{
-		stepX = distance_x / step;
-		stepY = distance_y / step;
+		step.x = distance.x / step_value;
+		step.y = distance.y / step_value;
 	}
-	while (i <= step + 1)
+	while (i <= step_value + 1)
 	{
-		y = floor(start.y + i * stepY);
-		x = floor(start.x + i * stepX);
-		put_pixel_to_buffer(buffer, (t_uvec2){x, y}, color);
+		c.x = floor(start.x + i * step.x);
+		c.y = floor(start.y + i * step.y);
+		put_pixel_to_buffer(buffer, (t_uvec2){c.x, c.y}, color);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 09:34:15 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:53:56 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 
 # define MINIMAP_OFFSET 25
 # define MINIMAP_TILE_SIZE 25
+# define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
 
 typedef struct s_vec_2
 {
@@ -96,6 +97,7 @@ typedef struct s_player
 	double				rotation_angle;
 	double				rotation_angle_add;
 	t_dvec2				direction;
+	t_dvec2				minimap_pos;
 	double				cos_r;
 	double				sin_r;
 }						t_player;
@@ -110,8 +112,6 @@ typedef struct s_minimap
 typedef struct s_settings
 {
 	bool				debug;
-	double				fNear;
-	double				fFar;
 	unsigned char		fov;
 }						t_settings;
 
