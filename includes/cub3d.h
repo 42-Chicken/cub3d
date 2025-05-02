@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 09:31:23 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/02 09:38:13 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ typedef enum e_cub3d_log_level
 	CUB3D_LOG_ERROR
 }							t_e_cub3d_log_level;
 
+typedef enum e_cub3d_menu
+{
+	CUB3D_MENU_NONE = -1,
+	CUB3D_MENU_PAUSE,
+	CUB3D_MENU_SETTINGS,
+	CUB3D_MENU_CREDITS,
+}							t_e_cub3d_menu;
+
 typedef unsigned int		t_color;
 
 typedef struct s_map
@@ -147,6 +155,8 @@ typedef struct s_cub3d
 	t_minimap				minimap;
 	t_textures_atlas		textures_atlas;
 
+	t_e_cub3d_menu			menu;
+
 	void					*mlx;
 	void					*win;
 }							t_cub3d;
@@ -157,6 +167,8 @@ void						init_mlx_hooks(t_cub3d *cub3d);
 bool						destroy_mlx(t_cub3d *cub3d);
 void						loop(t_cub3d *cub3d);
 void						end_loop(t_cub3d *cub3d);
+void						unpause_game(t_cub3d *cub3d);
+void						pause_game(t_cub3d *cub3d);
 void						exit_error(const char *msg);
 
 // PARSING

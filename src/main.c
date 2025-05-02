@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 08:49:51 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/02 09:40:45 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char const *argv[])
 	ft_bzero(&cub3d, sizeof(t_cub3d));
 	cub3d.ac = argc;
 	cub3d.av = argv;
+	cub3d.menu = CUB3D_MENU_NONE;
 	cub3d.settings.fov = 60;
 	cub3d.player.item = TEXTURE_HUD_PISTOL;
 	cub3d.player.health = 100;

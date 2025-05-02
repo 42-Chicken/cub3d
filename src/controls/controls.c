@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 09:31:06 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/02 09:49:27 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 void	on_key_pressed(int key, t_cub3d *cub3d)
 {
+	if (key == XK_p)
+	{
+		if (cub3d->menu == CUB3D_MENU_PAUSE)
+			unpause_game(cub3d);
+		else if (cub3d->menu == CUB3D_MENU_NONE)
+			pause_game(cub3d);
+	}
 	if (key == XK_Escape)
 		mlx_loop_end(cub3d->mlx);
 	if (key == XK_Up)
