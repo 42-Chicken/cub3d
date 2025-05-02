@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 09:38:13 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/02 12:07:44 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@
 # define MINIMAP_TILE_SIZE 25
 # define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
 
+# define MENU_MAX_BUTTONS 5
+
 typedef struct timeval		t_time;
 
 typedef enum e_cub3d_map_values
@@ -89,6 +91,7 @@ typedef enum e_cub3d_menu
 	CUB3D_MENU_PAUSE,
 	CUB3D_MENU_SETTINGS,
 	CUB3D_MENU_CREDITS,
+	__CUB3D_MENU_COUNT__,
 }							t_e_cub3d_menu;
 
 typedef unsigned int		t_color;
@@ -127,6 +130,15 @@ typedef struct s_settings
 	unsigned char			fov;
 }							t_settings;
 
+typedef void				(*t_button_callback)(t_cub3d *);
+
+typedef struct s_button
+{
+	t_button_callback		callback;
+	t_uvec2					pos;
+	t_texture				*texture;
+}							t_button;
+
 typedef struct s_cub3d
 {
 	const char				**av;
@@ -152,6 +164,11 @@ typedef struct s_cub3d
 
 	t_uvec2					spawn_point;
 
+	t_uvec2					mouse_position;
+	t_uvec2					old_mouse_position;
+
+	t_button				menus_buttons[__CUB3D_MENU_COUNT__][MENU_MAX_BUTTONS];
+
 	t_minimap				minimap;
 	t_textures_atlas		textures_atlas;
 
@@ -170,6 +187,11 @@ void						end_loop(t_cub3d *cub3d);
 void						unpause_game(t_cub3d *cub3d);
 void						pause_game(t_cub3d *cub3d);
 void						exit_error(const char *msg);
+void						render_game(t_cub3d *cub3d);
+
+// MENUS
+void						render_pause_menu(t_cub3d *cub3d);
+void						handle_button_clicks(t_cub3d *cub3d);
 
 // PARSING
 bool						parse(t_cub3d *cube3d);
@@ -197,9 +219,8 @@ void						minimap_handle_background(t_cub3d *cub3d,
 // CONTROLS
 void						on_key_pressed(int key, t_cub3d *cub3d);
 void						on_key_released(int key, t_cub3d *cub3d);
-void						on_mouse_scrool_down(t_cub3d *cub3d);
-void						on_mouse_scrool_up(t_cub3d *cub3d);
-
+void	on_mouse_button_down(int key, int x, int y, t_cub3d *cub3d);
+void						on_mouse_move(int x, int y, t_cub3d *cub3d);
 void						keycode_controls_items(int key, t_cub3d *cub3d);
 
 // IMAGES
@@ -243,7 +264,8 @@ void						_warning(const char *msg);
 void						_error(const char *msg);
 
 // UTILS
-
+bool						fast_is_between(t_vec2 pos, t_vec2 bpos1,
+								t_vec2 bpos2);
 void						custom_itoa(int n, char *buffer);
 void						render_text(t_cub3d *cub3d, char *font_name,
 								char *text, t_uvec2 pos);

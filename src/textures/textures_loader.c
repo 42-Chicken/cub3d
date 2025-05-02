@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 16:55:03 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/02 11:20:29 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ bool	load_assets(t_cub3d *cub3d)
 	error = false;
 	error |= load_texture(cub3d, "assets/minimap/minimap_border.xpm",
 			TEXTURE_MINIMAP_BORDER);
+	error |= load_texture(cub3d, "assets/menus/pause/resume.xpm",
+			TEXTURE_PAUSE_MENU_RESUME);
+	error |= load_texture(cub3d, "assets/menus/pause/resume_hover.xpm",
+			TEXTURE_PAUSE_MENU_RESUME_H);
+	error |= load_texture(cub3d, "assets/menus/pause/options.xpm",
+			TEXTURE_PAUSE_MENU_OPTIONS);
+	error |= load_texture(cub3d, "assets/menus/pause/options_hover.xpm",
+			TEXTURE_PAUSE_MENU_OPTIONS_H);
+	error |= load_texture(cub3d, "assets/menus/pause/quit.xpm",
+			TEXTURE_PAUSE_MENU_QUIT);
+	error |= load_texture(cub3d, "assets/menus/pause/quit_hover.xpm",
+			TEXTURE_PAUSE_MENU_QUIT_H);
+	error |= load_texture(cub3d, "assets/menus/pause/title.xpm",
+		TEXTURE_PAUSE_MENU_TITLE);
 	error |= load_texture(cub3d, "assets/minimap/minimap_house.xpm",
 			TEXTURE_MINIMAP_HOUSE);
 	error |= load_texture(cub3d,

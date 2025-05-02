@@ -35,6 +35,9 @@ SRCS				=	src/main.c\
 						src/hud/stats/health_render.c\
 						src/hud/stats/money_render.c\
 						src/hud/stats/time_render.c\
+						src/game/game_render.c\
+						src/menus/pause_menu.c\
+						src/menus/buttons.c\
 						src/controls/controls.c\
 						src/controls/item_controls.c\
 						src/images/manipulation.c\
@@ -56,6 +59,7 @@ SRCS				=	src/main.c\
 						src/map/map_utils.c\
 						src/player/player.c\
 						src/utils/balloc.c\
+						src/utils/vectors.c\
 						src/utils/render_text.c\
 						src/utils/ft_lstget.c\
 						src/utils/endswith.c\
