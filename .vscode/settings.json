@@ -22,7 +22,8 @@
 		"cmath": "c",
 		"get_next_line.h": "c",
 		"stdlib.h": "c",
-		"fonts.h": "c"
+		"fonts.h": "c",
+		"time.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:22:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 15:19:22 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/02 09:30:56 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 void	init_mlx_hooks(t_cub3d *cub3d)
 {
 	mlx_hook(cub3d->win, DestroyNotify, 0, (int (*)(void *)) & end_loop, cub3d);
+	
+	mlx_hook(cub3d->win, 4, 0, (int (*)(void *)) & on_mouse_scrool_down, cub3d);
+	mlx_hook(cub3d->win, 5, 0, (int (*)(void *)) & on_mouse_scrool_up, cub3d);
+
 	mlx_hook(cub3d->win, KeyPress, KeyPressMask,
 		(int (*)(void *)) & on_key_pressed, cub3d);
 	mlx_hook(cub3d->win, KeyRelease, KeyReleaseMask,

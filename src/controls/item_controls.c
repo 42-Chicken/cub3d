@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   money_render.c                                     :+:      :+:    :+:   */
+/*   item_controls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 15:51:26 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 09:13:16 by rguigneb         ###   ########.fr       */
+/*   Created: 2025/05/02 09:14:11 by rguigneb          #+#    #+#             */
+/*   Updated: 2025/05/02 09:23:39 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_stats_money(t_cub3d *cub3d, t_texture *item)
+void keycode_controls_items(int key, t_cub3d *cub3d)
 {
-	char	money[8];
-
-	money[0] = '$';
-	custom_itoa(cub3d->player.money, (char *)&money + 1);
-	render_text(cub3d, GTA_FONT_BLUE_NAME, money, (t_uvec2){SCREEN_W - item->width - RIGHT_HUD_OFFSET * 2.2
-		- ft_strlen(money) * 18, item->height - RIGHT_HUD_OFFSET - 50});
+	if (key == '1')
+		cub3d->player.item = TEXTURE_HUD_HAND;
+	if (key == '2')
+		cub3d->player.item = TEXTURE_HUD_PISTOL;
+	if (key == '3')
+		cub3d->player.item = TEXTURE_HUD_SHOTGUN;
 }

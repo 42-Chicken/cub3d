@@ -32,8 +32,11 @@ SRCS				=	src/main.c\
 						src/hud/minimap/minimap_render.c\
 						src/hud/minimap/minimap_background.c\
 						src/hud/stats/stats_render.c\
+						src/hud/stats/health_render.c\
 						src/hud/stats/money_render.c\
+						src/hud/stats/time_render.c\
 						src/controls/controls.c\
+						src/controls/item_controls.c\
 						src/images/manipulation.c\
 						src/images/shapes/line.c\
 						src/images/shapes/rectangle.c\
@@ -56,6 +59,7 @@ SRCS				=	src/main.c\
 						src/utils/render_text.c\
 						src/utils/ft_lstget.c\
 						src/utils/endswith.c\
+						src/utils/custom_itoa.c\
 						src/utils/distance_between.c\
 						src/utils/normalize_vector.c\
 						src/utils/ft_clamp.c\

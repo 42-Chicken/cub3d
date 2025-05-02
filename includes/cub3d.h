@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 16:55:59 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/02 09:31:23 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
 # include <unistd.h>
 
 # define SCREEN_W 1550
@@ -37,11 +38,15 @@
 
 # define MAX_MONEY 999999
 
+# define FONT_HEART "\1"
+
 # define CUB3D_LOG_PREFIX "CUB3D"
 # define CUB3D_MAX_MAP_ID_LENGTH 2
 
 # define SPACES " \t\n\v\f\r"
 # define CUB3D_MAP_SUPPORTED_CHARS "10NSEW"
+
+# define RIGHT_HUD_OFFSET 25
 
 # define GTA_FONT "assets/fonts/pricedown.xpm"
 
@@ -60,6 +65,8 @@
 # define MINIMAP_OFFSET 25
 # define MINIMAP_TILE_SIZE 25
 # define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
+
+typedef struct timeval		t_time;
 
 typedef enum e_cub3d_map_values
 {
@@ -93,6 +100,7 @@ typedef struct s_player
 	t_dvec2					direction;
 	t_dvec2					minimap_pos;
 	size_t					money;
+	unsigned char			health;
 	t_textures_definition	item;
 	double					cos_r;
 	double					sin_r;
@@ -161,7 +169,10 @@ bool						parse_map(t_cub3d *cub3d, int fd);
 
 // STATS
 void						render_stats(t_cub3d *cub3d);
-void						render_stats_money(t_cub3d *cub3d);
+void						render_stats_money(t_cub3d *cub3d, t_texture *item);
+void						render_stats_health(t_cub3d *cub3d,
+								t_texture *item);
+void						render_stats_time(t_cub3d *cub3d, t_texture *item);
 
 // MINIMAP
 void						render_minimap(t_cub3d *cub3d);
@@ -174,6 +185,10 @@ void						minimap_handle_background(t_cub3d *cub3d,
 // CONTROLS
 void						on_key_pressed(int key, t_cub3d *cub3d);
 void						on_key_released(int key, t_cub3d *cub3d);
+void						on_mouse_scrool_down(t_cub3d *cub3d);
+void						on_mouse_scrool_up(t_cub3d *cub3d);
+
+void						keycode_controls_items(int key, t_cub3d *cub3d);
 
 // IMAGES
 void						put_pixel_to_buffer(t_img *buffer, t_uvec2 pos,
@@ -216,6 +231,8 @@ void						_warning(const char *msg);
 void						_error(const char *msg);
 
 // UTILS
+
+void						custom_itoa(int n, char *buffer);
 void						render_text(t_cub3d *cub3d, char *font_name,
 								char *text, t_uvec2 pos);
 t_list						*ft_lstget(t_list *lst, bool (*f)(void *, void *),
