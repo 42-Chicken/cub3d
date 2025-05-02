@@ -37,7 +37,9 @@ SRCS				=	src/main.c\
 						src/hud/stats/time_render.c\
 						src/game/game_render.c\
 						src/menus/pause_menu.c\
+						src/menus/options_menu.c\
 						src/menus/buttons.c\
+						src/menus/init_menus.c\
 						src/controls/controls.c\
 						src/controls/item_controls.c\
 						src/images/manipulation.c\

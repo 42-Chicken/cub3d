@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 09:40:45 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/02 14:03:42 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char const *argv[])
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
 	if (init_mlx(&cub3d) == false)
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
+	init_menus(&cub3d);
 	printf("F %x \n", cub3d.floor_color);
 	printf("C %x \n", cub3d.ceiling_color);
 	printf("NO %s \n", cub3d.north_texture_path);
