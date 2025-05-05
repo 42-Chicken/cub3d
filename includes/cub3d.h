@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 14:07:40 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 09:17:30 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,12 +128,14 @@ typedef struct s_settings
 {
 	bool						debug;
 	unsigned char				fov;
+	unsigned char				jsp;
 }								t_settings;
 
 typedef struct s_incrementor_data
 {
 	int							*n;
 	double						i;
+	t_cub3d						*cub3d;
 }								t_incrementor_data;
 
 typedef enum e_button_type

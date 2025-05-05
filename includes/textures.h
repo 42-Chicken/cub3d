@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 11:20:18 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 08:47:51 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ typedef enum e_textures
 	TEXTURE_PAUSE_MENU_QUIT,
 	TEXTURE_PAUSE_MENU_QUIT_H,
 	TEXTURE_PAUSE_MENU_TITLE,
+	TEXTURE_OPTIONS_MENU_PLUS,
+	TEXTURE_OPTIONS_MENU_PLUS_H,
+	TEXTURE_OPTIONS_MENU_MINUS,
+	TEXTURE_OPTIONS_MENU_MINUS_H,
 }						t_textures_definition;
 
 typedef struct s_textures_atlas

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 11:20:29 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 08:57:36 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ bool	load_assets(t_cub3d *cub3d)
 			TEXTURE_PAUSE_MENU_QUIT);
 	error |= load_texture(cub3d, "assets/menus/pause/quit_hover.xpm",
 			TEXTURE_PAUSE_MENU_QUIT_H);
+	error |= load_texture(cub3d, "assets/menus/options/plus.xpm",
+			TEXTURE_OPTIONS_MENU_PLUS);
+	error |= load_texture(cub3d, "assets/menus/options/plus_hover.xpm",
+			TEXTURE_OPTIONS_MENU_PLUS_H);
+	error |= load_texture(cub3d, "assets/menus/options/minus.xpm",
+			TEXTURE_OPTIONS_MENU_MINUS);
+	error |= load_texture(cub3d, "assets/menus/options/minus_hover.xpm",
+			TEXTURE_OPTIONS_MENU_MINUS_H);
 	error |= load_texture(cub3d, "assets/menus/pause/title.xpm",
 		TEXTURE_PAUSE_MENU_TITLE);
 	error |= load_texture(cub3d, "assets/minimap/minimap_house.xpm",
