@@ -6,11 +6,21 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:01:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 08:37:45 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:45:25 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	switch_to_pause_menu(t_cub3d *cub3d)
+{
+	render_game(cub3d);
+	igmlx_apply_color_filter(cub3d->rendering_buffer, 0x000000);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->rendering_buffer, 0,
+		0);
+		render_pause_menu(cub3d);
+	cub3d->menu = CUB3D_MENU_PAUSE;
+}
 
 void	switch_to_options_menu(t_cub3d *cub3d)
 {

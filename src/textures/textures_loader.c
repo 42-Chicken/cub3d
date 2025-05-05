@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 10:00:49 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:57:33 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ bool	load_assets(t_cub3d *cub3d)
 			TEXTURE_OPTIONS_MENU_MINUS);
 	error |= load_texture(cub3d, "assets/menus/options/minus_hover.xpm",
 			TEXTURE_OPTIONS_MENU_MINUS_H);
+	error |= load_texture(cub3d, "assets/menus/back.xpm",
+			TEXTURE_OPTIONS_MENU_BACK);
+	error |= load_texture(cub3d, "assets/menus/back_hover.xpm",
+		TEXTURE_OPTIONS_MENU_BACK_H);
 	error |= load_texture(cub3d, "assets/menus/pause/title.xpm",
 		TEXTURE_PAUSE_MENU_TITLE);
 	error |= load_texture(cub3d, "assets/minimap/minimap_house.xpm",
@@ -63,6 +67,8 @@ bool	load_assets(t_cub3d *cub3d)
 			TEXTURE_MINIMAP_NORTH_INDICATION);
 	error |= load_texture(cub3d, "assets/minimap/minimap_player.xpm",
 			TEXTURE_MINIMAP_PLAYER);
+	error |= load_texture(cub3d, "assets/menus/options/title.xpm",
+		TEXTURE_OPTIONS_MENU_TITLE);
 	error |= load_texture(cub3d, "assets/pistol.xpm",
 			TEXTURE_HUD_PISTOL);
 	error |= load_texture(cub3d, "assets/fist.xpm",

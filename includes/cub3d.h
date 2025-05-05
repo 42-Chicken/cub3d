@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 12:57:04 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:50:50 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ typedef struct s_settings
 	bool						debug;
 	int							fov;
 	int							mouse_sens;
+	int							sounds;
 }								t_settings;
 
 typedef struct s_incrementor_data
@@ -229,6 +230,7 @@ void							render_options_menu(t_cub3d *cub3d);
 void							handle_button_clicks(t_cub3d *cub3d);
 void							init_menus(t_cub3d *cub3d);
 void							switch_to_options_menu(t_cub3d *cub3d);
+void							switch_to_pause_menu(t_cub3d *cub3d);
 
 // PARSING
 bool							parse(t_cub3d *cube3d);

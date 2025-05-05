@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:37:33 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 11:31:48 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:46:13 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	unpause_game(t_cub3d *cub3d)
 
 void	pause_game(t_cub3d *cub3d)
 {
-	if (cub3d->menu == CUB3D_MENU_PAUSE)
+	if (cub3d->menu != CUB3D_MENU_NONE)
 		return ;
 	cub3d->menu = CUB3D_MENU_PAUSE;
 	igmlx_apply_color_filter(cub3d->rendering_buffer, 0x000000);
