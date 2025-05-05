@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 08:57:36 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 10:00:49 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ bool	load_texture(t_cub3d *cub3d, const char *path, int id)
 	img = mlx_xpm_file_to_image(cub3d->mlx, (char *)path, &w, &h);
 	if (!img)
 		return (true);
+	// pthread_mutex_lock(&cub3d->mutex);
 	add_asset(cub3d, id, img);
+	// pthread_mutex_unlock(&cub3d->mutex);
 	return (false);
 }
 

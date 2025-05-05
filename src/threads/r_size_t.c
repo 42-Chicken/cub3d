@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   r_size_t.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 15:14:38 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 09:55:28 by rguigneb         ###   ########.fr       */
+/*   Created: 2025/05/05 09:51:28 by rguigneb          #+#    #+#             */
+/*   Updated: 2025/05/05 09:55:51 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	add_asset(t_cub3d *cub3d, int id, t_img *img)
+size_t r_size_t(pthread_mutex_t *mutex, size_t *value)
 {
-	if (id < MAX_TEXTURES)
-	{
-		cub3d->textures_atlas.atlas[id] = img;
-		cub3d->textures_loaded++;
-	}
-}
+	size_t r;
 
-t_texture	*get_texture(t_cub3d *cub3d, int id)
-{
-	return (cub3d->textures_atlas.atlas[id]);
+	pthread_mutex_lock(mutex);
+	r = *value;
+	pthread_mutex_unlock(mutex);
+	return (r);
 }

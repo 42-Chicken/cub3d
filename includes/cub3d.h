@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 09:17:30 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/05 12:57:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
+# include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -66,7 +67,7 @@
 # define MINIMAP_TILE_SIZE 25
 # define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
 
-# define MENU_MAX_BUTTONS 5
+# define MENU_MAX_BUTTONS 15
 
 typedef struct timeval			t_time;
 
@@ -127,8 +128,8 @@ typedef struct s_minimap
 typedef struct s_settings
 {
 	bool						debug;
-	unsigned char				fov;
-	unsigned char				jsp;
+	int							fov;
+	int							mouse_sens;
 }								t_settings;
 
 typedef struct s_incrementor_data
@@ -192,9 +193,13 @@ typedef struct s_cub3d
 	t_uvec2						mouse_position;
 	t_uvec2						old_mouse_position;
 
+	pthread_t					loading_thread;
+	pthread_mutex_t				mutex;
+
 	t_button					menus_buttons[__CUB3D_MENU_COUNT__][MENU_MAX_BUTTONS];
 
 	t_minimap					minimap;
+	size_t						textures_loaded;
 	t_textures_atlas			textures_atlas;
 
 	t_e_cub3d_menu				menu;
@@ -213,6 +218,10 @@ void							unpause_game(t_cub3d *cub3d);
 void							pause_game(t_cub3d *cub3d);
 void							exit_error(const char *msg);
 void							render_game(t_cub3d *cub3d);
+
+// THREADS
+size_t							r_size_t(pthread_mutex_t *mutex, size_t *value);
+bool							init_loading_thread(t_cub3d *cub3d);
 
 // MENUS
 void							render_pause_menu(t_cub3d *cub3d);

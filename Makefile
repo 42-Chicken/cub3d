@@ -60,6 +60,8 @@ SRCS				=	src/main.c\
 						src/parsing/map_checks.c\
 						src/map/map_utils.c\
 						src/player/player.c\
+						src/threads/loading_thread.c\
+						src/threads/r_size_t.c\
 						src/utils/balloc.c\
 						src/utils/vectors.c\
 						src/utils/render_text.c\
