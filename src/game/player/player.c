@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 13:39:03 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:56:00 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ void	handle_player_movements(t_cub3d *cub3d)
 void	handle_player_rotation(t_cub3d *cub3d)
 {
 	if (is_pressed(cub3d, 'd'))
-		cub3d->player.rotation_angle += ((double)cub3d->settings.player_rotation_speed / 100);
+		cub3d->player.rotation_angle
+			+= ((double)cub3d->settings.player_rotation_speed / 100);
 	if (is_pressed(cub3d, 'a'))
-		cub3d->player.rotation_angle -= ((double)cub3d->settings.player_rotation_speed / 100);
+		cub3d->player.rotation_angle
+			-= ((double)cub3d->settings.player_rotation_speed / 100);
 	cub3d->player.cos_r = cos(cub3d->player.rotation_angle);
 	cub3d->player.sin_r = sin(cub3d->player.rotation_angle);
 	cub3d->player.rotation_angle = fmod(cub3d->player.rotation_angle, 2.0f

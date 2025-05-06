@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 09:39:11 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 13:59:20 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:54:38 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 static void	*loading_thread_routine(void *data)
 {
 	t_cub3d	*cub3d;
+	int		i;
+	t_img	*loading;
 
 	cub3d = (t_cub3d *)data;
 	while (1)
@@ -32,8 +34,8 @@ static void	*loading_thread_routine(void *data)
 	cub3d->rendering_buffer = mlx_new_image(cub3d->mlx, SCREEN_W, SCREEN_H);
 	if (!cub3d->rendering_buffer)
 		return (NULL);
-	int i;
-	t_img *loading = mlx_xpm_file_to_image(cub3d->mlx, "assets/loading_screens/1.xpm", &i, &i);
+	loading = mlx_xpm_file_to_image(cub3d->mlx, "assets/loading_screens/1.xpm",
+			&i, &i);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, loading, 0, 0);
 	pthread_mutex_unlock(&cub3d->mutex);
 	while (r_size_t(&cub3d->mutex,

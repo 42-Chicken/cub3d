@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:01:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 13:39:35 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:55:14 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	draw_incrementor(t_cub3d *cub3d, char *name, t_incrementor_data data,
 
 void	render_options_menu(t_cub3d *cub3d)
 {
-	t_uvec2		pos;
 	t_button	*btns;
 
 	btns = cub3d->menus_buttons[CUB3D_MENU_SETTINGS];
@@ -80,13 +79,12 @@ void	render_options_menu(t_cub3d *cub3d)
 		(t_incrementor_data){(int *)&cub3d->settings.player_speed, 1, 1, 10,
 		cub3d}, 4);
 	draw_incrementor(cub3d, "R O T A T I O N",
-		(t_incrementor_data){(int *)&cub3d->settings.player_rotation_speed, 1, 1, 10,
-		cub3d}, 6);
-	pos = (t_uvec2){SCREEN_W / 2 - 55, SCREEN_H - SCREEN_H / 4};
+		(t_incrementor_data){(int *)&cub3d->settings.player_rotation_speed, 1,
+		1, 10, cub3d}, 6);
 	btns[8].type = CUB3D_BUTTON_DEFAULT;
 	btns[8].button_callback = switch_to_pause_menu;
 	btns[8].button_args = cub3d;
-	btns[8].pos = pos;
+	btns[8].pos = (t_uvec2){SCREEN_W / 2 - 55, SCREEN_H - SCREEN_H / 4};;
 	btns[8].texture = get_texture(cub3d, TEXTURE_OPTIONS_MENU_BACK);
 	draw_button(cub3d, btns[8], TEXTURE_OPTIONS_MENU_BACK_H);
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->rendering_buffer, 0,
@@ -94,5 +92,5 @@ void	render_options_menu(t_cub3d *cub3d)
 }
 
 //// draw_incrementor(cub3d, "V O L U M E :",
-	// 	(t_incrementor_data){(int *)&cub3d->settings.sounds, 1, 0, 100, cub3d},
-	// 	4);
+// 	(t_incrementor_data){(int *)&cub3d->settings.sounds, 1, 0, 100, cub3d},
+// 	4);

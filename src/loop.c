@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:37:33 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 14:49:49 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:56:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	unpause_game(t_cub3d *cub3d)
 
 void	pause_game(t_cub3d *cub3d)
 {
-	if (cub3d->menu != CUB3D_MENU_NONE || cub3d->loaded == false || cub3d->tick < 100)
+	if (cub3d->menu != CUB3D_MENU_NONE || cub3d->loaded == false
+		|| cub3d->tick < 100)
 		return ;
 	cub3d->menu = CUB3D_MENU_PAUSE;
 	usleep(100);
