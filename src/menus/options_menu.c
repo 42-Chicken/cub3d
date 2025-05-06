@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:01:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 16:59:36 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 08:32:12 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 static void	decrement_value(t_incrementor_data data)
 {
 	*data.n -= data.i;
-	render_options_menu(data.cub3d);
+	switch_to_options_menu(data.cub3d);
 }
 static void	increment_value(t_incrementor_data data)
 {
 	*data.n += data.i;
-	render_options_menu(data.cub3d);
+	switch_to_options_menu(data.cub3d);
 }
 
 void	draw_incrementor(t_cub3d *cub3d, char *name, int *n, double incr, int i)
@@ -31,9 +31,6 @@ void	draw_incrementor(t_cub3d *cub3d, char *name, int *n, double incr, int i)
 
 	btns = cub3d->menus_buttons[CUB3D_MENU_SETTINGS];
 	custom_itoa(*n, buffer);
-	draw_rect(cub3d->rendering_buffer, 0xFFFFFF, (t_uvec2){SCREEN_W / 2 + 225
-		- 145, SCREEN_H / 4 + 50 * i - 25}, (t_uvec2){SCREEN_W / 2 + 225 + 125,
-		SCREEN_H / 4 + 50 * i + 40});
 	render_text(cub3d, GTA_FONT_YELLOW_NAME, name, (t_uvec2){SCREEN_W / 2
 		- ft_strlen(name) * 18 - 50, SCREEN_H / 4 + 50 * i - 27});
 	pos = (t_uvec2){SCREEN_W / 2 + 225 + 125 - 70, SCREEN_H / 4 + 50 * i - 25};
