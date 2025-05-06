@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:08:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 10:40:15 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:06:02 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	handle_house(t_cub3d *cub3d, t_texture *border, t_texture *house)
 		cub3d->spawn_point.y - cub3d->player.location.y
 	};
 	rotated = (t_dvec2){
-		vec_to_spawn.x * cub3d->player.cos_r - \
-vec_to_spawn.y * cub3d->player.sin_r,
-		vec_to_spawn.x * cub3d->player.sin_r + \
-vec_to_spawn.y * cub3d->player.cos_r
+		vec_to_spawn.x * -cub3d->player.sin_r - \
+vec_to_spawn.y * -cub3d->player.cos_r,
+		vec_to_spawn.x * -cub3d->player.cos_r + \
+vec_to_spawn.y * -cub3d->player.sin_r
 	};
 	rotated = normalize_vector(rotated);
 	len = ft_clamp(sqrt(vec_to_spawn.x * vec_to_spawn.x + vec_to_spawn.y \

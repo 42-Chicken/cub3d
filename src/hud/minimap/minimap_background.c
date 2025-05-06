@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:23:19 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 10:38:56 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:07:41 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static t_dvec2	get_rotated(t_cub3d *cub3d, t_vec2 c)
 
 	direction.x = c.x - cub3d->player.minimap_pos.x;
 	direction.y = c.y - cub3d->player.minimap_pos.y;
-	rotated.x = direction.x * cub3d->player.cos_r + direction.y
-		* cub3d->player.sin_r + cub3d->player.minimap_pos.x;
-	rotated.y = -direction.x * cub3d->player.sin_r + direction.y
-		* cub3d->player.cos_r + cub3d->player.minimap_pos.y;
+	rotated.x = direction.x * -cub3d->player.sin_r + direction.y
+		* -cub3d->player.cos_r + cub3d->player.minimap_pos.x;
+	rotated.y = -direction.x * -cub3d->player.cos_r + direction.y
+		* -cub3d->player.sin_r + cub3d->player.minimap_pos.y;
 	return (rotated);
 }
 

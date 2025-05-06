@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:15 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 10:42:33 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:05:45 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	render_minimap(t_cub3d *cub3d)
 	igmlx_simple_copy_to_dest(player, cub3d->rendering_buffer,
 		cub3d->minimap.player_pos);
 	igmlx_simple_copy_to_dest(north, cub3d->rendering_buffer,
-		(t_uvec2){(border->width / 2 + 5) + cub3d->player.sin_r * border->width
+		(t_uvec2){(border->width / 2 + 5) + -cub3d->player.cos_r * border->width
 		/ 2, SCREEN_H - (border->height / 2) - (north->height + 5)
-		+ -cub3d->player.cos_r * border->height / 2});
+		+ cub3d->player.sin_r * border->height / 2});
 	handle_house(cub3d, border, house);
 }
 

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 09:48:54 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:14:19 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@ void	on_key_pressed(int key, t_cub3d *cub3d)
 	}
 	if (key == 'w')
 	{
-		cub3d->player.direction.x = cub3d->player.cos_r * 0.7f;
-		cub3d->player.direction.y = cub3d->player.sin_r * 0.7f;
+		cub3d->player.direction.x = cub3d->player.cos_r * 0.1f;
+		cub3d->player.direction.y = cub3d->player.sin_r * 0.1f;
 	}
 	if (key == 's')
 	{
-		cub3d->player.direction.x = -cub3d->player.cos_r * 0.7f;
-		cub3d->player.direction.y = -cub3d->player.sin_r * 0.7f;
+		cub3d->player.direction.x = -cub3d->player.cos_r * 0.1f;
+		cub3d->player.direction.y = -cub3d->player.sin_r * 0.1f;
 	}
 	if (key == 'a')
 	{
-		cub3d->player.rotation_angle_add = +0.04f;
+		cub3d->player.rotation_angle_add = -0.04f;
 	}
 	if (key == 'd')
 	{
-		cub3d->player.rotation_angle_add = -0.04f;
+		cub3d->player.rotation_angle_add = +0.04f;
 	}
 }
 

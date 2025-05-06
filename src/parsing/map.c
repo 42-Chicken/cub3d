@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:26:56 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 10:00:32 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 11:03:18 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ void	parsing_set_player_data(t_cub3d *cub3d)
 					(double)y}, M_PI / 2);
 			if (cub3d->map.buffer[y][x] == 'E')
 				set_player_position_angle(cub3d, (t_dvec2){(double)x,
-					(double)y}, M_PI);
+					(double)y}, M_PI * 2);
 			if (cub3d->map.buffer[y][x] == 'W')
 				set_player_position_angle(cub3d, (t_dvec2){(double)x,
-					(double)y}, M_PI * 2);
+					(double)y}, M_PI);
 			x++;
 		}
 		y++;
