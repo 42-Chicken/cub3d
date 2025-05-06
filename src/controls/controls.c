@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 12:03:59 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:08:19 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	on_key_pressed(int key, t_cub3d *cub3d)
 		mlx_loop_end(cub3d->mlx);
 	if (key == XK_Up)
 		cub3d->player.money += 5;
-	printf("%c\n", key);
 	keycode_controls_items(key, cub3d);
 	if (cub3d->key_pressed_index < KEY_PRESSED_MAX && !is_pressed(cub3d, key))
 		cub3d->key_pressed[cub3d->key_pressed_index++] = key;
