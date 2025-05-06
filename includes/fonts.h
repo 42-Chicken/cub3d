@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 09:18:50 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:43:03 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void					igmlx_destroy_fonts_list(t_cub3d *igmlx,
 							t_list **fonts);
 void					igmlx_load_font(t_cub3d *igmlx, char *path, char *name,
 							t_igmlx_font_params params);
-void					igmlx_put_str_to_buffer(t_igmlx_font *font, char *str, t_img *buffer, t_uvec2 pos);
+void					igmlx_put_str_to_buffer(t_igmlx_font *font, char *str,
+							t_img *buffer, t_uvec2 pos);
 
 #endif
