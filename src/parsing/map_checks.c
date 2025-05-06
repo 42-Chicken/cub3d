@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:55:38 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/28 09:26:31 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:00:32 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ bool	parsing_duplicates_player_data(t_cub3d *cub3d)
 		while (x < ft_strlen(cub3d->map.buffer[y]))
 		{
 			if (ft_strchr("NSEW", cub3d->map.buffer[y][x])
-				&& cub3d->player.position.x != x
-				&& cub3d->player.position.y != y)
+				&& cub3d->player.location.x != x
+				&& cub3d->player.location.y != y)
 				return (false);
 			x++;
 		}
@@ -58,12 +58,9 @@ bool	parsing_duplicates_player_data(t_cub3d *cub3d)
 
 bool	parsing_is_neighbor_void(t_cub3d *cub3d, size_t x, size_t y)
 {
-	return (
-		map_is_void(cub3d, x + 1, y) == true
-		|| map_is_void(cub3d, x - 1, y) == true
-		|| map_is_void(cub3d, x, y + 1) == true
-		|| map_is_void(cub3d, x, y - 1) == true
-	);
+	return (map_is_void(cub3d, x + 1, y) == true || map_is_void(cub3d, x - 1,
+			y) == true || map_is_void(cub3d, x, y + 1) == true
+		|| map_is_void(cub3d, x, y - 1) == true);
 }
 
 bool	parsing_check_if_map_is_enclosed(t_cub3d *cub3d)

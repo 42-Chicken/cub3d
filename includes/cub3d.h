@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 09:47:43 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:06:43 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@
 # define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
 
 # define MENU_MAX_BTNS 15
+# define MAX_ENTITIES 100
 
 typedef struct timeval			t_time;
 
@@ -103,6 +104,35 @@ typedef struct s_img_pos
 
 typedef unsigned int			t_color;
 
+typedef enum e_cub3d_entity_type
+{
+	CUB3D_ENTITY_OFFICER,
+	CUB3D_ENTITY_CAR,
+	__ENTITY_TYPES_COUNT__,
+}								t_e_cub3d_entity_type;
+
+typedef enum e_cub3d_entity_textures_rotations
+{
+	CUB3D_ENTITY_TEXTURE_FRONT,
+	CUB3D_ENTITY_TEXTURE_FRONT_LEFT,
+	CUB3D_ENTITY_TEXTURE_FRONT_RIGHT,
+	CUB3D_ENTITY_TEXTURE_LEFT,
+	CUB3D_ENTITY_TEXTURE_RIGHT,
+	CUB3D_ENTITY_TEXTURE_BACK,
+	CUB3D_ENTITY_TEXTURE_BACK_LEFT,
+	CUB3D_ENTITY_TEXTURE_BACK_RIGHT,
+	__ENTITY_ROTATIONS_COUNT__,
+}								t_e_cub3d_entity_textures_rotations;
+
+typedef struct s_entity
+{
+	bool						in_game;
+	t_e_cub3d_entity_type		type;
+	int							health;
+	t_dvec2						location;
+	t_texture					textures[__ENTITY_ROTATIONS_COUNT__];
+}								t_entity;
+
 typedef struct s_argb
 {
 	t_color						alpha;
@@ -120,7 +150,7 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	t_dvec2						position;
+	t_dvec2						location;
 	double						rotation_angle;
 	double						rotation_angle_add;
 	t_dvec2						direction;
@@ -214,6 +244,7 @@ typedef struct s_cub3d
 	pthread_mutex_t				mutex;
 
 	t_button					menus_buttons[__MENUS_COUNT__][MENU_MAX_BTNS];
+	t_entity					entities[MAX_ENTITIES];
 
 	t_minimap					minimap;
 	size_t						textures_loaded;
@@ -301,7 +332,8 @@ t_color							igmlx_melt_colors(t_color input,
 void							igmlx_apply_color_filter(t_img *img,
 									t_color filter);
 void							igmlx_copy_to_dest(t_img_pos origin,
-									t_uvec2 length, t_img_pos dest,bool transparancy);
+									t_uvec2 length, t_img_pos dest,
+									bool transparancy);
 void							igmlx_simple_copy_to_dest(t_img *origin,
 									t_img *dest, t_uvec2 dest_pos);
 // PLAYER

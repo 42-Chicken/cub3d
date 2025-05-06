@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:26:56 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 10:33:29 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:00:32 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,10 @@ bool	parse_map(t_cub3d *cub3d, int fd)
 	cub3d->map.buffer = safe_malloc(sizeof(char *) * cub3d->map.height);
 	send_pointer_to_main_context(cub3d->map.buffer);
 	parsing_fill_map_buffer(cub3d, head);
-	cub3d->player.position = (t_dvec2){-1, -1};
+	cub3d->player.location = (t_dvec2){-1, -1};
 	parsing_set_player_data(cub3d);
-	p_pos = (t_uvec2){cub3d->player.position.x, cub3d->player.position.y};
-	if (cub3d->player.position.x == -1 || cub3d->player.position.y == -1)
+	p_pos = (t_uvec2){cub3d->player.location.x, cub3d->player.location.y};
+	if (cub3d->player.location.x == -1 || cub3d->player.location.y == -1)
 		return (_error("no player spawn position in the map!"), false);
 	cub3d->spawn_point = p_pos;
 	cub3d->map.buffer[p_pos.y][p_pos.x] = CUB3D_MAP_FLOOR;

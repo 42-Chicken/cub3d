@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 09:10:33 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:55:46 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ bool	load_assets(t_cub3d *cub3d)
 	while (textures_paths[++i])
 		error |= load_texture(cub3d, textures_paths[i], i);
 	error |= init_minimap(cub3d);
+	// igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_FLOOR), cub3d->floor_color);
+	// igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_SKY), cub3d->ceiling_color);
 	exit_safe_memory_context();
 	return (error);
 }
