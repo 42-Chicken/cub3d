@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:50:29 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 14:30:10 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 10:30:44 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ static bool	parsing_set_and_read_color_id_value(t_color *target, char *value)
 	if (!splitted)
 		return (false);
 	i = 0;
-	d = 0;
+	d = 8;
 	while (splitted[i] && i < 3)
 	{
 		if (is_not_only_digits(splitted[i]) == false
 			|| ft_atoi(splitted[i]) > 255 || ft_strlen(splitted[i]) > 3)
 			return (_error("invalid color value in the map data!"), false);
-		*target = ((*target << d) | ft_atoi(splitted[i]));
+		*target |= (ft_atoi(splitted[i]) << (24 - d));
 		i++;
 		d += 8;
 	}
