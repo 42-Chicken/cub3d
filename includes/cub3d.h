@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 13:25:16 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:37:50 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,7 @@ typedef struct s_settings
 	int							fov;
 	int							mouse_sens;
 	int							player_speed;
+	int							player_rotation_speed;
 	int							sounds;
 }								t_settings;
 
