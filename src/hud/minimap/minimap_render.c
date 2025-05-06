@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:15 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 13:08:35 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:47:43 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	render_minimap(t_cub3d *cub3d)
 	north = get_texture(cub3d, TEXTURE_MINIMAP_NORTH_INDICATION);
 	player = get_texture(cub3d, TEXTURE_MINIMAP_PLAYER);
 	minimap_handle_background(cub3d, border);
-	igmlx_simple_copy_to_dest_ignore_null(border, cub3d->rendering_buffer,
+	igmlx_simple_copy_to_dest(border, cub3d->rendering_buffer,
 		cub3d->minimap.border_pos);
-	igmlx_simple_copy_to_dest_ignore_null(player, cub3d->rendering_buffer,
+	igmlx_simple_copy_to_dest(player, cub3d->rendering_buffer,
 		cub3d->minimap.player_pos);
-	igmlx_simple_copy_to_dest_ignore_null(north, cub3d->rendering_buffer,
+	igmlx_simple_copy_to_dest(north, cub3d->rendering_buffer,
 		(t_uvec2){(border->width / 2 + 5) + cub3d->player.cos_r * border->width
 		/ 2, SCREEN_H - (border->height / 2) - (north->height + 5)
 		+ cub3d->player.sin_r * border->height / 2});

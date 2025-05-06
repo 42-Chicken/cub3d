@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 12:23:19 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 08:25:39 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:12:25 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	minimap_draw_background(t_cub3d *cub3d, t_vec2 offset,
 	t_vec2		c;
 	t_dvec2		rotated;
 
-	minimap = get_texture(cub3d, TEXTURE_MINIMAP);
+	minimap = get_texture(cub3d, __TEXTURE_MINIMAP__);
 	c.y = cub3d->player.minimap_pos.y - 4 * MINIMAP_TILE_SIZE;
 	while (c.y < cub3d->player.minimap_pos.y + 4 * MINIMAP_TILE_SIZE)
 	{

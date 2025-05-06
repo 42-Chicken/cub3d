@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:40:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 14:34:37 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:12:14 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static bool	create_minimap_texture(t_cub3d *cub3d)
 	if (!minimap)
 		return (_error("failed to create minimap image !"), true);
 	fill_minimap_texture(cub3d, minimap);
-	add_asset(cub3d, TEXTURE_MINIMAP, minimap);
+	add_asset(cub3d, __TEXTURE_MINIMAP__, minimap);
 	return (false);
 }
 

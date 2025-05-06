@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:22:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 10:01:39 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 08:57:42 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 void	init_mlx_hooks(t_cub3d *cub3d)
 {
 	mlx_hook(cub3d->win, DestroyNotify, 0, (int (*)(void *)) & end_loop, cub3d);
-	mlx_hook(cub3d->win, FocusOut, FocusChangeMask, (int (*)(void *)) & pause_game, cub3d);
-
-	mlx_hook(cub3d->win, MotionNotify, PointerMotionMask, (int (*)(void *)) & on_mouse_move, cub3d);
-
-	mlx_hook(cub3d->win, ButtonPress, ButtonPressMask, (int (*)(void *)) & on_mouse_button_down, cub3d);
-
+	mlx_hook(cub3d->win, FocusOut, FocusChangeMask,
+		(int (*)(void *)) & pause_game, cub3d);
+	mlx_hook(cub3d->win, MotionNotify, PointerMotionMask,
+		(int (*)(void *)) & on_mouse_move, cub3d);
+	mlx_hook(cub3d->win, ButtonPress, ButtonPressMask,
+		(int (*)(void *)) & on_mouse_button_down, cub3d);
 	mlx_hook(cub3d->win, KeyPress, KeyPressMask,
 		(int (*)(void *)) & on_key_pressed, cub3d);
 	mlx_hook(cub3d->win, KeyRelease, KeyReleaseMask,
@@ -31,11 +31,13 @@ void	init_mlx_hooks(t_cub3d *cub3d)
 
 bool	init_mlx(t_cub3d *cub3d)
 {
+	// if (init_loading_thread(cub3d))
+	// 	return (_error("failed to init loading thread!"), false);
+	// pthread_mutex_lock(&cub3d->mutex);
 	cub3d->mlx = mlx_init();
+	// pthread_mutex_unlock(&cub3d->mutex);
 	if (!cub3d->mlx)
 		return (_error("failed to init mlx!"), false);
-	if (init_loading_thread(cub3d))
-		return (destroy_mlx(cub3d), false);
 	if (load_assets(cub3d) == true)
 		return (destroy_mlx(cub3d), _error("failed to load textures !"), false);
 	igmlx_load_font(cub3d, GTA_FONT, GTA_FONT_BLUE_NAME,
@@ -50,10 +52,11 @@ bool	init_mlx(t_cub3d *cub3d)
 			"GTA III (raycasting)");
 	if (!cub3d->win)
 		return (_error("failed to create new window!"), false);
-	// pthread_join(cub3d->loading_thread, NULL);
 	cub3d->rendering_buffer = mlx_new_image(cub3d->mlx, SCREEN_W, SCREEN_H);
 	if (!cub3d->rendering_buffer)
-		return (_error("failed to create rendering buffer!"), false);
+		return (NULL);
+	// pthread_join(cub3d->loading_thread, NULL);
+	// usleep(1000000);
 	return (true);
 }
 

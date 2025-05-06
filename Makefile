@@ -43,6 +43,7 @@ SRCS				=	src/main.c\
 						src/controls/controls.c\
 						src/controls/item_controls.c\
 						src/images/manipulation.c\
+						src/images/pixels.c\
 						src/images/shapes/line.c\
 						src/images/shapes/rectangle.c\
 						src/images/shapes/circle.c\

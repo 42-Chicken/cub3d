@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:01:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 08:45:23 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:47:43 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	decrement_value(t_incrementor_data data)
 		*data.n = data.max;
 	switch_to_options_menu(data.cub3d);
 }
+
 static void	increment_value(t_incrementor_data data)
 {
 	*data.n += data.i;
@@ -66,9 +67,9 @@ void	render_options_menu(t_cub3d *cub3d)
 	t_button	*btns;
 
 	btns = cub3d->menus_buttons[CUB3D_MENU_SETTINGS];
-	igmlx_simple_copy_to_dest_ignore_null(get_texture(cub3d,
-			TEXTURE_OPTIONS_MENU_TITLE), cub3d->rendering_buffer,
-		(t_uvec2){SCREEN_W / 2 - 135, SCREEN_H / 8 - 50});
+	igmlx_simple_copy_to_dest(get_texture(cub3d, TEXTURE_OPTIONS_MENU_TITLE),
+		cub3d->rendering_buffer, (t_uvec2){SCREEN_W / 2 - 135, SCREEN_H / 8
+		- 50});
 	draw_incrementor(cub3d, "M O U S E :",
 		(t_incrementor_data){(int *)&cub3d->settings.mouse_sens, 1, 1, 100,
 		cub3d}, 0);

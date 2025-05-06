@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:43:25 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 14:24:12 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:18:32 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	init_types(t_button *buttons, t_e_button_type type)
 	size_t	i;
 
 	i = 0;
-	while (i < MENU_MAX_BUTTONS)
+	while (i < MENU_MAX_BTNS)
 	{
 		buttons[i++].type = type;
 	}
@@ -35,7 +35,8 @@ static void	init_pause_menu(t_cub3d *cub3d)
 	cub3d->menus_buttons[CUB3D_MENU_PAUSE][0].texture = get_texture(cub3d,
 			TEXTURE_PAUSE_MENU_RESUME);
 	pos = (t_uvec2){SCREEN_W / 2 - 50, SCREEN_H / 4 + 160};
-	cub3d->menus_buttons[CUB3D_MENU_PAUSE][1].button_callback = switch_to_options_menu;
+	cub3d->menus_buttons[CUB3D_MENU_PAUSE][1].button_callback = \
+	switch_to_options_menu;
 	cub3d->menus_buttons[CUB3D_MENU_PAUSE][1].button_args = cub3d;
 	cub3d->menus_buttons[CUB3D_MENU_PAUSE][1].pos = (t_uvec2){SCREEN_W / 2 - 50,
 		SCREEN_H / 4 + 160};

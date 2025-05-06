@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   health_render.c                                    :+:      :+:    :+:   */
+/*   pixels.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/02 08:42:49 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 09:20:02 by rguigneb         ###   ########.fr       */
+/*   Created: 2025/05/06 09:48:12 by rguigneb          #+#    #+#             */
+/*   Updated: 2025/05/06 09:48:25 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_stats_health(t_cub3d *cub3d, t_texture *item)
+// maybe can be optimized, check igmxl_copy...
+t_color	*get_pixel(t_img *img, t_uvec2 pos)
 {
-	char	health[5];
+	if (pos.x >= (unsigned int)img->width)
+		pos.x = img->width;
+	if (pos.y >= (unsigned int)img->height)
+		pos.y = img->height;
+	return ((t_color *)img->data + pos.y * (img->size_line / 4) + pos.x);
+}
 
-	health[0] = '\1';
-	custom_itoa(cub3d->player.health, (char *)&health + 1);
-	render_text(cub3d, GTA_FONT_RED_NAME, health, (t_uvec2){SCREEN_W
-		- item->width - RIGHT_HUD_OFFSET * 2.2 - ft_strlen(health) * 18,
-		item->height - RIGHT_HUD_OFFSET * 1.7 - 2});
+t_color	get_pixel_color(t_img *img, t_uvec2 pos)
+{
+	return (*get_pixel(img, pos));
 }

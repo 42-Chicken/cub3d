@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:12:20 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/01 17:00:05 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:48:47 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,14 @@ static void	init_letters_images(t_cub3d *igmlx, t_igmlx_font *font,
 	{
 		tmp = mlx_new_image(igmlx->mlx, 48, 48);
 		if (!tmp)
-		{
-			_error("mlx_new_image failed!");
-			return ;
-		}
+			return (_error("mlx_new_image failed!"), (void)0);
 		if (x == 16)
 		{
 			y++;
 			x = 0;
 		}
-		igmlx_copy_to_dest(font_img, (t_uvec2){x * 48, y * 48}, (t_uvec2){48,
-			48}, tmp, (t_uvec2){0, 0});
+		igmlx_copy_to_dest((t_img_pos){font_img, (t_uvec2){x * 48, y * 48}},
+			(t_uvec2){48, 48}, (t_img_pos){tmp, (t_uvec2){0, 0}}, false);
 		igmlx_apply_color_filter(tmp, font->color);
 		font->letters[(int)c] = tmp;
 		x++;

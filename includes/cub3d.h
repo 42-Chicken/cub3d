@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 08:44:07 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:47:43 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 # define MINIMAP_TILE_SIZE 25
 # define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
 
-# define MENU_MAX_BUTTONS 15
+# define MENU_MAX_BTNS 15
 
 typedef struct timeval			t_time;
 
@@ -92,10 +92,24 @@ typedef enum e_cub3d_menu
 	CUB3D_MENU_PAUSE,
 	CUB3D_MENU_SETTINGS,
 	CUB3D_MENU_CREDITS,
-	__CUB3D_MENU_COUNT__,
+	__MENUS_COUNT__,
 }								t_e_cub3d_menu;
 
+typedef struct s_img_pos
+{
+	t_img						*img;
+	t_uvec2						pos;
+}								t_img_pos;
+
 typedef unsigned int			t_color;
+
+typedef struct s_argb
+{
+	t_color						alpha;
+	t_color						red;
+	t_color						green;
+	t_color						blue;
+}								t_argb;
 
 typedef struct s_map
 {
@@ -135,10 +149,10 @@ typedef struct s_settings
 
 typedef struct s_incrementor_data
 {
-	int						*n;
-	int						i;
-	int						min;
-	int						max;
+	int							*n;
+	int							i;
+	int							min;
+	int							max;
 	t_cub3d						*cub3d;
 }								t_incrementor_data;
 
@@ -199,7 +213,7 @@ typedef struct s_cub3d
 	pthread_t					loading_thread;
 	pthread_mutex_t				mutex;
 
-	t_button					menus_buttons[__CUB3D_MENU_COUNT__][MENU_MAX_BUTTONS];
+	t_button					menus_buttons[__MENUS_COUNT__][MENU_MAX_BTNS];
 
 	t_minimap					minimap;
 	size_t						textures_loaded;
@@ -286,15 +300,9 @@ t_color							igmlx_melt_colors(t_color input,
 									t_color filter);
 void							igmlx_apply_color_filter(t_img *img,
 									t_color filter);
-void							igmlx_copy_to_dest_ignore_null(t_img *origin,
-									t_uvec2 origin_pos, t_uvec2 length,
-									t_img *dest, t_uvec2 dest_pos);
-void							igmlx_copy_to_dest(t_img *origin,
-									t_uvec2 origin_pos, t_uvec2 length,
-									t_img *dest, t_uvec2 dest_pos);
-void							igmlx_set_to_null(t_img *origin,
-									t_uvec2 origin_pos, t_uvec2 length);
-void							igmlx_simple_copy_to_dest_ignore_null(t_img *origin,
+void							igmlx_copy_to_dest(t_img_pos origin,
+									t_uvec2 length, t_img_pos dest,bool transparancy);
+void							igmlx_simple_copy_to_dest(t_img *origin,
 									t_img *dest, t_uvec2 dest_pos);
 // PLAYER
 void							set_player_position_angle(t_cub3d *cub3d,

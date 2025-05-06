@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 16:56:51 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 09:12:00 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,32 @@
 typedef t_img			t_texture;
 typedef struct s_cub3d	t_cub3d;
 
+# define TEXTURES_PATHS "\
+assets/minimap/minimap_border.xpm\n\
+assets/minimap/minimap_house.xpm\n\
+assets/minimap/minimap_north_indication.xpm\n\
+assets/minimap/minimap_player.xpm\n\
+assets/pistol.xpm\n\
+assets/fist.xpm\n\
+assets/shotgun.xpm\n\
+assets/menus/pause/resume.xpm\n\
+assets/menus/pause/resume_hover.xpm\n\
+assets/menus/pause/options.xpm\n\
+assets/menus/pause/options_hover.xpm\n\
+assets/menus/pause/quit.xpm\n\
+assets/menus/pause/quit_hover.xpm\n\
+assets/menus/pause/title.xpm\n\
+assets/menus/options/title.xpm\n\
+assets/menus/options/plus.xpm\n\
+assets/menus/options/plus_hover.xpm\n\
+assets/menus/options/minus.xpm\n\
+assets/menus/options/minus_hover.xpm\n\
+assets/menus/back.xpm\n\
+assets/menus/back_hover.xpm\n\
+"
+
 typedef enum e_textures
 {
-	TEXTURE_MINIMAP,
 	TEXTURE_MINIMAP_BORDER,
 	TEXTURE_MINIMAP_HOUSE,
 	TEXTURE_MINIMAP_NORTH_INDICATION,
@@ -47,7 +70,8 @@ typedef enum e_textures
 	TEXTURE_OPTIONS_MENU_MINUS_H,
 	TEXTURE_OPTIONS_MENU_BACK,
 	TEXTURE_OPTIONS_MENU_BACK_H,
-	__TEXTURES_COUNT__
+	__TEXTURES_COUNT__,
+	__TEXTURE_MINIMAP__,
 }						t_textures_definition;
 
 typedef struct s_textures_atlas
