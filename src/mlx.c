@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:22:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 08:57:42 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:04:51 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ bool	init_mlx(t_cub3d *cub3d)
 	if (!cub3d->win)
 		return (_error("failed to create new window!"), false);
 	cub3d->rendering_buffer = mlx_new_image(cub3d->mlx, SCREEN_W, SCREEN_H);
-	if (!cub3d->rendering_buffer)
-		return (NULL);
+		if (!cub3d->rendering_buffer)
+			return (NULL);
 	// pthread_join(cub3d->loading_thread, NULL);
 	// usleep(1000000);
 	return (true);

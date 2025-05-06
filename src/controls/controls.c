@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 11:14:19 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:03:59 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,49 +25,36 @@ void	on_key_pressed(int key, t_cub3d *cub3d)
 		mlx_loop_end(cub3d->mlx);
 	if (key == XK_Up)
 		cub3d->player.money += 5;
+	printf("%c\n", key);
 	keycode_controls_items(key, cub3d);
-	if (key == XK_l)
-	{
-	}
-	if (key == 'w')
-	{
-		cub3d->player.direction.x = cub3d->player.cos_r * 0.1f;
-		cub3d->player.direction.y = cub3d->player.sin_r * 0.1f;
-	}
-	if (key == 's')
-	{
-		cub3d->player.direction.x = -cub3d->player.cos_r * 0.1f;
-		cub3d->player.direction.y = -cub3d->player.sin_r * 0.1f;
-	}
-	if (key == 'a')
-	{
-		cub3d->player.rotation_angle_add = -0.04f;
-	}
-	if (key == 'd')
-	{
-		cub3d->player.rotation_angle_add = +0.04f;
-	}
+	if (cub3d->key_pressed_index < KEY_PRESSED_MAX && !is_pressed(cub3d, key))
+		cub3d->key_pressed[cub3d->key_pressed_index++] = key;
 }
 
 void	on_key_released(int key, t_cub3d *cub3d)
 {
-	if (key == 'w')
+	size_t	i;
+	size_t	y;
+
+	i = KEY_PRESSED_MAX - 1;
+	if (cub3d->key_pressed_index > 0 && is_pressed(cub3d, key))
 	{
-		cub3d->player.direction.x = 0;
-		cub3d->player.direction.y = 0;
-	}
-	if (key == 's')
-	{
-		cub3d->player.direction.x = 0;
-		cub3d->player.direction.y = 0;
-	}
-	if (key == 'a')
-	{
-		cub3d->player.rotation_angle_add = 0;
-	}
-	if (key == 'd')
-	{
-		cub3d->player.rotation_angle_add = 0;
+		cub3d->key_pressed_index--;
+		while (i >= 0)
+		{
+			if (cub3d->key_pressed[i] == key)
+			{
+				y = i;
+				cub3d->key_pressed[y] = 0;
+				while (y + 1 < KEY_PRESSED_MAX)
+				{
+					cub3d->key_pressed[y] = cub3d->key_pressed[y + 1];
+					y++;
+				}
+				break ;
+			}
+			i--;
+		}
 	}
 }
 

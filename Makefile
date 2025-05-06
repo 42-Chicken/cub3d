@@ -41,6 +41,7 @@ SRCS				=	src/main.c\
 						src/menus/buttons.c\
 						src/menus/init_menus.c\
 						src/controls/controls.c\
+						src/controls/controls_utils.c\
 						src/controls/item_controls.c\
 						src/images/manipulation.c\
 						src/images/pixels.c\
@@ -143,7 +144,6 @@ clean-objs :
 clean : clean-objs
 		@$(MAKE) $(shell dirname $(FT_LIBC)) fclean
 		@$(MAKE) $(shell dirname $(MLX_LIB)) clean
-		@$(MAKE) $(shell dirname $(IGMLX_LIB)) fclean
 
 fclean : clean
 		@$(RM) $(NAME)

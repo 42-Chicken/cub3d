@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 10:43:12 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 12:02:58 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@
 
 # define MENU_MAX_BTNS 15
 # define MAX_ENTITIES 100
+
+# define PLAYER_SPEED 0.1f
+
+# define KEY_PRESSED_MAX 10
 
 typedef struct timeval			t_time;
 
@@ -148,6 +152,13 @@ typedef struct s_map
 	char						**buffer;
 }								t_map;
 
+typedef enum e_cub3d_player_movement
+{
+	CUB3D_PLAYER_MOVE_NONE = 0,
+	CUB3D_PLAYER_MOVE_FORWARD,
+	CUB3D_PLAYER_MOVE_BACKWARD,
+}								t_e_cub3d_player_movement;
+
 typedef struct s_player
 {
 	t_dvec2						location;
@@ -158,6 +169,7 @@ typedef struct s_player
 	size_t						money;
 	unsigned char				health;
 	t_textures_definition		item;
+	t_e_cub3d_player_movement	movement;
 	double						cos_r;
 	double						sin_r;
 }								t_player;
@@ -174,6 +186,7 @@ typedef struct s_settings
 	bool						debug;
 	int							fov;
 	int							mouse_sens;
+	int							player_speed;
 	int							sounds;
 }								t_settings;
 
@@ -228,6 +241,9 @@ typedef struct s_cub3d
 	t_color						ceiling_color;
 	t_player					player;
 	t_map						map;
+
+	size_t						key_pressed_index;
+	int							key_pressed[KEY_PRESSED_MAX];
 
 	t_list						*fonts;
 
@@ -306,6 +322,7 @@ void							minimap_handle_background(t_cub3d *cub3d,
 									t_texture *border);
 
 // CONTROLS
+bool							is_pressed(t_cub3d *cub3d, int key);
 void							on_key_pressed(int key, t_cub3d *cub3d);
 void							on_key_released(int key, t_cub3d *cub3d);
 void							on_mouse_button_down(int key, int x, int y,
