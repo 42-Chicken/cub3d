@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 08:44:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/02 08:49:30 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 08:41:05 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static size_t	get_number_len(long n)
 	return (i);
 }
 
-void custom_itoa(int n, char *buffer)
+void	custom_itoa(int n, char *buffer)
 {
 	size_t	i;
 	size_t	is_negative;

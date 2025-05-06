@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 16:50:50 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 08:44:07 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,10 @@ typedef struct s_settings
 
 typedef struct s_incrementor_data
 {
-	int							*n;
-	double						i;
+	int						*n;
+	int						i;
+	int						min;
+	int						max;
 	t_cub3d						*cub3d;
 }								t_incrementor_data;
 
@@ -204,6 +206,7 @@ typedef struct s_cub3d
 	t_textures_atlas			textures_atlas;
 
 	t_e_cub3d_menu				menu;
+	t_e_cub3d_menu				last_frame_menu;
 
 	void						*mlx;
 	void						*win;

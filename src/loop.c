@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:37:33 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/05 16:46:13 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 08:45:01 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	loop(t_cub3d *cub3d)
 	usleep(10000);
 	if (cub3d->menu == CUB3D_MENU_NONE)
 		render_game(cub3d);
+	cub3d->last_frame_menu = cub3d->menu;
 }
