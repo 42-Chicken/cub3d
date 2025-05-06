@@ -27,22 +27,22 @@ SRCS				=	src/main.c\
 						src/mlx.c\
 						src/loop.c\
 						src/exit_error.c\
-						src/hud/minimap/minimap_init.c\
-						src/hud/minimap/minimap_house.c\
-						src/hud/minimap/minimap_render.c\
-						src/hud/minimap/minimap_background.c\
-						src/hud/stats/stats_render.c\
-						src/hud/stats/health_render.c\
-						src/hud/stats/money_render.c\
-						src/hud/stats/time_render.c\
+						src/game/hud/minimap/minimap_init.c\
+						src/game/hud/minimap/minimap_house.c\
+						src/game/hud/minimap/minimap_render.c\
+						src/game/hud/minimap/minimap_background.c\
+						src/game/hud/stats/stats_render.c\
+						src/game/hud/stats/health_render.c\
+						src/game/hud/stats/money_render.c\
+						src/game/hud/stats/time_render.c\
 						src/game/game_render.c\
-						src/menus/pause_menu.c\
-						src/menus/options_menu.c\
-						src/menus/buttons.c\
-						src/menus/init_menus.c\
-						src/controls/controls.c\
-						src/controls/controls_utils.c\
-						src/controls/item_controls.c\
+						src/game/hud/menus/pause_menu.c\
+						src/game/hud/menus/options_menu.c\
+						src/game/hud/menus/buttons.c\
+						src/game/hud/menus/init_menus.c\
+						src/game/controls/controls.c\
+						src/game/controls/controls_utils.c\
+						src/game/controls/item_controls.c\
 						src/images/manipulation.c\
 						src/images/pixels.c\
 						src/images/shapes/line.c\
@@ -57,11 +57,11 @@ SRCS				=	src/main.c\
 						src/fonts/fonts_get.c\
 						src/fonts/fonts_loader.c\
 						src/fonts/fonts_print.c\
-						src/textures/textures_loader.c\
-						src/textures/textures.c\
+						src/game/textures/textures_loader.c\
+						src/game/textures/textures.c\
 						src/parsing/map_checks.c\
-						src/map/map_utils.c\
-						src/player/player.c\
+						src/game/map/map_utils.c\
+						src/game/player/player.c\
 						src/threads/loading_thread.c\
 						src/threads/r_size_t.c\
 						src/utils/balloc.c\
