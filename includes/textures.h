@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 09:12:00 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:29:09 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef t_img			t_texture;
 typedef struct s_cub3d	t_cub3d;
 
 # define TEXTURES_PATHS "\
+assets/loading_screens/1.xpm\n\
 assets/minimap/minimap_border.xpm\n\
 assets/minimap/minimap_house.xpm\n\
 assets/minimap/minimap_north_indication.xpm\n\
@@ -49,6 +50,7 @@ assets/menus/back_hover.xpm\n\
 
 typedef enum e_textures
 {
+	TEXTURE_LOADING_SCREEN,
 	TEXTURE_MINIMAP_BORDER,
 	TEXTURE_MINIMAP_HOUSE,
 	TEXTURE_MINIMAP_NORTH_INDICATION,

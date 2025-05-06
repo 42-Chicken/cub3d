@@ -2,7 +2,7 @@
 NAME				=	cub3d
 CC					=	clang
 
-CFLAGS				=	-Wall -Werror -Wextra -O3 -O2 -ffast-math -march=native -Ilibs/ft_libc/includes -Ilibs/minilibx-linux -Iincludes -fPIE -g
+CFLAGS				=	-Wall -Werror -Wextra -O3 -O2 -ffast-math -march=native -Ilibs/ft_libc/includes -Ilibs/minilibx-linux -Iincludes -fPIE -g 
 RM					=	rm -rf
 MAKE				=	make --no-print-directory -C
 
@@ -35,6 +35,7 @@ SRCS				=	src/main.c\
 						src/game/hud/stats/health_render.c\
 						src/game/hud/stats/money_render.c\
 						src/game/hud/stats/time_render.c\
+						src/game/hud/screens/loading_screen.c\
 						src/game/game_render.c\
 						src/game/hud/menus/pause_menu.c\
 						src/game/hud/menus/options_menu.c\

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 13:37:50 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:46:28 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,9 @@ typedef struct s_cub3d
 	int							ac;
 
 	bool						error;
+	bool						loaded;
+
+	size_t						tick;
 
 	char						*north_texture_path;
 	char						*south_texture_path;
@@ -354,10 +357,14 @@ void							igmlx_copy_to_dest(t_img_pos origin,
 									bool transparancy);
 void							igmlx_simple_copy_to_dest(t_img *origin,
 									t_img *dest, t_uvec2 dest_pos);
+
 // PLAYER
 void							set_player_position_angle(t_cub3d *cub3d,
 									t_dvec2 pos, double angle);
 void							update_player(t_cub3d *cub3d);
+
+// SCREEN
+void							update_loading_screen(t_cub3d *cub3d);
 
 // MAP
 bool							map_is_floor(t_cub3d *cub3d, size_t x,

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:22:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 13:27:42 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:43:17 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,17 @@ void	init_mlx_hooks(t_cub3d *cub3d)
 
 bool	init_mlx(t_cub3d *cub3d)
 {
-	// if (init_loading_thread(cub3d))
-	// 	return (_error("failed to init loading thread!"), false);
-	// pthread_mutex_lock(&cub3d->mutex);
 	cub3d->mlx = mlx_init();
-	// pthread_mutex_unlock(&cub3d->mutex);
 	if (!cub3d->mlx)
 		return (_error("failed to init mlx!"), false);
+	cub3d->win = mlx_new_window(cub3d->mlx, SCREEN_W, SCREEN_H,
+			"GTA III (raycasting)");
+	if (!cub3d->win)
+		return (_error("failed to create new window!"), false);
+	cub3d->rendering_buffer = mlx_new_image(cub3d->mlx, SCREEN_W, SCREEN_H);
+	if (!cub3d->rendering_buffer)
+		return (_error("failed to create rendering buffer!"), false);
+	update_loading_screen(cub3d);
 	if (load_assets(cub3d) == true)
 		return (destroy_mlx(cub3d), _error("failed to load textures !"), false);
 	igmlx_load_font(cub3d, GTA_FONT, GTA_FONT_BLUE_NAME,
@@ -48,15 +52,6 @@ bool	init_mlx(t_cub3d *cub3d)
 		(t_igmlx_font_params){GTA_FONT_YELLOW_COLOR, 1, (t_uvec2){30, 0}});
 	igmlx_load_font(cub3d, GTA_FONT, GTA_FONT_BLACK_NAME,
 		(t_igmlx_font_params){GTA_FONT_BLACK_COLOR, 1, (t_uvec2){30, 0}});
-	cub3d->win = mlx_new_window(cub3d->mlx, SCREEN_W, SCREEN_H,
-			"GTA III (raycasting)");
-	if (!cub3d->win)
-		return (_error("failed to create new window!"), false);
-	cub3d->rendering_buffer = mlx_new_image(cub3d->mlx, SCREEN_W, SCREEN_H);
-		if (!cub3d->rendering_buffer)
-			return (NULL);
-	// pthread_join(cub3d->loading_thread, NULL);
-	// usleep(1000000);
 	return (true);
 }
 

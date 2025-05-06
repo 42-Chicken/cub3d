@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 13:38:22 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:46:02 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	main(int argc, char const *argv[])
 	printf("MAP width %zu \n", cub3d.map.width);
 	printf("MAP height %zu \n", cub3d.map.height);
 	init_mlx_hooks(&cub3d);
+	cub3d.loaded = true;
 	mlx_loop(cub3d.mlx);
 	destroy_mlx(&cub3d);
 	free_all_contexts_garbage();

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 13:24:29 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:44:49 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ bool	load_texture(t_cub3d *cub3d, const char *path, int id)
 	add_asset(cub3d, id, img);
 	return (false);
 }
-// pthread_mutex_unlock(&cub3d->mutex);
-// pthread_mutex_lock(&cub3d->mutex);
 
 bool	load_assets(t_cub3d *cub3d)
 {
@@ -39,9 +37,14 @@ bool	load_assets(t_cub3d *cub3d)
 	if (!textures_paths)
 		return (true);
 	error = false;
-	while (textures_paths[++i])
+	while (textures_paths[++i] && error == false)
+	{
 		error |= load_texture(cub3d, textures_paths[i], i);
-	error |= init_minimap(cub3d);
+		update_loading_screen(cub3d);
+		usleep(100000);
+	}
+	if (!error)
+		error |= init_minimap(cub3d);
 	exit_safe_memory_context();
 	return (error);
 }
