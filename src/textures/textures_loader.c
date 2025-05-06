@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 10:31:29 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/06 13:24:29 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ bool	load_texture(t_cub3d *cub3d, const char *path, int id)
 
 bool	load_assets(t_cub3d *cub3d)
 {
-	bool				error;
-	char				**textures_paths;
-	size_t				i;
+	bool	error;
+	char	**textures_paths;
+	size_t	i;
 
 	i = -1;
 	create_safe_memory_context();
@@ -42,11 +42,13 @@ bool	load_assets(t_cub3d *cub3d)
 	while (textures_paths[++i])
 		error |= load_texture(cub3d, textures_paths[i], i);
 	error |= init_minimap(cub3d);
-	// igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_FLOOR), cub3d->floor_color);
-	// igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_SKY), cub3d->ceiling_color);
 	exit_safe_memory_context();
 	return (error);
 }
+// igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_FLOOR),
+	// cub3d->floor_color);
+// igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_SKY),
+	// cub3d->ceiling_color);
 
 void	unload_assets(t_cub3d *cub3d)
 {
