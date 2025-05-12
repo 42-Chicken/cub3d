@@ -2,7 +2,7 @@
 NAME				=	cub3d
 CC					=	clang
 
-CFLAGS				=	-Wall -Werror -Wextra -O3 -O2 -ffast-math -march=native -Ilibs/ft_libc/includes -Ilibs/minilibx-linux -Iincludes -fPIE -g 
+CFLAGS				=	-Wall -Werror -Wextra -O3 -march=native -pipe -flto -fomit-frame-pointer -ffast-math  -Ilibs/ft_libc/includes -Ilibs/minilibx-linux -Iincludes -fPIE -g
 RM					=	rm -rf
 MAKE				=	make --no-print-directory -C
 
