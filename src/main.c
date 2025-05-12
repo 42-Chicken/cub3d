@@ -6,11 +6,32 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 14:56:07 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:56:26 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void print_average_fps(t_cub3d *cub3d)
+{
+	struct timeval end_time;
+	gettimeofday(&end_time, NULL);
+
+	double start_sec = cub3d->start_time.tv_sec + cub3d->start_time.tv_usec / 1e6;
+	double end_sec = end_time.tv_sec + end_time.tv_usec / 1e6;
+	double elapsed = end_sec - start_sec;
+
+	if (elapsed > 0)
+	{
+		double avg_fps = cub3d->tick / elapsed;
+		printf("Average FPS: %.2f\n", avg_fps);
+	}
+	else
+	{
+		printf("Elapsed time too small to compute FPS.\n");
+	}
+}
+
 
 int	main(int argc, char const *argv[])
 {
@@ -42,7 +63,9 @@ int	main(int argc, char const *argv[])
 	printf("MAP height %zu \n", cub3d.map.height);
 	init_mlx_hooks(&cub3d);
 	cub3d.loaded = true;
+	gettimeofday(&cub3d.start_time, NULL);
 	mlx_loop(cub3d.mlx);
+	print_average_fps(&cub3d);
 	destroy_mlx(&cub3d);
 	free_all_contexts_garbage();
 	return (EXIT_SUCCESS);

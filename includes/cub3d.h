@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 14:46:28 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:53:24 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,8 @@ typedef struct s_cub3d
 
 	t_button					menus_buttons[__MENUS_COUNT__][MENU_MAX_BTNS];
 	t_entity					entities[MAX_ENTITIES];
+
+	t_time						start_time;
 
 	t_minimap					minimap;
 	size_t						textures_loaded;
