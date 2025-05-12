@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:18:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 14:54:46 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:28:26 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	update_loading_screen(t_cub3d *cub3d)
 	usleep(1000);
 	if (!loading_screen)
 	{
+		loading_screen = get_texture(cub3d, TEXTURE_42);
+		if (loading_screen)
+			igmlx_simple_copy_to_dest(loading_screen, cub3d->rendering_buffer,
+				(t_uvec2){SCREEN_W / 2 - loading_screen->width / 2, SCREEN_H / 2
+				- loading_screen->height});
 		draw_rect(cub3d->rendering_buffer, 0x36454f, (t_uvec2){SCREEN_W / 8,
 			SCREEN_H - 30}, (t_uvec2){SCREEN_W - SCREEN_W / 8, SCREEN_H - 20});
 		mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->rendering_buffer,
