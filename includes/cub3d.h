@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/16 09:33:55 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/16 16:55:14 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+# define FOV (60 * (M_PI / 180))
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -78,6 +80,11 @@
 # define OPTIONS_MENU_FOV_LABEL "F O V"
 # define OPTIONS_MENU_SPEED_LABEL "S P E E D"
 # define OPTIONS_MENU_ROTATION_LABEL "R O T A T I O N"
+
+# define RAYS 1
+# define NUM_RAYS ((int)SCREEN_W / (int)RAYS)
+# define TILESIZE 64
+# define DISTANCE_FROM_CAMERA (double)((SCREEN_W / 2) / tan(FOV / 2))
 
 typedef struct timeval			t_time;
 
@@ -163,6 +170,39 @@ typedef enum e_cub3d_player_movement
 	CUB3D_PLAYER_MOVE_FORWARD,
 	CUB3D_PLAYER_MOVE_BACKWARD,
 }								t_e_cub3d_player_movement;
+
+typedef enum s_direction
+{
+	RIGHT,
+	LEFT,
+	UP,
+	DOWN,
+}								t_e_direction;
+
+typedef struct s_inter
+{
+	double						x_intercept;
+	double						y_intercept;
+	double						x_step;
+	double						y_step;
+}								t_inter;
+typedef struct s_ray
+{
+	float						rayangle;
+	t_e_direction				facing_wall;
+	bool						found_horizontal_wall;
+	bool						found_vertical_wall;
+	bool						was_hit_horizontal;
+	bool						was_hit_vertical;
+	float						horizontal_hit_x;
+	float						horizontal_hit_y;
+	float						vertical_hit_x;
+	float						vertical_hit_y;
+	float						wall_hit_x;
+	float						wall_hit_y;
+	float						distance;
+
+}								t_ray;
 
 typedef struct s_player
 {
@@ -375,8 +415,10 @@ void							update_player(t_cub3d *cub3d);
 void							update_loading_screen(t_cub3d *cub3d);
 
 // MAP
+bool							map_is_wall(t_cub3d *cub3d, size_t x, size_t y);
 bool							map_is_floor(t_cub3d *cub3d, size_t x,
 									size_t y);
+bool							map_is_wall(t_cub3d *cub3d, size_t x, size_t y);
 bool							map_is_void(t_cub3d *cub3d, size_t x, size_t y);
 
 // LOGS
@@ -404,5 +446,8 @@ bool							is_same_str(char *str1, char *str2);
 bool							is_not_only_spaces(char *str);
 void							*balloc(size_t size);
 void							*balloc_(size_t size);
+
+// RAYCASTER
+void							render_raycasting(t_cub3d *data);
 
 #endif

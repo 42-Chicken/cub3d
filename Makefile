@@ -79,6 +79,11 @@ SRCS				=	src/main.c\
 						src/utils/ft_split_with_set.c\
 						src/utils/ft_is_only_digits.c\
 						src/utils/is_not_only_spaces.c\
+						src/game/raycaster/cast.c\
+						src/game/raycaster/draw.c\
+						src/game/raycaster/get_wall_hit.c\
+						src/game/raycaster/intersection.c\
+						src/game/raycaster/raycasting.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a
