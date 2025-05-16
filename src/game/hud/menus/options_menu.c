@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:01:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 14:55:14 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:34:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,25 @@ void	render_options_menu(t_cub3d *cub3d)
 	igmlx_simple_copy_to_dest(get_texture(cub3d, TEXTURE_OPTIONS_MENU_TITLE),
 		cub3d->rendering_buffer, (t_uvec2){SCREEN_W / 2 - 135, SCREEN_H / 8
 		- 50});
-	draw_incrementor(cub3d, "M O U S E :",
+	draw_incrementor(cub3d, OPTIONS_MENU_MOUSE_LABEL,
 		(t_incrementor_data){(int *)&cub3d->settings.mouse_sens, 1, 1, 100,
 		cub3d}, 0);
-	draw_incrementor(cub3d, "F O V :",
+	draw_incrementor(cub3d, OPTIONS_MENU_FOV_LABEL,
 		(t_incrementor_data){(int *)&cub3d->settings.fov, 1, 45, 100, cub3d},
 		2);
-	draw_incrementor(cub3d, "S P E E D",
+	draw_incrementor(cub3d, OPTIONS_MENU_SPEED_LABEL,
 		(t_incrementor_data){(int *)&cub3d->settings.player_speed, 1, 1, 10,
 		cub3d}, 4);
-	draw_incrementor(cub3d, "R O T A T I O N",
+	draw_incrementor(cub3d, OPTIONS_MENU_ROTATION_LABEL,
 		(t_incrementor_data){(int *)&cub3d->settings.player_rotation_speed, 1,
 		1, 10, cub3d}, 6);
 	btns[8].type = CUB3D_BUTTON_DEFAULT;
 	btns[8].button_callback = switch_to_pause_menu;
 	btns[8].button_args = cub3d;
-	btns[8].pos = (t_uvec2){SCREEN_W / 2 - 55, SCREEN_H - SCREEN_H / 4};;
+	btns[8].pos = (t_uvec2){SCREEN_W / 2 - 55, SCREEN_H - SCREEN_H / 4};
 	btns[8].texture = get_texture(cub3d, TEXTURE_OPTIONS_MENU_BACK);
 	draw_button(cub3d, btns[8], TEXTURE_OPTIONS_MENU_BACK_H);
-	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->rendering_buffer, 0,
-		0);
+	render_rendering_buffer(cub3d);
 }
 
 //// draw_incrementor(cub3d, "V O L U M E :",

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/12 11:53:24 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:33:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@
 # define PLAYER_SPEED 0.1f
 
 # define KEY_PRESSED_MAX 10
+
+# define OPTIONS_MENU_MOUSE_LABEL "M O U S E"
+# define OPTIONS_MENU_FOV_LABEL "F O V"
+# define OPTIONS_MENU_SPEED_LABEL "S P E E D"
+# define OPTIONS_MENU_ROTATION_LABEL "R O T A T I O N"
 
 typedef struct timeval			t_time;
 
@@ -289,6 +294,7 @@ void							unpause_game(t_cub3d *cub3d);
 void							pause_game(t_cub3d *cub3d);
 void							exit_error(const char *msg);
 void							render_game(t_cub3d *cub3d);
+void							render_rendering_buffer(t_cub3d *cub3d);
 
 // THREADS
 size_t							r_size_t(pthread_mutex_t *mutex, size_t *value);
