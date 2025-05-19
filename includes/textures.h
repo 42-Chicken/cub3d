@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 17:55:11 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:47:57 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ assets/menus/options/minus_hover.xpm\n\
 assets/menus/back.xpm\n\
 assets/menus/back_hover.xpm\n\
 M assets/walls/townhall.xpm\n\
+F assets/walls/townhall.xpm\n\
 "
 
 typedef enum e_textures
