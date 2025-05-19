@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 09:04:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/16 16:54:44 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/19 19:03:17 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,17 @@ bool	map_is_wall(t_cub3d *cub3d, size_t x, size_t y)
 	if (map_is_outside_map_buffer(cub3d, x, y))
 		return (false);
 	type = cub3d->map.buffer[y][x];
-	return (type == CUB3D_MAP_WALL);
+	return (type != CUB3D_MAP_FLOOR);
+}
+
+char	map_get_wall(t_cub3d *cub3d, size_t x, size_t y)
+{
+	char	type;
+
+	if (map_is_outside_map_buffer(cub3d, x, y))
+		return (false);
+	type = cub3d->map.buffer[y][x];
+	return (type);
 }
 
 bool	map_is_void(t_cub3d *cub3d, size_t x, size_t y)

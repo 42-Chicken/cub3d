@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/16 16:55:14 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/19 19:03:30 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@
 # define NUM_RAYS ((int)SCREEN_W / (int)RAYS)
 # define TILESIZE 64
 # define DISTANCE_FROM_CAMERA (double)((SCREEN_W / 2) / tan(FOV / 2))
+# define WALL_SCALE 3.0
 
 typedef struct timeval			t_time;
 
@@ -201,7 +202,7 @@ typedef struct s_ray
 	float						wall_hit_x;
 	float						wall_hit_y;
 	float						distance;
-
+	char						wall;
 }								t_ray;
 
 typedef struct s_player
@@ -286,6 +287,7 @@ typedef struct s_cub3d
 	char						*west_texture_path;
 	char						*east_texture_path;
 
+	t_img						hand;
 	t_color						floor_color;
 	t_color						ceiling_color;
 	t_player					player;
@@ -415,6 +417,8 @@ void							update_player(t_cub3d *cub3d);
 void							update_loading_screen(t_cub3d *cub3d);
 
 // MAP
+char							map_get_wall(t_cub3d *cub3d, size_t x,
+									size_t y);
 bool							map_is_wall(t_cub3d *cub3d, size_t x, size_t y);
 bool							map_is_floor(t_cub3d *cub3d, size_t x,
 									size_t y);

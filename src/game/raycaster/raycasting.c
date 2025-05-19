@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:43:43 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/16 17:31:14 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/19 19:03:56 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	get_horizontal_intersection(t_cub3d *data, t_ray *ray)
 			check_y = next_y - 1;
 		if (map_is_wall(data, next_x / TILESIZE, check_y/ TILESIZE))
 		{
+			ray->wall = map_get_wall(data, next_x / TILESIZE, check_y/ TILESIZE);
 			ray->horizontal_hit_x = next_x;
 			ray->horizontal_hit_y = next_y;
 			ray->found_horizontal_wall = true;
@@ -118,6 +119,7 @@ void	get_vertical_intersection(t_cub3d *data, t_ray *ray)
 			check_x = next_x - 1;
 		if (map_is_wall(data, check_x/ TILESIZE, next_y/ TILESIZE))
 		{
+			ray->wall = map_get_wall(data, next_x / TILESIZE, check_y/ TILESIZE);
 			ray->vertical_hit_x = next_x;
 			ray->vertical_hit_y = next_y;
 			ray->found_vertical_wall = true;
@@ -225,29 +227,24 @@ void draw_wall(t_cub3d *data, t_ray *ray, int i)
 	double draw_begin = (SCREEN_H - height) / 2;
 
 	if (ray->was_hit_vertical)
-		color = 0x008000;
+	{
+		color = 0x008888;
+	}
 	else
 		color = 0x008800;
 
-	// draw_line(data, i , 0, i, draw_begin, 0x000080);
 	for (size_t y = 0; y < draw_begin; y++)
 	{
 		put_pixel_to_buffer(data->rendering_buffer, (t_uvec2){i, y}, 0x0000F0);
 	}
-	// if (draw_begin >= INT_MAX || draw_begin <= INT_MIN)
-	// 	draw_begin = 10;
-	// if (height >= INT_MAX || height <= INT_MIN)
-	// 	height = 10;
-	// printf("%d %f %f\n", i, height, draw_begin);
-	// fdraw_line(data, i, 0, i, (int)draw_begin, 0x000040);
 
-	fdraw_line(data, i , draw_begin, i, height + draw_begin, color);
+	fdraw_line(data, i , draw_begin, i, (height + draw_begin), color);
 
 	for (size_t d = (int)height + draw_begin; d < SCREEN_H; d++)
 	{
 		put_pixel_to_buffer(data->rendering_buffer, (t_uvec2){i, d}, 0xFF0000);
 	}
-	// fdraw_line(data, i , draw_end + draw_begin, i, SCREEN_H - 1, 0x880080);
+
 }
 void render_raycasting(t_cub3d *data)
 {

@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:02:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/16 16:43:59 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/19 19:04:33 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	render_game(t_cub3d *cub3d)
 		return (end_loop(cub3d), _error("failed to create rendering buffer!"));
 	update_player(cub3d);
 	render_raycasting(cub3d);
-	// draw_rect(cub3d->rendering_buffer, cub3d->floor_color, (t_uvec2){0, 0},
-	// 	(t_uvec2){SCREEN_W, SCREEN_H});
 	render_minimap(cub3d);
 	render_stats(cub3d);
 	render_rendering_buffer(cub3d);
