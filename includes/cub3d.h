@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 20:18:02 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:06:13 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -358,8 +358,7 @@ void							switch_to_pause_menu(t_cub3d *cub3d);
 // PARSING
 bool							parse(t_cub3d *cube3d);
 bool							parsing_is_correct_file_path(t_cub3d *cub3d);
-bool							parsing_map_only_contains_allowed_chars(
-									t_cub3d *cub3d);
+bool							parsing_map_only_contains_allowed_chars(t_cub3d *cub3d);
 bool							parsing_check_map(t_cub3d *cub3d);
 int								parsing_open_file(t_cub3d *cub3d);
 bool							parse_data(t_cub3d *cub3d, int fd);
@@ -406,6 +405,8 @@ void							draw_rect(t_img *buffer, int color,
 
 t_color							*get_pixel(t_img *img, t_uvec2 pos);
 t_color							get_pixel_color(t_img *img, t_uvec2 pos);
+t_color							igmlx_melt_colors_weigthed(t_color input,
+									t_color filter, double filter_weight);
 t_color							igmlx_melt_colors(t_color input,
 									t_color filter);
 void							igmlx_apply_color_filter(t_img *img,
