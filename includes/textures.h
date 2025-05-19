@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 18:47:57 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:21:08 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ assets/menus/options/minus.xpm\n\
 assets/menus/options/minus_hover.xpm\n\
 assets/menus/back.xpm\n\
 assets/menus/back_hover.xpm\n\
+assets/img/pistol1.xpm\n\
+assets/img/pistol2.xpm\n\
+assets/img/pistol3.xpm\n\
+assets/img/pistol4.xpm\n\
+assets/img/pistol5.xpm\n\
+assets/img/punch1.xpm\n\
+assets/img/punch2.xpm\n\
+assets/img/punch3.xpm\n\
+assets/img/shotgun1.xpm\n\
+assets/img/shotgun2.xpm\n\
+assets/img/shotgun3.xpm\n\
+assets/img/shotgun4.xpm\n\
+assets/img/shotgun5.xpm\n\
 M assets/walls/townhall.xpm\n\
 F assets/walls/townhall.xpm\n\
 "
@@ -77,6 +90,19 @@ typedef enum e_textures
 	TEXTURE_OPTIONS_MENU_MINUS_H,
 	TEXTURE_OPTIONS_MENU_BACK,
 	TEXTURE_OPTIONS_MENU_BACK_H,
+	TEXTURE_PISTOL1,
+	TEXTURE_PISTOL2,
+	TEXTURE_PISTOL3,
+	TEXTURE_PISTOL4,
+	TEXTURE_PISTOL5,
+	TEXTURE_PUNCH1,
+	TEXTURE_PUNCH2,
+	TEXTURE_PUNCH3,
+	TEXTURE_SHOTGUN1,
+	TEXTURE_SHOTGUN2,
+	TEXTURE_SHOTGUN3,
+	TEXTURE_SHOTGUN4,
+	TEXTURE_SHOTGUN5,
 	__TEXTURES_COUNT__,
 	__TEXTURE_MINIMAP__,
 }						t_textures_definition;
