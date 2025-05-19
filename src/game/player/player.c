@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 14:56:00 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:18:16 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,40 @@ void	set_player_position_angle(t_cub3d *cub3d, t_dvec2 pos, double angle)
 	cub3d->player.rotation_angle = angle;
 }
 
+static bool	can_move(t_cub3d *cub3d, double x, double y, double r)
+{
+	if (map_is_wall(cub3d, (size_t)floor(x + r), (size_t)floor(y)))
+		return (false);
+	if (map_is_wall(cub3d, (size_t)floor(x - r), (size_t)floor(y)))
+		return (false);
+	if (map_is_wall(cub3d, (size_t)floor(x), (size_t)floor(y + r)))
+		return (false);
+	if (map_is_wall(cub3d, (size_t)floor(x), (size_t)floor(y - r)))
+		return (false);
+	return (true);
+}
+
 void	handle_player_movements(t_cub3d *cub3d)
 {
-	double	multiplier;
-
-	multiplier = 0;
+	double		mult;
+	double		dx, dy;
+	mult = 0;
 	if (is_pressed(cub3d, 'w'))
-		multiplier += 1;
+		mult +=  1;
 	if (is_pressed(cub3d, 's'))
-		multiplier -= 1;
-	cub3d->player.location.x += cub3d->player.cos_r * multiplier
-		* ((double)cub3d->settings.player_speed / 10);
-	cub3d->player.location.y += cub3d->player.sin_r * multiplier
-		* ((double)cub3d->settings.player_speed / 10);
+		mult += -1;
+	dx = cub3d->player.cos_r * mult * (cub3d->settings.player_speed / 10.0);
+	dy = cub3d->player.sin_r * mult * (cub3d->settings.player_speed / 10.0);
+	if (can_move(cub3d,
+			cub3d->player.location.x + dx,
+			cub3d->player.location.y,
+			PLAYER_COLLISION_RADIUS))
+		cub3d->player.location.x += dx;
+	if (can_move(cub3d,
+			cub3d->player.location.x,
+			cub3d->player.location.y + dy,
+			PLAYER_COLLISION_RADIUS))
+		cub3d->player.location.y += dy;
 }
 
 void	handle_player_rotation(t_cub3d *cub3d)

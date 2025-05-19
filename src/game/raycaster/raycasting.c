@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:43:43 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/19 19:21:34 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 20:09:26 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	get_horizontal_intersection(t_cub3d *data, t_ray *ray)
 		x_step *= -1;
 	float next_x = x_intercept;
 	float next_y = y_intercept;
-	while (next_x >= 0 && next_x <= SCREEN_W && next_y >= 0
-		&& next_y <= SCREEN_H)
+	while (next_x >= 0 && next_x <= data->map.width * TILESIZE && next_y >= 0
+		&& next_y <= data->map.height * TILESIZE)
 	{
 		if (angle > 0 && angle < M_PI)
 			check_y = next_y;
@@ -110,8 +110,8 @@ void	get_vertical_intersection(t_cub3d *data, t_ray *ray)
 		y_step *= -1;
 	float next_x = x_intercept;
 	float next_y = y_intercept;
-	while (next_x >= 0 && next_x <= SCREEN_W && next_y >= 0
-		&& next_y <= SCREEN_H)
+	while (next_x >= 0 && next_x <= data->map.width * TILESIZE&& next_y >= 0
+		&& next_y <= data->map.height* TILESIZE)
 	{
 		if (angle < M_PI_2 || angle > 3 * M_PI_2) // angle vers la droite
 			check_x = next_x;
