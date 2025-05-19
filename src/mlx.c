@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:22:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 14:43:17 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:16:24 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ bool	init_mlx(t_cub3d *cub3d)
 	update_loading_screen(cub3d);
 	if (load_assets(cub3d) == true)
 		return (destroy_mlx(cub3d), _error("failed to load textures !"), false);
+	load_animation(cub3d);
 	igmlx_load_font(cub3d, GTA_FONT, GTA_FONT_BLUE_NAME,
 		(t_igmlx_font_params){GTA_FONT_BLUE_COLOR, 1, (t_uvec2){30, 0}});
 	igmlx_load_font(cub3d, GTA_FONT, GTA_FONT_RED_NAME,
