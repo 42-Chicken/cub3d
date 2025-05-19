@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 19:29:09 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:39:21 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ assets/menus/options/minus.xpm\n\
 assets/menus/options/minus_hover.xpm\n\
 assets/menus/back.xpm\n\
 assets/menus/back_hover.xpm\n\
+assets/walls/wall.xpm\n\
 M assets/walls/townhall.xpm\n\
 F assets/walls/townhall.xpm\n\
+1 assets/walls/wall.xpm\n\
 "
 
 typedef enum e_textures
@@ -77,6 +79,7 @@ typedef enum e_textures
 	TEXTURE_OPTIONS_MENU_MINUS_H,
 	TEXTURE_OPTIONS_MENU_BACK,
 	TEXTURE_OPTIONS_MENU_BACK_H,
+	TEXTURE_WALL,
 	__TEXTURES_COUNT__,
 	__TEXTURE_MINIMAP__,
 }						t_textures_definition;

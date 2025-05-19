@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 15:37:33 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/16 16:59:45 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/19 22:58:45 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	loop(t_cub3d *cub3d)
 		render_game(cub3d);
 	cub3d->last_frame_menu = cub3d->menu;
 	cub3d->tick++;
-	usleep(10000);
+	usleep(100);
 }

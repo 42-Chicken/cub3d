@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 20:18:16 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:58:00 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,35 @@ void	set_player_position_angle(t_cub3d *cub3d, t_dvec2 pos, double angle)
 	cub3d->player.rotation_angle = angle;
 }
 
-static bool	can_move(t_cub3d *cub3d, double x, double y, double r)
+// in your movement/collision file, replace can_move with this:
+
+static bool can_move(t_cub3d *cub3d, double x, double y, double r)
 {
-	if (map_is_wall(cub3d, (size_t)floor(x + r), (size_t)floor(y)))
-		return (false);
-	if (map_is_wall(cub3d, (size_t)floor(x - r), (size_t)floor(y)))
-		return (false);
-	if (map_is_wall(cub3d, (size_t)floor(x), (size_t)floor(y + r)))
-		return (false);
-	if (map_is_wall(cub3d, (size_t)floor(x), (size_t)floor(y - r)))
-		return (false);
-	return (true);
+    // compute the 4 corners of the player's bounding box
+    double left   = x - r;
+    double right  = x + r;
+    double top    = y - r;
+    double bottom = y + r;
+
+    // check each corner against the map
+    if (map_is_wall(cub3d,
+            (size_t)floor(left),
+            (size_t)floor(top)))
+        return false;
+    if (map_is_wall(cub3d,
+            (size_t)floor(right),
+            (size_t)floor(top)))
+        return false;
+    if (map_is_wall(cub3d,
+            (size_t)floor(right),
+            (size_t)floor(bottom)))
+        return false;
+    if (map_is_wall(cub3d,
+            (size_t)floor(left),
+            (size_t)floor(bottom)))
+        return false;
+
+    return true;
 }
 
 void	handle_player_movements(t_cub3d *cub3d)
