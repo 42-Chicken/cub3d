@@ -6,33 +6,11 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:55:38 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 10:00:32 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:57:53 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	parsing_map_only_contains_allowed_chars(t_cub3d *cub3d)
-{
-	size_t	y;
-	size_t	x;
-
-	y = 0;
-	while (y < cub3d->map.height)
-	{
-		x = 0;
-		while (x < ft_strlen(cub3d->map.buffer[y]))
-		{
-			if (!ft_strchr(SPACES CUB3D_MAP_SUPPORTED_CHARS,
-					cub3d->map.buffer[y][x])
-				&& cub3d->map.buffer[y][x] != CUB3D_MAP_VOID)
-				return (false);
-			x++;
-		}
-		y++;
-	}
-	return (true);
-}
 
 bool	parsing_duplicates_player_data(t_cub3d *cub3d)
 {
@@ -45,7 +23,7 @@ bool	parsing_duplicates_player_data(t_cub3d *cub3d)
 		x = 0;
 		while (x < ft_strlen(cub3d->map.buffer[y]))
 		{
-			if (ft_strchr("NSEW", cub3d->map.buffer[y][x])
+			if (parsing_is_player(cub3d->map.buffer[y][x])
 				&& cub3d->player.location.x != x
 				&& cub3d->player.location.y != y)
 				return (false);
@@ -54,6 +32,13 @@ bool	parsing_duplicates_player_data(t_cub3d *cub3d)
 		y++;
 	}
 	return (true);
+}
+
+bool	parsing_is_player(char c)
+{
+	if (ft_strchr(CUB3D_MAP_SUPPORTED_DIRECTION, c))
+		return (true);
+	return (false);
 }
 
 bool	parsing_is_neighbor_void(t_cub3d *cub3d, size_t x, size_t y)

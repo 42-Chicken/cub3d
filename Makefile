@@ -54,13 +54,14 @@ SRCS				=	src/main.c\
 						src/parsing/file.c\
 						src/parsing/data.c\
 						src/parsing/map.c\
+						src/parsing/map_checks_chars.c\
+						src/parsing/map_checks.c\
 						src/fonts/destroy_fonts.c\
 						src/fonts/fonts_get.c\
 						src/fonts/fonts_loader.c\
 						src/fonts/fonts_print.c\
 						src/game/textures/textures_loader.c\
 						src/game/textures/textures.c\
-						src/parsing/map_checks.c\
 						src/game/map/map_utils.c\
 						src/game/player/player.c\
 						src/threads/loading_thread.c\
