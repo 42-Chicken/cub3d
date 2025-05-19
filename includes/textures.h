@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/12 15:20:04 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:47:57 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 typedef t_img			t_texture;
 typedef struct s_cub3d	t_cub3d;
 
+// assets/loading_screens/1.xpm\n
 # define TEXTURES_PATHS "\
 assets/42.xpm\n\
-assets/loading_screens/1.xpm\n\
+assets/42.xpm\n\
 assets/minimap/minimap_border.xpm\n\
 assets/minimap/minimap_house.xpm\n\
 assets/minimap/minimap_north_indication.xpm\n\
@@ -47,6 +48,8 @@ assets/menus/options/minus.xpm\n\
 assets/menus/options/minus_hover.xpm\n\
 assets/menus/back.xpm\n\
 assets/menus/back_hover.xpm\n\
+M assets/walls/townhall.xpm\n\
+F assets/walls/townhall.xpm\n\
 "
 
 typedef enum e_textures
@@ -78,9 +81,17 @@ typedef enum e_textures
 	__TEXTURE_MINIMAP__,
 }						t_textures_definition;
 
+typedef struct s_texture_link
+{
+	char				link;
+	t_texture			*texture;
+}						t_texture_link;
+
 typedef struct s_textures_atlas
 {
 	t_texture			*atlas[MAX_TEXTURES];
+	size_t				links_count;
+	t_texture_link		links[MAX_TEXTURES];
 }						t_textures_atlas;
 
 // -----------------------------------------
@@ -90,6 +101,7 @@ typedef struct s_textures_atlas
 // -----------------------------------------
 
 t_texture				*get_texture(t_cub3d *cub3d, int id);
+t_texture				*get_linked_texture(t_cub3d *cub3d, char link);
 
 // -----------------------------------------
 //
@@ -101,5 +113,6 @@ bool					load_texture(t_cub3d *cub3d, const char *path, int id);
 bool					load_assets(t_cub3d *cub3d);
 void					unload_assets(t_cub3d *cub3d);
 void					add_asset(t_cub3d *cub3d, int id, t_img *img);
+void					add_asset_link(t_cub3d *cub3d, char link, t_img *img);
 
 #endif

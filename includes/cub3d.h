@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 19:03:30 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/19 17:55:05 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define CUB3D_MAX_MAP_ID_LENGTH 2
 
 # define SPACES " \t\n\v\f\r"
-# define CUB3D_MAP_SUPPORTED_CHARS "10NSEW"
+# define CUB3D_MAP_SUPPORTED_DIRECTION "NSEW"
 
 # define RIGHT_HUD_OFFSET 25
 
@@ -89,11 +89,15 @@
 
 typedef struct timeval			t_time;
 
+# define MAP_SUPPORTED_CHARS "01M"
+
 typedef enum e_cub3d_map_values
 {
 	CUB3D_MAP_VOID = -1,
 	CUB3D_MAP_FLOOR = '0',
 	CUB3D_MAP_WALL = '1',
+	CUB3D_MAP_TOWNHALL = 'M',
+	__CUB3D_MAP_CHARS_COUNT__
 }								t_e_cub3d_map_values;
 
 typedef enum e_cub3d_log_level
@@ -353,10 +357,13 @@ void							switch_to_pause_menu(t_cub3d *cub3d);
 // PARSING
 bool							parse(t_cub3d *cube3d);
 bool							parsing_is_correct_file_path(t_cub3d *cub3d);
+bool							parsing_map_only_contains_allowed_chars(
+									t_cub3d *cub3d);
 bool							parsing_check_map(t_cub3d *cub3d);
 int								parsing_open_file(t_cub3d *cub3d);
 bool							parse_data(t_cub3d *cub3d, int fd);
 bool							parse_map(t_cub3d *cub3d, int fd);
+bool							parsing_is_player(char c);
 
 // STATS
 void							render_stats(t_cub3d *cub3d);
