@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 09:04:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/04/29 14:38:58 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/19 19:03:17 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,26 @@ bool	map_is_floor(t_cub3d *cub3d, size_t x, size_t y)
 		return (false);
 	type = cub3d->map.buffer[y][x];
 	return (type == CUB3D_MAP_FLOOR);
+}
+
+bool	map_is_wall(t_cub3d *cub3d, size_t x, size_t y)
+{
+	char	type;
+
+	if (map_is_outside_map_buffer(cub3d, x, y))
+		return (false);
+	type = cub3d->map.buffer[y][x];
+	return (type != CUB3D_MAP_FLOOR);
+}
+
+char	map_get_wall(t_cub3d *cub3d, size_t x, size_t y)
+{
+	char	type;
+
+	if (map_is_outside_map_buffer(cub3d, x, y))
+		return (false);
+	type = cub3d->map.buffer[y][x];
+	return (type);
 }
 
 bool	map_is_void(t_cub3d *cub3d, size_t x, size_t y)
