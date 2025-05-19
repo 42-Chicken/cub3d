@@ -61,8 +61,10 @@ assets/img/shotgun2.xpm\n\
 assets/img/shotgun3.xpm\n\
 assets/img/shotgun4.xpm\n\
 assets/img/shotgun5.xpm\n\
+assets/walls/wall.xpm\n\
 M assets/walls/townhall.xpm\n\
 F assets/walls/townhall.xpm\n\
+1 assets/walls/wall.xpm\n\
 "
 
 typedef enum e_textures
@@ -103,6 +105,7 @@ typedef enum e_textures
 	TEXTURE_SHOTGUN3,
 	TEXTURE_SHOTGUN4,
 	TEXTURE_SHOTGUN5,
+	TEXTURE_WALL,
 	__TEXTURES_COUNT__,
 	__TEXTURE_MINIMAP__,
 }						t_textures_definition;

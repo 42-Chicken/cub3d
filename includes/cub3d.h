@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
 /*   Updated: 2025/05/19 22:59:30 by efranco          ###   ########.fr       */
@@ -75,6 +75,7 @@
 # define MAX_ENTITIES 100
 
 # define PLAYER_SPEED 0.1f
+# define PLAYER_COLLISION_RADIUS 0.18f
 
 # define KEY_PRESSED_MAX 10
 
@@ -423,6 +424,8 @@ void							draw_rect(t_img *buffer, int color,
 
 t_color							*get_pixel(t_img *img, t_uvec2 pos);
 t_color							get_pixel_color(t_img *img, t_uvec2 pos);
+t_color							igmlx_melt_colors_weigthed(t_color input,
+									t_color filter, double filter_weight);
 t_color							igmlx_melt_colors(t_color input,
 									t_color filter);
 void							igmlx_apply_color_filter(t_img *img,
