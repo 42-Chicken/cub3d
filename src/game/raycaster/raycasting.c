@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:43:43 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/19 19:03:56 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/19 19:21:34 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	get_vertical_intersection(t_cub3d *data, t_ray *ray)
 			check_x = next_x - 1;
 		if (map_is_wall(data, check_x/ TILESIZE, next_y/ TILESIZE))
 		{
-			ray->wall = map_get_wall(data, next_x / TILESIZE, check_y/ TILESIZE);
+			ray->wall = map_get_wall(data, check_x / TILESIZE, next_y/ TILESIZE);
 			ray->vertical_hit_x = next_x;
 			ray->vertical_hit_y = next_y;
 			ray->found_vertical_wall = true;
