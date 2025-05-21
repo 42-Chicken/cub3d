@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 10:31:05 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:48:16 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ assets/img/shotgun3.xpm\n\
 assets/img/shotgun4.xpm\n\
 assets/img/shotgun5.xpm\n\
 assets/walls/wall.xpm\n\
+assets/entities/guard.xpm\n\
 M assets/walls/townhall.xpm\n\
 F assets/walls/townhall.xpm\n\
 1 assets/walls/wall.xpm\n\
@@ -110,6 +111,7 @@ typedef enum e_textures
 	TEXTURE_WALL_SOUTH,
 	TEXTURE_WALL_EAST,
 	TEXTURE_WALL_WEST,
+	TEXTURE_ENTITY_GUARD,
 	__TEXTURES_COUNT__,
 	__TEXTURE_MINIMAP__,
 }						t_textures_definition;
