@@ -2,12 +2,10 @@ F 150,150,0
 
 C 225,30,0
 
-  NO   ./path_to_the_north_texture
+  NO   ./assets/walls/south_wall.xpm
 
-EA 	./path_to_the_east_texture
-SO ./path_to_the_south_texture
-
-
+EA 	./assets/walls/east_wall.xpm
+SO ./assets/walls/north_wall.xpm
 
 
 
@@ -18,7 +16,9 @@ SO ./path_to_the_south_texture
 
 
 
-WE 					    ./path_to_the_west_texture
+
+
+WE 					    ./assets/walls/west_wall.xpm
 
 
         1111111111111111111111111

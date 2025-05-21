@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 22:39:21 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/21 09:13:39 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ typedef enum e_textures
 	TEXTURE_OPTIONS_MENU_MINUS_H,
 	TEXTURE_OPTIONS_MENU_BACK,
 	TEXTURE_OPTIONS_MENU_BACK_H,
-	TEXTURE_WALL,
+	TEXTURE_WALL_DEFAULT,
+	TEXTURE_WALL_NORTH,
+	TEXTURE_WALL_SOUTH,
+	TEXTURE_WALL_EAST,
+	TEXTURE_WALL_WEST,
 	__TEXTURES_COUNT__,
 	__TEXTURE_MINIMAP__,
 }						t_textures_definition;
