@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   distance_between.c                                 :+:      :+:    :+:   */
+/*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 12:32:35 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 12:12:55 by rguigneb         ###   ########.fr       */
+/*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
+/*   Updated: 2025/05/21 12:13:43 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	distance_between(t_dvec2 vec1, t_dvec2 vec2)
+void	update_entities(t_cub3d *cub3d)
 {
-	double	mx;
-	double	my;
+	size_t	i;
 
-	mx = vec2.x - vec1.x;
-	my = vec2.y - vec1.y;
-	return (sqrt(mx * mx + my * my));
+	i = 0;
+	while (cub3d->entities[i] && i < MAX_ENTITIES)
+	{
+		cub3d->entities[i].distance_from_player = distance_between(cub3d->entities[i].location,
+				cub3d->player.location);
+		i++;
+	}
 }
