@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 09:13:11 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:31:24 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ bool	load_assets(t_cub3d *cub3d)
 	{
 		error |= load_texture(cub3d, textures_paths[i], i);
 		update_loading_screen(cub3d);
-		// usleep(100000);
 	}
 	if (!error)
 		error |= init_minimap(cub3d);
 	exit_safe_memory_context();
 	return (error);
 }
+// usleep(100000);
 // igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_FLOOR),
 // cub3d->floor_color);
 // igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_SKY),

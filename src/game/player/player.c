@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 10:04:05 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:30:51 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	handle_player_movements(t_cub3d *cub3d)
 	double	mult;
 	double	dx;
 	double	dy;
-  
+
 	mult = 0;
 	if (is_pressed(cub3d, 'w'))
 		mult += 1;
