@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 10:22:41 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/21 10:04:05 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	set_player_position_angle(t_cub3d *cub3d, t_dvec2 pos, double angle)
 	cub3d->player.rotation_angle = angle;
 }
 
-// in your movement/collision file, replace can_move with this:
-
 static bool	can_move(t_cub3d *cub3d, double x, double y, double r)
 {
 	double	left;
@@ -27,12 +25,10 @@ static bool	can_move(t_cub3d *cub3d, double x, double y, double r)
 	double	top;
 	double	bottom;
 
-	// compute the 4 corners of the player's bounding box
 	left = x - r;
 	right = x + r;
 	top = y - r;
 	bottom = y + r;
-	// check each corner against the map
 	if (map_is_wall(cub3d, (size_t)floor(left), (size_t)floor(top)))
 		return (false);
 	if (map_is_wall(cub3d, (size_t)floor(right), (size_t)floor(top)))
@@ -47,8 +43,9 @@ static bool	can_move(t_cub3d *cub3d, double x, double y, double r)
 void	handle_player_movements(t_cub3d *cub3d)
 {
 	double	mult;
-
-	double dx, dy;
+	double	dx;
+	double	dy;
+  
 	mult = 0;
 	if (is_pressed(cub3d, 'w'))
 		mult += 1;

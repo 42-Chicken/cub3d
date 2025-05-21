@@ -25,7 +25,8 @@
 		"fonts.h": "c",
 		"time.h": "c",
 		"pthread.h": "c",
-		"vectors.h": "c"
+		"vectors.h": "c",
+		"ft_strings.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

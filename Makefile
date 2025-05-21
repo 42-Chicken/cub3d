@@ -80,11 +80,14 @@ SRCS				=	src/main.c\
 						src/utils/ft_split_with_set.c\
 						src/utils/ft_is_only_digits.c\
 						src/utils/is_not_only_spaces.c\
-						src/game/raycaster/cast.c\
-						src/game/raycaster/draw.c\
-						src/game/raycaster/get_wall_hit.c\
-						src/game/raycaster/intersection.c\
 						src/game/raycaster/raycasting.c\
+						src/game/raycaster/walls.c\
+						src/game/raycaster/walls_textures.c\
+						src/game/raycaster/floor.c\
+						src/game/raycaster/sky.c\
+						src/game/raycaster/utils.c\
+						src/game/raycaster/vertical.c\
+						src/game/raycaster/horizontal.c\
 						src/game/hud/hand/hand.c\
 						src/logs/logs.c
 

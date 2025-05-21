@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   hand.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:57:47 by efranco           #+#    #+#             */
 /*   Updated: 2025/05/19 23:01:54 by efranco          ###   ########.fr       */

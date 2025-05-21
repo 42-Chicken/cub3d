@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 22:59:30 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/21 10:13:53 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define FOV (60 * (M_PI / 180))
+# define FOV 60 * (M_PI / 180)
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -188,10 +188,10 @@ typedef enum e_cub3d_player_movement
 
 typedef enum s_direction
 {
-	RIGHT,
-	LEFT,
-	UP,
-	DOWN,
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST,
 }								t_e_direction;
 
 typedef struct s_inter
@@ -225,6 +225,7 @@ typedef struct s_ray
 	float						wall_hit_y;
 	float						distance;
 	char						wall;
+	int							x;
 }								t_ray;
 
 typedef struct s_player
@@ -377,7 +378,8 @@ void							switch_to_pause_menu(t_cub3d *cub3d);
 // PARSING
 bool							parse(t_cub3d *cube3d);
 bool							parsing_is_correct_file_path(t_cub3d *cub3d);
-bool							parsing_map_only_contains_allowed_chars(t_cub3d *cub3d);
+bool							parsing_map_only_contains_allowed_chars(
+									t_cub3d *cub3d);
 bool							parsing_check_map(t_cub3d *cub3d);
 int								parsing_open_file(t_cub3d *cub3d);
 bool							parse_data(t_cub3d *cub3d, int fd);
@@ -480,7 +482,23 @@ void							*balloc(size_t size);
 void							*balloc_(size_t size);
 
 // RAYCASTER
+
+void							draw_floor(t_cub3d *data, t_ray *ray,
+									double height, double begin);
 void							render_raycasting(t_cub3d *data);
+void							draw_sky(t_cub3d *data, t_ray *ray,
+									double begin);
+void							draw_wall(t_cub3d *data, t_ray *ray);
+double							get_wall_height(double distance);
+void							draw_textured_wall(t_cub3d *data, t_ray *ray,
+									double begin, double half_height);
+double							normalizeangle(double angle);
+void							get_horizontal_intersection(t_cub3d *data,
+									t_ray *ray);
+void							get_vertical_intersection(t_cub3d *data,
+									t_ray *ray);
+float							fdistance_between(float x1, float y1, float x2,
+									float y2);
 
 // ANIMATION
 void							load_animation(t_cub3d *data);

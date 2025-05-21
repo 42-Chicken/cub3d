@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 20:21:08 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/21 09:13:39 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,11 @@ typedef enum e_textures
 	TEXTURE_SHOTGUN3,
 	TEXTURE_SHOTGUN4,
 	TEXTURE_SHOTGUN5,
-	TEXTURE_WALL,
+ 	TEXTURE_WALL_DEFAULT,
+	TEXTURE_WALL_NORTH,
+	TEXTURE_WALL_SOUTH,
+	TEXTURE_WALL_EAST,
+	TEXTURE_WALL_WEST,
 	__TEXTURES_COUNT__,
 	__TEXTURE_MINIMAP__,
 }						t_textures_definition;
