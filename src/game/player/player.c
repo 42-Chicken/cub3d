@@ -45,7 +45,7 @@ void	handle_player_movements(t_cub3d *cub3d)
 	double	mult;
 	double	dx;
 	double	dy;
-
+  
 	mult = 0;
 	if (is_pressed(cub3d, 'w'))
 		mult += 1;
@@ -83,8 +83,6 @@ void	update_player(t_cub3d *cub3d)
 {
 	handle_player_movements(cub3d);
 	handle_player_rotation(cub3d);
-	cub3d->player.minimap_pos.x = cub3d->player.location.x * MINIMAP_TILE_SIZE
-		+ MINIMAP_TILE_SIZE / 2;
-	cub3d->player.minimap_pos.y = cub3d->player.location.y * MINIMAP_TILE_SIZE
-		+ MINIMAP_TILE_SIZE / 2;
+	cub3d->player.minimap_pos.x = cub3d->player.location.x * MINIMAP_TILE_SIZE;
+	cub3d->player.minimap_pos.y = cub3d->player.location.y * MINIMAP_TILE_SIZE;
 }

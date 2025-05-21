@@ -88,6 +88,7 @@ SRCS				=	src/main.c\
 						src/game/raycaster/utils.c\
 						src/game/raycaster/vertical.c\
 						src/game/raycaster/horizontal.c\
+						src/game/hud/hand/hand.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a

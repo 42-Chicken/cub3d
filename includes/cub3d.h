@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// igmlx_simple_copy_to_dest dest (SCRREN_W - SIZEIMGX || SCREEN_H - SIZEIMGY)
+
 #ifndef CUB3D_H
 
 # define CUB3D_H
@@ -91,6 +93,13 @@
 typedef struct timeval			t_time;
 
 # define MAP_SUPPORTED_CHARS "01M"
+
+typedef enum e_hand
+{
+	HAND,
+	GUN,
+	SHOTGUN,
+}								t_e_hand;
 
 typedef enum e_cub3d_map_values
 {
@@ -192,6 +201,14 @@ typedef struct s_inter
 	double						x_step;
 	double						y_step;
 }								t_inter;
+
+typedef struct s_animation
+{
+	t_textures_definition		img[10];
+	long						time_start;
+	long						time_end;
+}								t_animation;
+
 typedef struct s_ray
 {
 	float						rayangle;
@@ -327,6 +344,8 @@ typedef struct s_cub3d
 
 	t_e_cub3d_menu				menu;
 	t_e_cub3d_menu				last_frame_menu;
+
+	t_animation					animation[3];
 
 	void						*mlx;
 	void						*win;
@@ -480,5 +499,9 @@ void							get_vertical_intersection(t_cub3d *data,
 									t_ray *ray);
 float							fdistance_between(float x1, float y1, float x2,
 									float y2);
+
+// ANIMATION
+void							load_animation(t_cub3d *data);
+void							render_hand(t_cub3d *data);
 
 #endif
