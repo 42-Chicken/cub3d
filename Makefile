@@ -120,14 +120,15 @@ $(OBJ_DIR): $(OBJS)
 		fi
 
 $(MLX_LIB):
-	@if [ ! -e "$($@)" ]; then \
+	@if [ ! -d "$(shell dirname $@)" ]; then \
 		git clone https://github.com/42Paris/minilibx-linux.git $(shell dirname $@); \
 		cd $(shell dirname $@) && ./configure && cd .. ;\
 	fi;
 	make re -C $(MLX_LIB_PATH) --no-print-directory
 
 $(FT_LIBC) :
-	@if [ ! -e "$(shell dirname $@)" ]; then \
+	@if [ ! -e "$($@)" ]; then \
+		rm -rf $(shell dirname $@); \
 		git clone git@github.com:R0-main/ft_libc.git $(shell dirname $@); \
 	fi;
 	@$(MAKE) $(shell dirname $@) SAFE=1
