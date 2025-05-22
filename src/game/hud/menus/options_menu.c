@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:01:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 12:06:16 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:12:31 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	render_options_menu(t_cub3d *cub3d)
 {
 	t_button	*btns;
 
-	cub3d->fov = cub3d->settings.fov * (M_PI / 180);
+	init_settings(cub3d);
 	btns = cub3d->menus_buttons[CUB3D_MENU_SETTINGS];
 	igmlx_simple_copy_to_dest(get_texture(cub3d, TEXTURE_OPTIONS_MENU_TITLE),
 		cub3d->rendering_buffer, (t_uvec2){SCREEN_W / 2 - 135, SCREEN_H / 8
@@ -82,12 +82,9 @@ void	render_options_menu(t_cub3d *cub3d)
 	draw_incrementor(cub3d, OPTIONS_MENU_ROTATION_LABEL,
 		(t_incrementor_data){(int *)&cub3d->settings.player_rotation_speed, 1,
 		1, 10, cub3d}, 6);
-	btns[8].type = CUB3D_BUTTON_DEFAULT;
-	btns[8].button_callback = switch_to_pause_menu;
-	btns[8].button_args = cub3d;
-	btns[8].pos = (t_uvec2){SCREEN_W / 2 - 55, SCREEN_H - SCREEN_H / 4};
-	btns[8].texture = get_texture(cub3d, TEXTURE_OPTIONS_MENU_BACK);
-	draw_button(cub3d, btns[8], TEXTURE_OPTIONS_MENU_BACK_H);
+	btns[8] = (t_button){CUB3D_BUTTON_DEFAULT, {switch_to_pause_menu}, {cub3d},
+		(t_uvec2){SCREEN_W / 2 - 55, SCREEN_H - SCREEN_H / 4},
+		get_texture(cub3d, TEXTURE_OPTIONS_MENU_BACK)};
 	render_rendering_buffer(cub3d);
 }
 

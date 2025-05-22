@@ -26,6 +26,7 @@ INFO				=	ⓘ
 SRCS				=	src/main.c\
 						src/mlx.c\
 						src/loop.c\
+						src/settings.c\
 						src/exit_error.c\
 						src/game/hud/minimap/minimap_init.c\
 						src/game/hud/minimap/minimap_house.c\

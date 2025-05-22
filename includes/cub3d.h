@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 12:06:37 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:14:12 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,6 +374,7 @@ void							pause_game(t_cub3d *cub3d);
 void							exit_error(const char *msg);
 void							render_game(t_cub3d *cub3d);
 void							render_rendering_buffer(t_cub3d *cub3d);
+void							init_settings(t_cub3d *cub3d);
 
 // THREADS
 size_t							r_size_t(pthread_mutex_t *mutex, size_t *value);
