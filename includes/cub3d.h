@@ -432,6 +432,10 @@ void							on_mouse_button_down(int key, int x, int y,
 void							on_mouse_move(int x, int y, t_cub3d *cub3d);
 void							keycode_controls_items(int key, t_cub3d *cub3d);
 
+void							controls_center_mouse(t_cub3d *cub3d);
+void							controls_setup_mouse(t_cub3d *cub3d);
+void							controls_pause_mouse(t_cub3d *cub3d);
+
 // IMAGES
 void							draw_button(t_cub3d *cub3d, t_button button,
 									t_textures_definition texture_hover);
