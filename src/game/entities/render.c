@@ -6,81 +6,99 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 10:10:00 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:22:15 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void render_entities(t_cub3d *cub3d)
+t_vec2	get_draw_width(int width, int x)
 {
-	size_t	i;
-	int	j;
-	int	k;
-	t_entity *entity;
-	t_dvec2 pos;
-	t_dvec2 transformed;
-	double inv_det;
-	double plane_len = tan(FOV * 0.5);
-	const t_dvec2 plane = (t_dvec2){plane_len * -cub3d->player.sin_r, plane_len * cub3d->player.cos_r };
-	const t_dvec2 direction = (t_dvec2){cub3d->player.cos_r, cub3d->player.sin_r};
-	int x;
-	int height;
-	int width;
-	t_vec2 draw_y;
-	t_vec2 draw_x;
-	t_uvec2 texture_pos;
+	t_vec2	draw_x;
+
+	draw_x.x = -width / 2 + x;
+	if (draw_x.x < 0)
+		draw_x.x = 0;
+	draw_x.y = width / 2 + x;
+	if (draw_x.y >= SCREEN_W)
+		draw_x.y = SCREEN_W - 1;
+	return (draw_x);
+}
+
+t_vec2	get_draw_height(int height)
+{
+	t_vec2	draw_y;
+
+	draw_y.x = -height / 2 + SCREEN_H / 2;
+	if (draw_y.x < 0)
+		draw_y.x = 0;
+	draw_y.y = height / 2 + SCREEN_H / 2;
+	if (draw_y.y >= SCREEN_H)
+		draw_y.y = SCREEN_H - 1;
+	return (draw_y);
+}
+
+t_vec2	calculate_width_height_and_draw(t_dvec2 transformed, t_entity *entity,
+		t_vec2 *draw_height, int x)
+{
+	entity->width = abs((int)(SCREEN_W / transformed.y)) * 1.2;
+	entity->height = abs((int)(SCREEN_H / transformed.y)) * 1.7;
+	*draw_height = get_draw_height(entity->height);
+	return (get_draw_width(entity->width, x));
+}
+
+void	draw_entity(t_cub3d *cub3d, t_entity *entity, t_dvec2 transformed,
+		int x)
+{
+	t_vec2		c;
+	t_vec2		draw_width;
+	t_vec2		draw_height;
 	t_texture	*texture;
-	int d;
+	t_uvec2		texture_pos;
 
-	i = 0;
-	while (i < cub3d->entity_count)
+	draw_width = calculate_width_height_and_draw(transformed, entity,
+			&draw_height, x);
+	texture = get_texture(cub3d, entity->textures[0]);
+	c.x = draw_width.x - 1;
+	while (++c.x < draw_width.y)
 	{
-		entity = &cub3d->entities[i];
-		texture = get_texture(cub3d, entity->textures[0]);
-		pos = (t_dvec2){entity->location.x - cub3d->player.location.x, entity->location.y - cub3d->player.location.y};
-		inv_det = 1.0 / (plane.x * direction.y - direction.x * plane.y);
-		transformed = (t_dvec2){
-			inv_det * (direction.y * pos.x - direction.x * pos.y),
-			inv_det * (-plane.y * pos.x + plane.x * pos.y)
-		};
-		if (transformed.y <= 0) {
-			i++;
-			continue;
-		}
-		x = (int)((SCREEN_W / 2.0) * (1 + transformed.x / transformed.y));
-		height = abs((int)(SCREEN_H / transformed.y)) * 1.7;
-
-		draw_y.x = -height / 2 + SCREEN_H / 2;
-		if (draw_y.x < 0)
-			draw_y.x = 0;
-		draw_y.y = height / 2 + SCREEN_H / 2;
-		if (draw_y.y >= SCREEN_H)
-			draw_y.y = SCREEN_H - 1;
-
-		width = abs((int)(SCREEN_W / transformed.y)) *1.2;
-		draw_x.x = -width / 2 + x;
-		if (draw_x.x < 0)
-			draw_x.x = 0;
-		draw_x.y = width / 2 + x;
-		if (draw_x.y >= SCREEN_W)
-			draw_x.y = SCREEN_W - 1;
-		j = draw_x.x;
-		while (j < draw_x.y)
+		texture_pos.x = (int)(256 * (c.x - (-entity->width / 2 + x))
+				* texture->width / entity->width) / 256;
+		c.y = draw_height.x - 1;
+		while (transformed.y > 0 && c.x > 0 && c.x < SCREEN_W && transformed.y
+			* TILESIZE < cub3d->z_buffer[c.x] && ++c.y < draw_height.y)
 		{
-			texture_pos.x = (int)(256 * (j - (-width / 2 + x)) * texture->width / width) / 256;
-			k = draw_y.x;
-			if(transformed.y > 0 && j > 0 && j < SCREEN_W && transformed.y* TILESIZE < cub3d->z_buffer[j])
-				while (k < draw_y.y)
-				{
-					d = (k) * 256 - SCREEN_H * 128 + height * 128;
-					texture_pos.y = ((d * texture->height) / height) / 256;
-					put_pixel_to_buffer(cub3d->rendering_buffer, (t_uvec2){j, k}, get_pixel_color(texture, texture_pos));
-					k++;
-				}
-			j++;
+			texture_pos.y = (((double)((c.y) * 256 - SCREEN_H * 128
+							+ entity->height * 128) *texture->height)
+					/ entity->height) / 256;
+			put_pixel_to_buffer(cub3d->rendering_buffer, (t_uvec2){(size_t)c.x,
+				(size_t)c.y}, get_pixel_color(texture, texture_pos));
 		}
-		i++;
 	}
 }
 
+void	render_entities(t_cub3d *cub3d)
+{
+	size_t		i;
+	t_dvec2		pos;
+	t_dvec2		transformed;
+	double		inv_det;
+	t_player	player;
+
+	player = cub3d->player;
+	i = 0;
+	while (i < cub3d->entity_count)
+	{
+		pos = (t_dvec2){cub3d->entities[i].location.x - player.location.x,
+			cub3d->entities[i].location.y - player.location.y};
+		inv_det = 1.0 / (player.plane.x * player.direction.y
+				- player.direction.x * player.plane.y);
+		transformed = (t_dvec2){inv_det * (player.direction.y * pos.x
+				- player.direction.x * pos.y), inv_det * (-player.plane.y
+				* pos.x + player.plane.x * pos.y)};
+		if (transformed.y > 0)
+			draw_entity(cub3d, &cub3d->entities[i], transformed, (int)((SCREEN_W
+						/ 2.0) * (1 + transformed.x / transformed.y)));
+		i++;
+	}
+}

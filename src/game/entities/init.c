@@ -6,13 +6,13 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 11:53:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 10:17:10 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:20:09 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_entities(t_cub3d *cub3d)
+void	init_entities(t_cub3d *cub3d)
 {
 	(void)cub3d;
 }

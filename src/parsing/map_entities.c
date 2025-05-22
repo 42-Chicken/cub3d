@@ -6,15 +6,15 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:04:49 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 10:18:09 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:19:57 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void setup_entity(t_cub3d *cub3d, char c, t_uvec2 pos)
+static void	setup_entity(t_cub3d *cub3d, char c, t_uvec2 pos)
 {
-	t_entity entity;
+	t_entity	entity;
 
 	cub3d->map.buffer[pos.y][pos.x] = CUB3D_MAP_FLOOR;
 	if (c == 'V')
@@ -23,7 +23,7 @@ static void setup_entity(t_cub3d *cub3d, char c, t_uvec2 pos)
 		cub3d->entities[cub3d->entity_count++] = entity;
 }
 
-void parse_map_entities(t_cub3d *cub3d)
+void	parse_map_entities(t_cub3d *cub3d)
 {
 	size_t	i;
 	size_t	x;
@@ -38,8 +38,10 @@ void parse_map_entities(t_cub3d *cub3d)
 			x = 0;
 			while (x < ft_strlen(cub3d->map.buffer[y]))
 			{
-				if (ft_strchr(MAP_SUPPORTED_ENTITIES_CHARS, cub3d->map.buffer[y][x]))
-					setup_entity(cub3d, cub3d->map.buffer[y][x], (t_uvec2){x, y});
+				if (ft_strchr(MAP_SUPPORTED_ENTITIES_CHARS,
+						cub3d->map.buffer[y][x]))
+					setup_entity(cub3d, cub3d->map.buffer[y][x], (t_uvec2){x,
+						y});
 				x++;
 			}
 			y++;

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 10:17:51 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:23:42 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@
 # define TILESIZE 64
 # define DISTANCE_FROM_CAMERA (double)((SCREEN_W / 2) / tan(FOV / 2))
 # define WALL_SCALE 3.0
+# define PLANE_LEN tan(FOV * 0.5)
 
 typedef struct timeval			t_time;
 
@@ -163,6 +164,8 @@ typedef struct s_entity
 	int							health;
 	double						distance_from_player;
 	t_dvec2						location;
+	int							height;
+	int							width;
 	t_textures_definition		textures[__ENTITY_ROTATIONS_COUNT__];
 }								t_entity;
 
@@ -241,6 +244,7 @@ typedef struct s_player
 	unsigned char				health;
 	t_textures_definition		item;
 	t_e_cub3d_player_movement	movement;
+	t_dvec2						plane;
 	double						cos_r;
 	double						sin_r;
 }								t_player;
