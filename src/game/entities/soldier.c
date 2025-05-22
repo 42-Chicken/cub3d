@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 12:03:08 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:35:41 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_entity	new_soldier(t_uvec2 pos)
 	soldier.in_game = true;
 	soldier.scale = (t_dvec2){
 		1.2,
-		1.7,
+		1.3,
 	};
-	soldier.distance_from_floor = 160;
+	soldier.distance_from_floor = 16;
 	return (soldier);
 }
