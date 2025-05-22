@@ -26,10 +26,12 @@ INFO				=	ⓘ
 SRCS				=	src/main.c\
 						src/mlx.c\
 						src/loop.c\
+						src/settings.c\
 						src/exit_error.c\
 						src/game/hud/minimap/minimap_init.c\
 						src/game/hud/minimap/minimap_house.c\
 						src/game/hud/minimap/minimap_render.c\
+						src/game/hud/minimap/minimap_enemies.c\
 						src/game/hud/minimap/minimap_background.c\
 						src/game/hud/stats/stats_render.c\
 						src/game/hud/stats/health_render.c\
@@ -56,6 +58,7 @@ SRCS				=	src/main.c\
 						src/parsing/map.c\
 						src/parsing/map_checks_chars.c\
 						src/parsing/map_checks.c\
+						src/parsing/map_entities.c\
 						src/fonts/destroy_fonts.c\
 						src/fonts/fonts_get.c\
 						src/fonts/fonts_loader.c\
@@ -89,6 +92,11 @@ SRCS				=	src/main.c\
 						src/game/raycaster/vertical.c\
 						src/game/raycaster/horizontal.c\
 						src/game/hud/hand/hand.c\
+						src/game/entities/init.c\
+						src/game/entities/update.c\
+						src/game/entities/render.c\
+						src/game/entities/soldier.c\
+						src/game/entities/multitextures.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a

@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 14:49:16 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 12:05:54 by rguigneb         ###   ########.fr       */
+/*   Created: 2025/05/21 11:53:55 by rguigneb          #+#    #+#             */
+/*   Updated: 2025/05/22 11:20:09 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORS_H
+#include "cub3d.h"
 
-# define VECTORS_H
-
-typedef struct s_vec_2
+void	init_entities(t_cub3d *cub3d)
 {
-	int				x;
-	int				y;
-}					t_vec2;
-
-typedef struct s_uvec_2
-{
-	unsigned int	x;
-	unsigned int	y;
-}					t_uvec2;
-
-typedef struct s_dvec_2
-{
-	double			x;
-	double			y;
-}					t_dvec2;
-
-typedef struct s_fvec2
-{
-	float			x;
-	float			y;
-}					t_fvec2;
-
-#endif
+	(void)cub3d;
+}

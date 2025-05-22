@@ -6,21 +6,21 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:32:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 09:45:44 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:36:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	get_wall_height(double distance)
+double	get_wall_height(t_cub3d *data, double distance)
 {
-	return ((double)(64 / distance) *DISTANCE_FROM_CAMERA);
+	return ((double)(64 / distance) *data->distance_from_camera);
 }
 
-static void	calculate_begin_and_height(t_ray *ray, double *height,
-		double *begin)
+static void	calculate_begin_and_height(t_cub3d *data, t_ray *ray,
+		double *height, double *begin)
 {
-	*height = get_wall_height(ray->distance);
+	*height = get_wall_height(data, ray->distance);
 	if (*height < 0)
 		*height = 0;
 	if (*height > SCREEN_H)
@@ -37,7 +37,7 @@ void	draw_wall(t_cub3d *data, t_ray *ray)
 	double	height;
 	double	draw_begin;
 
-	calculate_begin_and_height(ray, &height, &draw_begin);
+	calculate_begin_and_height(data, ray, &height, &draw_begin);
 	draw_sky(data, ray, draw_begin);
 	draw_textured_wall(data, ray, draw_begin, height / 2);
 	draw_floor(data, ray, height, draw_begin);

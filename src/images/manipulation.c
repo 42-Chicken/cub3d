@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 12:11:32 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 10:06:01 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:03:58 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	igmlx_apply_color_filter(t_img *img, t_color filter)
 	t_uvec2	c;
 	t_color	*pixel;
 
+	if (!img)
+		return ;
 	c = (t_uvec2){-1, -1};
 	while (++c.x < (unsigned int)img->width)
 	{
@@ -82,6 +84,8 @@ void	igmlx_copy_to_dest(t_img_pos origin, t_uvec2 length, t_img_pos dest,
 	t_color	*dest_pixel;
 	t_color	*origin_pixel;
 
+	if (!origin.img || !dest.img)
+		return ;
 	c = (t_uvec2){-1, -1};
 	while (++c.x < length.x)
 	{
@@ -106,6 +110,8 @@ void	igmlx_simple_copy_to_dest(t_img *origin, t_img *dest, t_uvec2 dest_pos)
 	t_color	*dest_pixel;
 	t_color	*origin_pixel;
 
+	if (!origin || !dest)
+		return ;
 	c = (t_uvec2){-1, -1};
 	while (++c.x < (unsigned int)origin->width)
 	{

@@ -1,41 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 14:49:16 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 12:05:54 by rguigneb         ###   ########.fr       */
+/*   Created: 2025/05/22 12:09:06 by rguigneb          #+#    #+#             */
+/*   Updated: 2025/05/22 12:14:01 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VECTORS_H
+#include "cub3d.h"
 
-# define VECTORS_H
-
-typedef struct s_vec_2
+void	init_settings(t_cub3d *cub3d)
 {
-	int				x;
-	int				y;
-}					t_vec2;
-
-typedef struct s_uvec_2
-{
-	unsigned int	x;
-	unsigned int	y;
-}					t_uvec2;
-
-typedef struct s_dvec_2
-{
-	double			x;
-	double			y;
-}					t_dvec2;
-
-typedef struct s_fvec2
-{
-	float			x;
-	float			y;
-}					t_fvec2;
-
-#endif
+	cub3d->fov = cub3d->settings.fov * (M_PI / 180);
+	cub3d->distance_from_camera = (double)((SCREEN_W / 2) / tan(cub3d->fov
+				/ 2));
+	cub3d->plane_len = tan(cub3d->fov * 0.5);
+	cub3d->num_rays = ((int)SCREEN_W / (int)RAYS);
+}

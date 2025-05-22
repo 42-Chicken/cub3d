@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:10:15 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 17:54:01 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:52:14 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	render_minimap(t_cub3d *cub3d)
 	t_texture	*player;
 	t_texture	*north;
 	t_texture	*house;
+	t_texture	*enemy;
 
 	house = get_texture(cub3d, TEXTURE_MINIMAP_HOUSE);
+	enemy = get_texture(cub3d, TEXTURE_MINIMAP_HOUSE);
 	border = get_texture(cub3d, TEXTURE_MINIMAP_BORDER);
 	north = get_texture(cub3d, TEXTURE_MINIMAP_NORTH_INDICATION);
 	player = get_texture(cub3d, TEXTURE_MINIMAP_PLAYER);
@@ -32,7 +34,8 @@ void	render_minimap(t_cub3d *cub3d)
 		(t_uvec2){(border->width / 2 + 5) + -cub3d->player.cos_r * border->width
 		/ 2, SCREEN_H - (border->height / 2) - (north->height + 5)
 		+ cub3d->player.sin_r * border->height / 2});
-	handle_house(cub3d, border, house);
+	minimap_handle_house(cub3d, border, house);
+	minimap_handle_enemies(cub3d, border);
 }
 
 // draw_line(cub3d->rendering_buffer, 0xFF0000,

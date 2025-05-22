@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:02:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 20:21:53 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/22 08:30:58 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	render_game(t_cub3d *cub3d)
 	if (!cub3d->rendering_buffer)
 		return (end_loop(cub3d), _error("failed to create rendering buffer!"));
 	update_player(cub3d);
+	update_entities(cub3d);
 	render_raycasting(cub3d);
+	render_entities(cub3d);
 	render_hand(cub3d);
 	render_minimap(cub3d);
 	render_stats(cub3d);

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 10:13:53 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:35:46 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-# define FOV 60 * (M_PI / 180)
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -85,14 +83,13 @@
 # define OPTIONS_MENU_ROTATION_LABEL "R O T A T I O N"
 
 # define RAYS 1
-# define NUM_RAYS ((int)SCREEN_W / (int)RAYS)
 # define TILESIZE 64
-# define DISTANCE_FROM_CAMERA (double)((SCREEN_W / 2) / tan(FOV / 2))
 # define WALL_SCALE 3.0
 
 typedef struct timeval			t_time;
 
 # define MAP_SUPPORTED_CHARS "01M"
+# define MAP_SUPPORTED_ENTITIES_CHARS "V"
 
 typedef enum e_hand
 {
@@ -137,7 +134,7 @@ typedef unsigned int			t_color;
 
 typedef enum e_cub3d_entity_type
 {
-	CUB3D_ENTITY_OFFICER,
+	CUB3D_ENTITY_OFFICER = 'S',
 	CUB3D_ENTITY_CAR,
 	__ENTITY_TYPES_COUNT__,
 }								t_e_cub3d_entity_type;
@@ -160,8 +157,17 @@ typedef struct s_entity
 	bool						in_game;
 	t_e_cub3d_entity_type		type;
 	int							health;
+	double						distance_from_player;
 	t_dvec2						location;
-	t_texture					textures[__ENTITY_ROTATIONS_COUNT__];
+	int							height;
+	int							width;
+	t_dvec2						scale;
+	t_dvec2						transformed;
+	int							y_offset;
+	double						distance_from_floor;
+	t_textures_definition		minimap_texture;
+	t_textures_definition		textures[__ENTITY_ROTATIONS_COUNT__];
+	double						rotation_angle;
 }								t_entity;
 
 typedef struct s_argb
@@ -239,6 +245,7 @@ typedef struct s_player
 	unsigned char				health;
 	t_textures_definition		item;
 	t_e_cub3d_player_movement	movement;
+	t_dvec2						plane;
 	double						cos_r;
 	double						sin_r;
 }								t_player;
@@ -305,6 +312,11 @@ typedef struct s_cub3d
 
 	size_t						tick;
 
+	size_t						num_rays;
+	double						distance_from_camera;
+	double						plane_len;
+	double						fov;
+
 	char						*north_texture_path;
 	char						*south_texture_path;
 	char						*west_texture_path;
@@ -334,7 +346,9 @@ typedef struct s_cub3d
 	pthread_mutex_t				mutex;
 
 	t_button					menus_buttons[__MENUS_COUNT__][MENU_MAX_BTNS];
+
 	t_entity					entities[MAX_ENTITIES];
+	size_t						entity_count;
 
 	t_time						start_time;
 
@@ -346,6 +360,7 @@ typedef struct s_cub3d
 	t_e_cub3d_menu				last_frame_menu;
 
 	t_animation					animation[3];
+	double						z_buffer[SCREEN_W];
 
 	void						*mlx;
 	void						*win;
@@ -362,6 +377,7 @@ void							pause_game(t_cub3d *cub3d);
 void							exit_error(const char *msg);
 void							render_game(t_cub3d *cub3d);
 void							render_rendering_buffer(t_cub3d *cub3d);
+void							init_settings(t_cub3d *cub3d);
 
 // THREADS
 size_t							r_size_t(pthread_mutex_t *mutex, size_t *value);
@@ -378,8 +394,8 @@ void							switch_to_pause_menu(t_cub3d *cub3d);
 // PARSING
 bool							parse(t_cub3d *cube3d);
 bool							parsing_is_correct_file_path(t_cub3d *cub3d);
-bool							parsing_map_only_contains_allowed_chars(
-									t_cub3d *cub3d);
+bool							parsing_map_only_contains_allowed_chars(t_cub3d *cub3d);
+void							parse_map_entities(t_cub3d *cub3d);
 bool							parsing_check_map(t_cub3d *cub3d);
 int								parsing_open_file(t_cub3d *cub3d);
 bool							parse_data(t_cub3d *cub3d, int fd);
@@ -398,8 +414,10 @@ void							render_stats_time(t_cub3d *cub3d,
 // MINIMAP
 void							render_minimap(t_cub3d *cub3d);
 bool							init_minimap(t_cub3d *cub3d);
-void							handle_house(t_cub3d *cub3d, t_texture *border,
-									t_texture *house);
+void							minimap_handle_house(t_cub3d *cub3d,
+									t_texture *border, t_texture *house);
+void							minimap_handle_enemies(t_cub3d *cub3d,
+									t_texture *border);
 void							minimap_handle_background(t_cub3d *cub3d,
 									t_texture *border);
 
@@ -438,6 +456,14 @@ void							igmlx_copy_to_dest(t_img_pos origin,
 void							igmlx_simple_copy_to_dest(t_img *origin,
 									t_img *dest, t_uvec2 dest_pos);
 
+// ENTITIES
+void							init_entities(t_cub3d *cub3d);
+void							update_entities(t_cub3d *cub3d);
+void							render_entities(t_cub3d *cub3d);
+t_texture						*get_entity_texture(t_cub3d *cub3d,
+									t_entity *entity);
+t_entity						new_soldier(t_uvec2 pos);
+
 // PLAYER
 void							set_player_position_angle(t_cub3d *cub3d,
 									t_dvec2 pos, double angle);
@@ -471,7 +497,7 @@ t_list							*ft_lstget(t_list *lst, bool (*f)(void *,
 										void *), void *data);
 size_t							get_char_count(char *str, char c);
 double							ft_clamp(double d, double min, double max);
-double							distance_between(t_vec2 vec1, t_vec2 vec2);
+double							distance_between(t_dvec2 vec1, t_dvec2 vec2);
 t_dvec2							normalize_vector(t_dvec2 vec);
 bool							is_not_only_digits(const char *str);
 char							**ft_split_with_set(char const *s, char *set);
@@ -489,7 +515,8 @@ void							render_raycasting(t_cub3d *data);
 void							draw_sky(t_cub3d *data, t_ray *ray,
 									double begin);
 void							draw_wall(t_cub3d *data, t_ray *ray);
-double							get_wall_height(double distance);
+double							get_wall_height(t_cub3d *cub3d,
+									double distance);
 void							draw_textured_wall(t_cub3d *data, t_ray *ray,
 									double begin, double half_height);
 double							normalizeangle(double angle);

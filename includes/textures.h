@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 11:48:16 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:26:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ assets/42.xpm\n\
 assets/42.xpm\n\
 assets/minimap/minimap_border.xpm\n\
 assets/minimap/minimap_house.xpm\n\
+assets/minimap/bowser.xpm\n\
 assets/minimap/minimap_north_indication.xpm\n\
 assets/minimap/minimap_player.xpm\n\
 assets/pistol.xpm\n\
@@ -62,7 +63,14 @@ assets/img/shotgun3.xpm\n\
 assets/img/shotgun4.xpm\n\
 assets/img/shotgun5.xpm\n\
 assets/walls/wall.xpm\n\
-assets/entities/guard.xpm\n\
+assets/entities/soldier/front.xpm\n\
+assets/entities/soldier/front_right.xpm\n\
+assets/entities/soldier/right.xpm\n\
+assets/entities/soldier/back_right.xpm\n\
+assets/entities/soldier/back.xpm\n\
+assets/entities/soldier/back_left.xpm\n\
+assets/entities/soldier/left.xpm\n\
+assets/entities/soldier/front_left.xpm\n\
 M assets/walls/townhall.xpm\n\
 F assets/walls/townhall.xpm\n\
 1 assets/walls/wall.xpm\n\
@@ -74,6 +82,7 @@ typedef enum e_textures
 	TEXTURE_LOADING_SCREEN,
 	TEXTURE_MINIMAP_BORDER,
 	TEXTURE_MINIMAP_HOUSE,
+	TEXTURE_MINIMAP_ENEMY,
 	TEXTURE_MINIMAP_NORTH_INDICATION,
 	TEXTURE_MINIMAP_PLAYER,
 	TEXTURE_HUD_PISTOL,
@@ -107,11 +116,18 @@ typedef enum e_textures
 	TEXTURE_SHOTGUN4,
 	TEXTURE_SHOTGUN5,
 	TEXTURE_WALL_DEFAULT,
+	TEXTURE_ENTITY_SOLDIER_FRONT,
+	TEXTURE_ENTITY_SOLDIER_FRONT_RIGHT,
+	TEXTURE_ENTITY_SOLDIER_RIGHT,
+	TEXTURE_ENTITY_SOLDIER_BACK_RIGHT,
+	TEXTURE_ENTITY_SOLDIER_BACK,
+	TEXTURE_ENTITY_SOLDIER_BACK_LEFT,
+	TEXTURE_ENTITY_SOLDIER_LEFT,
+	TEXTURE_ENTITY_SOLDIER_FRONT_LEFT,
 	TEXTURE_WALL_NORTH,
 	TEXTURE_WALL_SOUTH,
 	TEXTURE_WALL_EAST,
 	TEXTURE_WALL_WEST,
-	TEXTURE_ENTITY_GUARD,
 	__TEXTURES_COUNT__,
 	__TEXTURE_MINIMAP__,
 }						t_textures_definition;

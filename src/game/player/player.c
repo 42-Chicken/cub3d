@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 10:30:51 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:31:10 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,8 @@ void	update_player(t_cub3d *cub3d)
 	handle_player_rotation(cub3d);
 	cub3d->player.minimap_pos.x = cub3d->player.location.x * MINIMAP_TILE_SIZE;
 	cub3d->player.minimap_pos.y = cub3d->player.location.y * MINIMAP_TILE_SIZE;
+	cub3d->player.plane = (t_dvec2){cub3d->plane_len * -cub3d->player.sin_r,
+		cub3d->plane_len * cub3d->player.cos_r};
+	cub3d->player.direction = (t_dvec2){cub3d->player.cos_r,
+		cub3d->player.sin_r};
 }

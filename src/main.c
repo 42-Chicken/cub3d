@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 08:47:33 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:12:06 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void print_average_fps(t_cub3d *cub3d)
 		printf("Elapsed time too small to compute FPS.\n");
 	}
 }
-
+// day night cycle
 
 int	main(int argc, char const *argv[])
 {
@@ -53,6 +53,7 @@ int	main(int argc, char const *argv[])
 	if (init_mlx(&cub3d) == false)
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
 	init_menus(&cub3d);
+	init_settings(&cub3d);
 	printf("F %x \n", cub3d.floor_color);
 	printf("C %x \n", cub3d.ceiling_color);
 	printf("NO %s \n", cub3d.north_texture_path);
