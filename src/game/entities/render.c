@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 11:22:15 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:39:52 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_vec2	get_draw_height(int height)
 t_vec2	calculate_width_height_and_draw(t_dvec2 transformed, t_entity *entity,
 		t_vec2 *draw_height, int x)
 {
-	entity->width = abs((int)(SCREEN_W / transformed.y)) * 1.2;
+	entity->width = abs((int)(SCREEN_H / transformed.y)) * 1.2;
 	entity->height = abs((int)(SCREEN_H / transformed.y)) * 1.7;
 	*draw_height = get_draw_height(entity->height);
 	return (get_draw_width(entity->width, x));

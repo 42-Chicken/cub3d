@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:01:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/16 09:34:04 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:38:32 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	render_options_menu(t_cub3d *cub3d)
 {
 	t_button	*btns;
 
+	cub3d->fov = cub3d->settings.fov * (M_PI / 180);
 	btns = cub3d->menus_buttons[CUB3D_MENU_SETTINGS];
 	igmlx_simple_copy_to_dest(get_texture(cub3d, TEXTURE_OPTIONS_MENU_TITLE),
 		cub3d->rendering_buffer, (t_uvec2){SCREEN_W / 2 - 135, SCREEN_H / 8
