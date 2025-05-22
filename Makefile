@@ -96,6 +96,7 @@ SRCS				=	src/main.c\
 						src/game/entities/update.c\
 						src/game/entities/render.c\
 						src/game/entities/soldier.c\
+						src/game/entities/multitextures.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 10:31:24 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:08:48 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	load_assets(t_cub3d *cub3d)
 		update_loading_screen(cub3d);
 	}
 	if (!error)
-		error |= init_minimap(cub3d);
+	error |= init_minimap(cub3d);
 	exit_safe_memory_context();
 	return (error);
 }

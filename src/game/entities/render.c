@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 12:46:15 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:35:20 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	draw_entity(t_cub3d *cub3d, t_entity *entity, int x)
 	t_uvec2		texture_pos;
 
 	draw_width = calculate_width_height_and_draw(cub3d, entity, &dr_h, x);
-	texture = get_texture(cub3d, entity->textures[0]);
+	texture = get_entity_texture(cub3d, entity);
 	c.x = draw_width.x - 1;
 	while (++c.x < draw_width.y)
 	{

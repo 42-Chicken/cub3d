@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 14:00:10 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:35:46 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct s_entity
 	double						distance_from_floor;
 	t_textures_definition		minimap_texture;
 	t_textures_definition		textures[__ENTITY_ROTATIONS_COUNT__];
+	double						rotation_angle;
 }								t_entity;
 
 typedef struct s_argb
@@ -393,8 +394,7 @@ void							switch_to_pause_menu(t_cub3d *cub3d);
 // PARSING
 bool							parse(t_cub3d *cube3d);
 bool							parsing_is_correct_file_path(t_cub3d *cub3d);
-bool							parsing_map_only_contains_allowed_chars(
-									t_cub3d *cub3d);
+bool							parsing_map_only_contains_allowed_chars(t_cub3d *cub3d);
 void							parse_map_entities(t_cub3d *cub3d);
 bool							parsing_check_map(t_cub3d *cub3d);
 int								parsing_open_file(t_cub3d *cub3d);
@@ -460,7 +460,8 @@ void							igmlx_simple_copy_to_dest(t_img *origin,
 void							init_entities(t_cub3d *cub3d);
 void							update_entities(t_cub3d *cub3d);
 void							render_entities(t_cub3d *cub3d);
-
+t_texture						*get_entity_texture(t_cub3d *cub3d,
+									t_entity *entity);
 t_entity						new_soldier(t_uvec2 pos);
 
 // PLAYER
