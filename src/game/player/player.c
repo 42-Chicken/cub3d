@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 11:31:10 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:43:12 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,20 @@ static bool	can_move(t_cub3d *cub3d, double x, double y, double r)
 
 void	handle_player_movements(t_cub3d *cub3d)
 {
-	double	mult;
 	double	dx;
 	double	dy;
+	t_dvec2 direction;
 
-	mult = 0;
 	if (is_pressed(cub3d, 'w'))
-		mult += 1;
+		direction = (t_dvec2){cub3d->player.cos_r, cub3d->player.sin_r};
 	if (is_pressed(cub3d, 's'))
-		mult += -1;
-	dx = cub3d->player.cos_r * mult * (cub3d->settings.player_speed / 10.0);
-	dy = cub3d->player.sin_r * mult * (cub3d->settings.player_speed / 10.0);
+		direction = (t_dvec2){-cub3d->player.cos_r, -cub3d->player.sin_r};
+	if (is_pressed(cub3d, 'a'))
+		direction = (t_dvec2){cub3d->player.sin_r, -cub3d->player.cos_r};
+	if (is_pressed(cub3d, 'd'))
+		direction = (t_dvec2){-cub3d->player.sin_r, cub3d->player.cos_r};
+	dx = direction.x * (cub3d->settings.player_speed / 10.0);
+	dy = direction.y * (cub3d->settings.player_speed / 10.0);
 	if (can_move(cub3d, cub3d->player.location.x + dx, cub3d->player.location.y,
 			PLAYER_COLLISION_RADIUS))
 		cub3d->player.location.x += dx;
@@ -63,10 +66,10 @@ void	handle_player_movements(t_cub3d *cub3d)
 
 void	handle_player_rotation(t_cub3d *cub3d)
 {
-	if (is_pressed(cub3d, 'd'))
+	if (is_pressed(cub3d, XK_Right))
 		cub3d->player.rotation_angle
 			+= ((double)cub3d->settings.player_rotation_speed / 100);
-	if (is_pressed(cub3d, 'a'))
+	if (is_pressed(cub3d, XK_Left))
 		cub3d->player.rotation_angle
 			-= ((double)cub3d->settings.player_rotation_speed / 100);
 	cub3d->player.cos_r = cos(cub3d->player.rotation_angle);
