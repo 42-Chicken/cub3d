@@ -6,21 +6,50 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 12:13:43 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 08:52:58 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	swap_entities(t_cub3d *cub3d, size_t i, size_t j)
+{
+	t_entity tmp;
+
+	tmp = cub3d->entities[i];
+	cub3d->entities[i] = cub3d->entities[j];
+	cub3d->entities[j] = tmp;
+}
+
+static void	sort_entities(t_cub3d *cub3d)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (i < MAX_ENTITIES)
+	{
+		j = 0;
+		while (j < MAX_ENTITIES)
+		{
+			if (cub3d->entities[i].distance_from_player > cub3d->entities[j].distance_from_player)
+				swap_entities(cub3d, i, j);
+			j++;
+		}
+		i++;
+	}
+}
 
 void	update_entities(t_cub3d *cub3d)
 {
 	size_t	i;
 
 	i = 0;
-	while (cub3d->entities[i] && i < MAX_ENTITIES)
+	while (i < MAX_ENTITIES)
 	{
 		cub3d->entities[i].distance_from_player = distance_between(cub3d->entities[i].location,
 				cub3d->player.location);
 		i++;
 	}
+	sort_entities(cub3d);
 }

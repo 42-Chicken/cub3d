@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:02:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 12:10:39 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 08:30:58 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	render_game(t_cub3d *cub3d)
 	update_player(cub3d);
 	update_entities(cub3d);
 	render_raycasting(cub3d);
+	render_entities(cub3d);
 	render_hand(cub3d);
 	render_minimap(cub3d);
 	render_stats(cub3d);

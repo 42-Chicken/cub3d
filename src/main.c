@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 08:47:33 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 08:30:28 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void print_average_fps(t_cub3d *cub3d)
 		printf("Elapsed time too small to compute FPS.\n");
 	}
 }
-
+// day night cycle
 
 int	main(int argc, char const *argv[])
 {

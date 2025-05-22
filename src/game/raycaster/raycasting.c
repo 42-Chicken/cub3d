@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:43:43 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/21 12:01:57 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 09:57:00 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void	render_raycasting(t_cub3d *data)
 		ray.x = i;
 		angle += FOV / NUM_RAYS;
 		get_wall_hit(data, &ray);
+		data->z_buffer[i] = ray.distance;
 		draw_wall(data, &ray);
 		i++;
 	}
-	igmlx_simple_copy_to_dest(get_texture(data, data->entities[0].textures[0]), data->rendering_buffer, (t_uvec2){0, 0});
 }

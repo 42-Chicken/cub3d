@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 12:13:02 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 09:56:42 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,7 @@ typedef struct s_cub3d
 	t_e_cub3d_menu				last_frame_menu;
 
 	t_animation					animation[3];
+	double						z_buffer[SCREEN_W];
 
 	void						*mlx;
 	void						*win;
@@ -441,6 +442,7 @@ void							igmlx_simple_copy_to_dest(t_img *origin,
 // ENTITIES
 void							init_entities(t_cub3d *cub3d);
 void							update_entities(t_cub3d *cub3d);
+void							render_entities(t_cub3d *cub3d);
 
 // PLAYER
 void							set_player_position_angle(t_cub3d *cub3d,
