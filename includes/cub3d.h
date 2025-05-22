@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 14:35:46 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:38:39 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,6 +229,8 @@ typedef struct s_ray
 	float						vertical_hit_y;
 	float						wall_hit_x;
 	float						wall_hit_y;
+	float						dir_x;
+	float						dir_y;
 	float						distance;
 	char						wall;
 	int							x;
