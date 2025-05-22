@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 12:42:57 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:00:10 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ typedef struct s_entity
 	t_dvec2						transformed;
 	int							y_offset;
 	double						distance_from_floor;
+	t_textures_definition		minimap_texture;
 	t_textures_definition		textures[__ENTITY_ROTATIONS_COUNT__];
 }								t_entity;
 
@@ -413,8 +414,10 @@ void							render_stats_time(t_cub3d *cub3d,
 // MINIMAP
 void							render_minimap(t_cub3d *cub3d);
 bool							init_minimap(t_cub3d *cub3d);
-void							handle_house(t_cub3d *cub3d, t_texture *border,
-									t_texture *house);
+void							minimap_handle_house(t_cub3d *cub3d,
+									t_texture *border, t_texture *house);
+void							minimap_handle_enemies(t_cub3d *cub3d,
+									t_texture *border);
 void							minimap_handle_background(t_cub3d *cub3d,
 									t_texture *border);
 

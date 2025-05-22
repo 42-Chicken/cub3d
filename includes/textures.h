@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 12:02:26 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 13:46:36 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ assets/42.xpm\n\
 assets/42.xpm\n\
 assets/minimap/minimap_border.xpm\n\
 assets/minimap/minimap_house.xpm\n\
+assets/minimap/bowser.xpm\n\
 assets/minimap/minimap_north_indication.xpm\n\
 assets/minimap/minimap_player.xpm\n\
 assets/pistol.xpm\n\
@@ -74,6 +75,7 @@ typedef enum e_textures
 	TEXTURE_LOADING_SCREEN,
 	TEXTURE_MINIMAP_BORDER,
 	TEXTURE_MINIMAP_HOUSE,
+	TEXTURE_MINIMAP_ENEMY,
 	TEXTURE_MINIMAP_NORTH_INDICATION,
 	TEXTURE_MINIMAP_PLAYER,
 	TEXTURE_HUD_PISTOL,

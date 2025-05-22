@@ -31,6 +31,7 @@ SRCS				=	src/main.c\
 						src/game/hud/minimap/minimap_init.c\
 						src/game/hud/minimap/minimap_house.c\
 						src/game/hud/minimap/minimap_render.c\
+						src/game/hud/minimap/minimap_enemies.c\
 						src/game/hud/minimap/minimap_background.c\
 						src/game/hud/stats/stats_render.c\
 						src/game/hud/stats/health_render.c\
