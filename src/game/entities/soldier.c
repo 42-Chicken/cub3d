@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 11:20:03 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:03:08 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,10 @@ t_entity	new_soldier(t_uvec2 pos)
 	soldier.textures[0] = TEXTURE_ENTITY_GUARD;
 	soldier.type = CUB3D_ENTITY_OFFICER;
 	soldier.in_game = true;
+	soldier.scale = (t_dvec2){
+		1.2,
+		1.7,
+	};
+	soldier.distance_from_floor = 160;
 	return (soldier);
 }

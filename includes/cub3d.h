@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 11:33:35 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 12:06:37 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,9 @@ typedef struct s_entity
 	t_dvec2						location;
 	int							height;
 	int							width;
+	t_dvec2						scale;
+	int							y_offset;
+	double						distance_from_floor;
 	t_textures_definition		textures[__ENTITY_ROTATIONS_COUNT__];
 }								t_entity;
 
