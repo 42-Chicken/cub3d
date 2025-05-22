@@ -56,6 +56,7 @@ SRCS				=	src/main.c\
 						src/parsing/map.c\
 						src/parsing/map_checks_chars.c\
 						src/parsing/map_checks.c\
+						src/parsing/map_entities.c\
 						src/fonts/destroy_fonts.c\
 						src/fonts/fonts_get.c\
 						src/fonts/fonts_loader.c\
@@ -92,6 +93,7 @@ SRCS				=	src/main.c\
 						src/game/entities/init.c\
 						src/game/entities/update.c\
 						src/game/entities/render.c\
+						src/game/entities/soldier.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a

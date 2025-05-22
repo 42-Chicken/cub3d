@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 10:00:39 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 10:10:00 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void render_entities(t_cub3d *cub3d)
 	int d;
 
 	i = 0;
-	while (i < MAX_ENTITIES)
+	while (i < cub3d->entity_count)
 	{
 		entity = &cub3d->entities[i];
 		texture = get_texture(cub3d, entity->textures[0]);
@@ -44,12 +44,10 @@ void render_entities(t_cub3d *cub3d)
 			inv_det * (direction.y * pos.x - direction.x * pos.y),
 			inv_det * (-plane.y * pos.x + plane.x * pos.y)
 		};
-
 		if (transformed.y <= 0) {
 			i++;
 			continue;
 		}
-
 		x = (int)((SCREEN_W / 2.0) * (1 + transformed.x / transformed.y));
 		height = abs((int)(SCREEN_H / transformed.y)) * 1.7;
 

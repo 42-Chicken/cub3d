@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 09:56:42 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 10:17:51 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@
 typedef struct timeval			t_time;
 
 # define MAP_SUPPORTED_CHARS "01M"
+# define MAP_SUPPORTED_ENTITIES_CHARS "V"
 
 typedef enum e_hand
 {
@@ -137,7 +138,7 @@ typedef unsigned int			t_color;
 
 typedef enum e_cub3d_entity_type
 {
-	CUB3D_ENTITY_OFFICER,
+	CUB3D_ENTITY_OFFICER = 'S',
 	CUB3D_ENTITY_CAR,
 	__ENTITY_TYPES_COUNT__,
 }								t_e_cub3d_entity_type;
@@ -335,7 +336,9 @@ typedef struct s_cub3d
 	pthread_mutex_t				mutex;
 
 	t_button					menus_buttons[__MENUS_COUNT__][MENU_MAX_BTNS];
+
 	t_entity					entities[MAX_ENTITIES];
+	size_t						entity_count;
 
 	t_time						start_time;
 
@@ -381,6 +384,7 @@ void							switch_to_pause_menu(t_cub3d *cub3d);
 bool							parse(t_cub3d *cube3d);
 bool							parsing_is_correct_file_path(t_cub3d *cub3d);
 bool							parsing_map_only_contains_allowed_chars(t_cub3d *cub3d);
+void							parse_map_entities(t_cub3d *cub3d);
 bool							parsing_check_map(t_cub3d *cub3d);
 int								parsing_open_file(t_cub3d *cub3d);
 bool							parse_data(t_cub3d *cub3d, int fd);
@@ -443,6 +447,8 @@ void							igmlx_simple_copy_to_dest(t_img *origin,
 void							init_entities(t_cub3d *cub3d);
 void							update_entities(t_cub3d *cub3d);
 void							render_entities(t_cub3d *cub3d);
+
+t_entity						new_soldier(t_uvec2 pos);
 
 // PLAYER
 void							set_player_position_angle(t_cub3d *cub3d,
