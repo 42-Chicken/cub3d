@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 11:23:42 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:33:35 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-
-# define FOV 60 * (M_PI / 180)
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -85,11 +83,8 @@
 # define OPTIONS_MENU_ROTATION_LABEL "R O T A T I O N"
 
 # define RAYS 1
-# define NUM_RAYS ((int)SCREEN_W / (int)RAYS)
 # define TILESIZE 64
-# define DISTANCE_FROM_CAMERA (double)((SCREEN_W / 2) / tan(FOV / 2))
 # define WALL_SCALE 3.0
-# define PLANE_LEN tan(FOV * 0.5)
 
 typedef struct timeval			t_time;
 
@@ -311,6 +306,11 @@ typedef struct s_cub3d
 
 	size_t						tick;
 
+	size_t						num_rays;
+	double						distance_from_camera;
+	double						plane_len;
+	double						fov;
+
 	char						*north_texture_path;
 	char						*south_texture_path;
 	char						*west_texture_path;
@@ -387,7 +387,8 @@ void							switch_to_pause_menu(t_cub3d *cub3d);
 // PARSING
 bool							parse(t_cub3d *cube3d);
 bool							parsing_is_correct_file_path(t_cub3d *cub3d);
-bool							parsing_map_only_contains_allowed_chars(t_cub3d *cub3d);
+bool							parsing_map_only_contains_allowed_chars(
+									t_cub3d *cub3d);
 void							parse_map_entities(t_cub3d *cub3d);
 bool							parsing_check_map(t_cub3d *cub3d);
 int								parsing_open_file(t_cub3d *cub3d);
@@ -505,7 +506,8 @@ void							render_raycasting(t_cub3d *data);
 void							draw_sky(t_cub3d *data, t_ray *ray,
 									double begin);
 void							draw_wall(t_cub3d *data, t_ray *ray);
-double							get_wall_height(double distance);
+double							get_wall_height(t_cub3d *cub3d,
+									double distance);
 void							draw_textured_wall(t_cub3d *data, t_ray *ray,
 									double begin, double half_height);
 double							normalizeangle(double angle);

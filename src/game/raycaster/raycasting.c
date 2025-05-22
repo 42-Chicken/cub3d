@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:43:43 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/22 09:57:00 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 11:34:45 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,16 @@ void	render_raycasting(t_cub3d *data)
 {
 	t_ray	ray;
 	double	angle;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	angle = data->player.rotation_angle - FOV / 2;
-	while (i < NUM_RAYS)
+	angle = data->player.rotation_angle - data->fov / 2;
+	while (i < data->num_rays)
 	{
 		ft_bzero(&ray, sizeof(t_ray));
 		ray.rayangle = normalizeangle(angle);
 		ray.x = i;
-		angle += FOV / NUM_RAYS;
+		angle += data->fov / data->num_rays;
 		get_wall_hit(data, &ray);
 		data->z_buffer[i] = ray.distance;
 		draw_wall(data, &ray);
