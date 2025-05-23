@@ -6,11 +6,31 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:20:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 11:10:31 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:22:58 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static double	get_darkness(double distance)
+{
+	double	darkness_weight;
+
+	darkness_weight = (215 / distance);
+	if (darkness_weight < 0)
+		darkness_weight = 0;
+	if (darkness_weight > 1)
+		darkness_weight = 1;
+	return (darkness_weight);
+}
+
+static void	draw_floor_pixel_color(t_cub3d *data, t_uvec2 pos,
+		t_color pixel_color, double row_distance)
+{
+	put_pixel_to_buffer(data->rendering_buffer, pos,
+		igmlx_melt_colors_weigthed(0x000000, pixel_color,
+			get_darkness(row_distance * 100)));
+}
 
 void	draw_floor(t_cub3d *data, t_ray *ray, double height, double begin)
 {
@@ -35,7 +55,7 @@ void	draw_floor(t_cub3d *data, t_ray *ray, double height, double begin)
 		};
 		texture_loc = (t_vec2){(int)(floor.x * img->width) % img->width,
 			(int)(floor.y * img->height) % img->height};
-		put_pixel_to_buffer(data->rendering_buffer, (t_uvec2){ray->x, y},
-			get_pixel_color(img, (t_uvec2){texture_loc.x, texture_loc.y}));
+		draw_floor_pixel_color(data, (t_uvec2){ray->x, y}, get_pixel_color(img,
+				(t_uvec2){texture_loc.x, texture_loc.y}), row_distance);
 	}
 }
