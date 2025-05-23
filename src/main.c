@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 12:12:06 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:00:09 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int	main(int argc, char const *argv[])
 	init_mlx_hooks(&cub3d);
 	cub3d.loaded = true;
 	gettimeofday(&cub3d.start_time, NULL);
+	controls_setup_mouse(&cub3d);
 	mlx_loop(cub3d.mlx);
+	controls_pause_mouse(&cub3d);
 	print_average_fps(&cub3d);
 	destroy_mlx(&cub3d);
 	free_all_contexts_garbage();
