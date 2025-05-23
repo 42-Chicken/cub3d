@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:20:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 08:31:00 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:10:31 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_floor(t_cub3d *data, t_ray *ray, double height, double begin)
 	t_vec2	texture_loc;
 	t_img	*img;
 
-	img = get_texture(data, TEXTURE_WALL_DEFAULT);
+	img = get_texture(data, TEXTURE_FLOOR);
 	y = (int)height + begin - 1;
 	ray->dir_x = cos(ray->rayangle);
 	ray->dir_y = sin(ray->rayangle);
