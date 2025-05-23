@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 09:01:35 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:52:41 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,17 @@
 
 static void	setup_textures(t_entity *money)
 {
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT] = \
-	TEXTURE_ENTITY_MONEY;
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_RIGHT] = \
-	TEXTURE_ENTITY_MONEY;
-	money->textures[CUB3D_ENTITY_TEXTURE_RIGHT] = \
-	TEXTURE_ENTITY_MONEY;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK_RIGHT] = \
-	TEXTURE_ENTITY_MONEY;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK] = \
-	TEXTURE_ENTITY_MONEY;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK_LEFT] = \
-	TEXTURE_ENTITY_MONEY;
-	money->textures[CUB3D_ENTITY_TEXTURE_LEFT] = \
-	TEXTURE_ENTITY_MONEY;
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_LEFT] = \
-	TEXTURE_ENTITY_MONEY;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT] = TEXTURE_ENTITY_MONEY;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_RIGHT] = TEXTURE_ENTITY_MONEY;
+	money->textures[CUB3D_ENTITY_TEXTURE_RIGHT] = TEXTURE_ENTITY_MONEY;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK_RIGHT] = TEXTURE_ENTITY_MONEY;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK] = TEXTURE_ENTITY_MONEY;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK_LEFT] = TEXTURE_ENTITY_MONEY;
+	money->textures[CUB3D_ENTITY_TEXTURE_LEFT] = TEXTURE_ENTITY_MONEY;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_LEFT] = TEXTURE_ENTITY_MONEY;
 }
 
-void		update_money(t_cub3d *cub3d, t_entity *entity)
+void	update_money(t_cub3d *cub3d, t_entity *entity)
 {
 	if (!entity->flag)
 	{

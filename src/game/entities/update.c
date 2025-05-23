@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 09:02:17 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:52:47 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	update_entities(t_cub3d *cub3d)
 		{
 			cub3d->entities[i].distance_from_player = \
 			distance_between(cub3d->entities[i].location,
-				cub3d->player.location);
+					cub3d->player.location);
 			update_interactions(cub3d, &cub3d->entities[i]);
 		}
 		i++;

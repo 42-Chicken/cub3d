@@ -2,7 +2,7 @@
 NAME				=	cub3d
 CC					=	clang
 
-CFLAGS				=	-Wall -Werror -Wextra -O3 -march=native -pipe -flto -fomit-frame-pointer -ffast-math  -Ilibs/ft_libc/includes -Ilibs/minilibx-linux -Iincludes -fPIE -g
+CFLAGS				=	-O3 -march=native -pipe -flto -fomit-frame-pointer -ffast-math  -Ilibs/ft_libc/includes -Ilibs/minilibx-linux -Iincludes -fPIE -g
 RM					=	rm -rf
 MAKE				=	make --no-print-directory -C
 
@@ -95,6 +95,7 @@ SRCS				=	src/main.c\
 						src/game/entities/init.c\
 						src/game/entities/update.c\
 						src/game/entities/render.c\
+						src/game/entities/door.c\
 						src/game/entities/soldier.c\
 						src/game/entities/money.c\
 						src/game/entities/multitextures.c\

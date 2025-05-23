@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:04:49 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 08:40:15 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:43:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ static void	setup_entity(t_cub3d *cub3d, char c, t_uvec2 pos)
 		entity = new_soldier(pos);
 	if (c == 'M')
 		entity = new_money(pos);
-	if (entity.in_game == true)
-		cub3d->entities[cub3d->entity_count++] = entity;
+	if (c == 'D')
+	{
+		cub3d->map.buffer[pos.y][pos.x] = CUB3D_MAP_DOOR;
+		entity = new_door(pos);
+	}
+	cub3d->entities[cub3d->entity_count++] = entity;
 }
 
 void	parse_map_entities(t_cub3d *cub3d)

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 08:45:59 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:38:16 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ assets/42.xpm\n\
 assets/minimap/minimap_border.xpm\n\
 assets/minimap/minimap_house.xpm\n\
 assets/minimap/bowser.xpm\n\
+assets/minimap/minimap_door.xpm\n\
 assets/minimap/minimap_money.xpm\n\
 assets/minimap/minimap_north_indication.xpm\n\
 assets/minimap/minimap_player.xpm\n\
@@ -75,6 +76,7 @@ assets/entities/soldier/front_left.xpm\n\
 assets/entities/money.xpm\n\
 M assets/walls/townhall.xpm\n\
 F assets/walls/townhall.xpm\n\
+D assets/entities/soldier/front_left.xpm\n\
 1 assets/walls/wall.xpm\n\
 "
 
@@ -85,6 +87,7 @@ typedef enum e_textures
 	TEXTURE_MINIMAP_BORDER,
 	TEXTURE_MINIMAP_HOUSE,
 	TEXTURE_MINIMAP_ENEMY,
+	TEXTURE_MINIMAP_DOOR,
 	TEXTURE_MINIMAP_MONEY,
 	TEXTURE_MINIMAP_NORTH_INDICATION,
 	TEXTURE_MINIMAP_PLAYER,
