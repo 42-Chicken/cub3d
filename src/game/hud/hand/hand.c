@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hand.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:57:47 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/19 23:01:54 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/23 11:22:37 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,40 @@ void	load_animation(t_cub3d *data)
 	data->animation[SHOTGUN].img[2] = TEXTURE_SHOTGUN3;
 	data->animation[SHOTGUN].img[3] = TEXTURE_SHOTGUN4;
 	data->animation[SHOTGUN].img[4] = TEXTURE_SHOTGUN5;
+	data->animation[HAND].is_anim = false;
 	data->animation[HAND].time_start = 0;
 	data->animation[GUN].time_start = 0;
 	data->animation[SHOTGUN].time_start = 0;
 }
 void	render_hand(t_cub3d *data)
 {
-	static int i = 0;
-	static int j = 0;
-	if (data->animation[HAND + j].time_start == 0)
-		data->animation[HAND + j].time_start = gettime();
+	t_img *img;
+	static int	i = 0;
 
-	if (gettime() - data->animation[HAND + j].time_start > 120)
+	img = NULL;
+	if (data->animation[HAND].is_anim == true)
 	{
-		data->animation[HAND + j].time_start = gettime();
-		i++;
+		if (data->animation[HAND].time_start == 0)
+			data->animation[HAND].time_start = gettime();
+		if (gettime() - data->animation[HAND].time_start > 60)
+		{
+			data->animation[HAND].time_start = gettime();
+			i++;
+		}
+
+			if ((i >= 3 && data->player.item == TEXTURE_HUD_HAND) || (i >= 5 && (data->player.item == TEXTURE_HUD_PISTOL || data->player.item == TEXTURE_HUD_SHOTGUN)))
+			{
+				data->animation[HAND].is_anim = false;
+				data->animation[HAND].time_start = 0;
+				i = 0;
+				return ;
+			}
 	}
-	if ((j == HAND && i == 3) || ((j == GUN || j == SHOTGUN) && i == 5))
-	{
-		i = 0;
-		j++;
-	}
-	if (j == 3)
-		j = 0;
-	t_img *img = get_texture(data, data->animation[HAND + j].img[i]);
+	if (data->player.item == TEXTURE_HUD_HAND)
+		img = get_texture(data, data->animation[HAND].img[i]);
+	if(data->player.item == TEXTURE_HUD_PISTOL)
+		img = get_texture(data, data->animation[GUN].img[i]);
+	if (data->player.item == TEXTURE_HUD_SHOTGUN)
+		img = get_texture(data, data->animation[SHOTGUN].img[i]);
 	igmlx_simple_copy_to_dest(img, data->rendering_buffer, (t_uvec2){SCREEN_W - img->width + 70 , SCREEN_H - img->height});
 }
