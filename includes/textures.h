@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 11:11:15 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:45:36 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ assets/entities/money.xpm\n\
 assets/walls/wall.xpm\n\
 F assets/walls/townhall.xpm\n\
 D assets/walls/door.xpm\n\
+B assets/walls/townhall.xpm\n\
 "
 
 typedef enum e_textures

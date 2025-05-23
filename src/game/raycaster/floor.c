@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:20:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 11:22:58 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:42:28 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,16 @@ void	draw_floor(t_cub3d *data, t_ray *ray, double height, double begin)
 	t_dvec2	floor;
 	t_vec2	texture_loc;
 	t_img	*img;
+	double	standard_wall_height;
+	double	floor_start;
 
+	(void)height;
+	(void)begin;
 	img = get_texture(data, TEXTURE_FLOOR);
-	y = (int)height + begin - 1;
+	standard_wall_height = ((double)(64 / ray->distance)
+			* data->distance_from_camera);
+	floor_start = SCREEN_H / 2 + standard_wall_height / 2;
+	y = (int)floor_start - 1;
 	ray->dir_x = cos(ray->rayangle);
 	ray->dir_y = sin(ray->rayangle);
 	while (++y < SCREEN_H)

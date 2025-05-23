@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 11:22:43 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/23 12:45:07 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@
 
 typedef struct timeval			t_time;
 
-# define MAP_SUPPORTED_CHARS "01T"
+# define MAP_SUPPORTED_CHARS "01TB"
 # define MAP_SUPPORTED_ENTITIES_CHARS "VMD"
 
 typedef enum e_hand
@@ -105,6 +105,7 @@ typedef enum e_cub3d_map_values
 	CUB3D_MAP_DOOR = 'D',
 	CUB3D_MAP_WALL = '1',
 	CUB3D_MAP_TOWNHALL = 'T',
+	CUB3D_MAP_BUILDING = 'B',
 	__CUB3D_MAP_CHARS_COUNT__
 }								t_e_cub3d_map_values;
 
@@ -248,6 +249,7 @@ typedef struct s_ray
 	float						distance;
 	char						wall;
 	int							x;
+
 }								t_ray;
 
 typedef struct s_player
@@ -542,7 +544,7 @@ void							draw_sky(t_cub3d *data, t_ray *ray,
 									double begin);
 void							draw_wall(t_cub3d *data, t_ray *ray);
 double							get_wall_height(t_cub3d *cub3d,
-									double distance);
+									t_ray *ray);
 void							draw_textured_wall(t_cub3d *data, t_ray *ray,
 									double begin, double half_height);
 double							normalizeangle(double angle);
