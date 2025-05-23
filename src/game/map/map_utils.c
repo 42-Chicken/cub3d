@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 09:04:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/19 19:03:17 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/23 09:49:12 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static bool	map_is_outside_map_buffer(t_cub3d *cub3d, size_t x, size_t y)
+bool	map_is_outside_map_buffer(t_cub3d *cub3d, size_t x, size_t y)
 {
 	return (!cub3d->map.buffer || x < 0 || y < 0 || y >= cub3d->map.height
 		|| x >= ft_strlen(cub3d->map.buffer[y]));

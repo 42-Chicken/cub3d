@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 14:46:36 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:31:54 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_entity	new_soldier(t_uvec2 pos)
 	setup_textures(&soldier);
 	soldier.type = CUB3D_ENTITY_OFFICER;
 	soldier.in_game = true;
+	soldier.anchored = true;
 	soldier.minimap_texture = TEXTURE_MINIMAP_ENEMY;
 	soldier.rotation_angle = M_PI / 2;
 	soldier.scale = (t_dvec2){

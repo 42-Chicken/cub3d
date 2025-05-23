@@ -24,6 +24,8 @@ void	on_key_pressed(int key, t_cub3d *cub3d)
 	if (key == XK_Up)
 		cub3d->player.money += 5;
 	keycode_controls_items(key, cub3d);
+	if (key == XK_e)
+		handle_door_interaction(cub3d);
 	if (cub3d->key_pressed_index < KEY_PRESSED_MAX && !is_pressed(cub3d, key))
 		cub3d->key_pressed[cub3d->key_pressed_index++] = key;
 }

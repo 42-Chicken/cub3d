@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 11:23:11 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:52:47 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ static void	sort_entities(t_cub3d *cub3d)
 	}
 }
 
+static void	update_interactions(t_cub3d *cub3d, t_entity *entity)
+{
+	if (entity->type == CUB3D_ENTITY_MONEY)
+		update_money(cub3d, entity);
+}
+
 void	update_entities(t_cub3d *cub3d)
 {
 	size_t	i;
@@ -48,9 +54,13 @@ void	update_entities(t_cub3d *cub3d)
 	i = 0;
 	while (i < cub3d->entity_count)
 	{
-		cub3d->entities[i].distance_from_player = \
-		distance_between(cub3d->entities[i].location,
-				cub3d->player.location);
+		if (cub3d->entities[i].in_game)
+		{
+			cub3d->entities[i].distance_from_player = \
+			distance_between(cub3d->entities[i].location,
+					cub3d->player.location);
+			update_interactions(cub3d, &cub3d->entities[i]);
+		}
 		i++;
 	}
 	sort_entities(cub3d);

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 15:27:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 15:43:12 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:40:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	handle_player_movements(t_cub3d *cub3d)
 {
 	double	dx;
 	double	dy;
-	t_dvec2 direction;
+	t_dvec2	direction;
 
 	if (is_pressed(cub3d, 'w'))
 		direction = (t_dvec2){cub3d->player.cos_r, cub3d->player.sin_r};
