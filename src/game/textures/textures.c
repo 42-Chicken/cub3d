@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:14:38 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 10:34:27 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:59:27 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_texture	*get_linked_texture(t_cub3d *cub3d, char link)
 	{
 		if (cub3d->textures_atlas.links[i].link == link)
 			return (cub3d->textures_atlas.links[i].texture);
+		i++;
 	}
 	return (NULL);
 }

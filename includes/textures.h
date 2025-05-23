@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 10:38:16 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:00:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ assets/entities/soldier/back_left.xpm\n\
 assets/entities/soldier/left.xpm\n\
 assets/entities/soldier/front_left.xpm\n\
 assets/entities/money.xpm\n\
-M assets/walls/townhall.xpm\n\
 F assets/walls/townhall.xpm\n\
-D assets/entities/soldier/front_left.xpm\n\
-1 assets/walls/wall.xpm\n\
+D assets/walls/door.xpm\n\
 "
 
 typedef enum e_textures
