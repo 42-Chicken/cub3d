@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:32:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 14:40:56 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:18:17 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ double	get_wall_height(t_cub3d *data, t_ray *ray)
 {
 	double	base_height;
 
-	base_height = 250;
+	base_height = 850;
 	if (ray->wall == 'G')
 	{
 		base_height = 135;
+	}
+	if (ray->wall == 'F')
+	{
+		base_height = 400;
 	}
 	if (ray->wall == CUB3D_MAP_BUILDING)
 	{

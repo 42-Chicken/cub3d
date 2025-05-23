@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 14:43:02 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 15:12:28 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ assets/entities/soldier/left.xpm\n\
 assets/entities/soldier/front_left.xpm\n\
 assets/entities/money.xpm\n\
 assets/road.xpm\n\
-F assets/walls/townhall.xpm\n\
+F assets/walls/wall3.xpm\n\
 D assets/walls/door.xpm\n\
 B assets/walls/building.xpm\n\
 G assets/walls/wall2.xpm\n\
