@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 14:35:46 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 09:02:13 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@
 
 typedef struct timeval			t_time;
 
-# define MAP_SUPPORTED_CHARS "01M"
-# define MAP_SUPPORTED_ENTITIES_CHARS "V"
+# define MAP_SUPPORTED_CHARS "01T"
+# define MAP_SUPPORTED_ENTITIES_CHARS "VM"
 
 typedef enum e_hand
 {
@@ -103,7 +103,7 @@ typedef enum e_cub3d_map_values
 	CUB3D_MAP_VOID = -1,
 	CUB3D_MAP_FLOOR = '0',
 	CUB3D_MAP_WALL = '1',
-	CUB3D_MAP_TOWNHALL = 'M',
+	CUB3D_MAP_TOWNHALL = 'T',
 	__CUB3D_MAP_CHARS_COUNT__
 }								t_e_cub3d_map_values;
 
@@ -135,6 +135,7 @@ typedef unsigned int			t_color;
 typedef enum e_cub3d_entity_type
 {
 	CUB3D_ENTITY_OFFICER = 'S',
+	CUB3D_ENTITY_MONEY = 'M',
 	CUB3D_ENTITY_CAR,
 	__ENTITY_TYPES_COUNT__,
 }								t_e_cub3d_entity_type;
@@ -165,6 +166,7 @@ typedef struct s_entity
 	t_dvec2						transformed;
 	int							y_offset;
 	double						distance_from_floor;
+	bool						flag;
 	t_textures_definition		minimap_texture;
 	t_textures_definition		textures[__ENTITY_ROTATIONS_COUNT__];
 	double						rotation_angle;
@@ -463,6 +465,8 @@ void							render_entities(t_cub3d *cub3d);
 t_texture						*get_entity_texture(t_cub3d *cub3d,
 									t_entity *entity);
 t_entity						new_soldier(t_uvec2 pos);
+t_entity						new_money(t_uvec2 pos);
+void							update_money(t_cub3d *cub3d, t_entity *entity);
 
 // PLAYER
 void							set_player_position_angle(t_cub3d *cub3d,

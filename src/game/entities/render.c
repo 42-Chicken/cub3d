@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 14:35:20 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:52:14 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	render_entities(t_cub3d *cub3d)
 		cub3d->entities[i].y_offset = (int)(\
 		-cub3d->entities[i].distance_from_floor * (cub3d->distance_from_camera
 					/ cub3d->entities[i].transformed.y) / TILESIZE);
-		if (cub3d->entities[i].transformed.y > 0)
+		if (cub3d->entities[i].transformed.y > 0 && cub3d->entities[i].in_game)
 			draw_entity(cub3d, &cub3d->entities[i], (int)((SCREEN_W / 2.0) * (1
 						+ cub3d->entities[i].transformed.x
 						/ cub3d->entities[i].transformed.y)));
