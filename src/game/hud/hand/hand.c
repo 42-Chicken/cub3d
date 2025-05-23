@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hand.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:57:47 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/23 11:22:37 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/23 11:41:32 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	load_animation(t_cub3d *data)
 }
 void	render_hand(t_cub3d *data)
 {
-	t_img *img;
+	t_img		*img;
 	static int	i = 0;
 
 	img = NULL;
@@ -55,20 +55,21 @@ void	render_hand(t_cub3d *data)
 			data->animation[HAND].time_start = gettime();
 			i++;
 		}
-
-			if ((i >= 3 && data->player.item == TEXTURE_HUD_HAND) || (i >= 5 && (data->player.item == TEXTURE_HUD_PISTOL || data->player.item == TEXTURE_HUD_SHOTGUN)))
-			{
-				data->animation[HAND].is_anim = false;
-				data->animation[HAND].time_start = 0;
-				i = 0;
-				return ;
-			}
+		if ((i >= 3 && data->player.item == TEXTURE_HUD_HAND) || (i >= 5
+				&& (data->player.item == TEXTURE_HUD_PISTOL
+					|| data->player.item == TEXTURE_HUD_SHOTGUN)))
+		{
+			data->animation[HAND].is_anim = false;
+			data->animation[HAND].time_start = 0;
+			i = 0;
+		}
 	}
 	if (data->player.item == TEXTURE_HUD_HAND)
 		img = get_texture(data, data->animation[HAND].img[i]);
-	if(data->player.item == TEXTURE_HUD_PISTOL)
+	if (data->player.item == TEXTURE_HUD_PISTOL)
 		img = get_texture(data, data->animation[GUN].img[i]);
 	if (data->player.item == TEXTURE_HUD_SHOTGUN)
 		img = get_texture(data, data->animation[SHOTGUN].img[i]);
-	igmlx_simple_copy_to_dest(img, data->rendering_buffer, (t_uvec2){SCREEN_W - img->width + 70 , SCREEN_H - img->height});
+	igmlx_simple_copy_to_dest(img, data->rendering_buffer, (t_uvec2){SCREEN_W
+		- img->width + 70, SCREEN_H - img->height});
 }

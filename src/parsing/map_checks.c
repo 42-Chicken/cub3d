@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:55:38 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/16 11:57:53 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:48:19 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ bool	parsing_check_if_map_is_enclosed(t_cub3d *cub3d)
 		x = 0;
 		while (x < ft_strlen(cub3d->map.buffer[y]))
 		{
-			if (map_is_floor(cub3d, x, y) == true
-				&& parsing_is_neighbor_void(cub3d, x, y))
+			if ((map_is_floor(cub3d, x, y) == true || map_get_wall(cub3d, x,
+						y) == CUB3D_MAP_DOOR) && parsing_is_neighbor_void(cub3d,
+					x, y))
 				return (false);
 			x++;
 		}
