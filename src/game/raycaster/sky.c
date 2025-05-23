@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:24:10 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/21 10:06:35 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:41:30 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_sky(t_cub3d *data, t_ray *ray, double begin)
 	while (y < begin)
 	{
 		put_pixel_to_buffer(data->rendering_buffer, (t_uvec2){ray->x, y},
-			0x0000F0);
+			0x120228);
 		y++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 12:45:07 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:37:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@
 
 typedef struct timeval			t_time;
 
-# define MAP_SUPPORTED_CHARS "01TB"
+# define MAP_SUPPORTED_CHARS "01TBGH"
 # define MAP_SUPPORTED_ENTITIES_CHARS "VMD"
 
 typedef enum e_hand

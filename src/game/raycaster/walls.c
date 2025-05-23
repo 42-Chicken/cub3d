@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:32:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 12:46:34 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:40:56 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ double	get_wall_height(t_cub3d *data, t_ray *ray)
 {
 	double	base_height;
 
-	base_height = 128;
-	if (ray->wall == CUB3D_MAP_TOWNHALL)
+	base_height = 250;
+	if (ray->wall == 'G')
 	{
 		base_height = 135;
 	}
@@ -53,7 +53,7 @@ void	draw_wall(t_cub3d *data, t_ray *ray)
 	double	draw_begin;
 
 	calculate_begin_and_height(data, ray, &height, &draw_begin);
-	// draw_sky(data, ray, draw_begin);
+	draw_sky(data, ray, draw_begin);
 	draw_textured_wall(data, ray, draw_begin, height / 2);
 	draw_floor(data, ray, height, draw_begin);
 }

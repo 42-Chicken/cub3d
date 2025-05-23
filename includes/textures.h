@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 12:45:36 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:43:02 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_cub3d	t_cub3d;
 // assets/loading_screens/1.xpm\n
 # define TEXTURES_PATHS "\
 assets/42.xpm\n\
-assets/42.xpm\n\
+assets/loading_screens/1.xpm\n\
 assets/minimap/minimap_border.xpm\n\
 assets/minimap/minimap_house.xpm\n\
 assets/minimap/bowser.xpm\n\
@@ -74,10 +74,12 @@ assets/entities/soldier/back_left.xpm\n\
 assets/entities/soldier/left.xpm\n\
 assets/entities/soldier/front_left.xpm\n\
 assets/entities/money.xpm\n\
-assets/walls/wall.xpm\n\
+assets/road.xpm\n\
 F assets/walls/townhall.xpm\n\
 D assets/walls/door.xpm\n\
-B assets/walls/townhall.xpm\n\
+B assets/walls/building.xpm\n\
+G assets/walls/wall2.xpm\n\
+H assets/walls/wall3.xpm\n\
 "
 
 typedef enum e_textures
