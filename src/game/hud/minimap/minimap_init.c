@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 13:40:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 11:01:36 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:47:33 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static t_color	get_color_at_location(t_cub3d *cub3d, size_t x, size_t y)
 		return (0x606060);
 	else if (map_is_void(cub3d, x, y))
 		return (0xFF000000);
+	else if (map_get_wall(cub3d, x, y) == CUB3D_MAP_DOOR)
+		return (0x5b3c11);
 	else
 		return (0xdeb887);
 }

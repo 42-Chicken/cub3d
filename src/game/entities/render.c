@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 14:35:20 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:45:45 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	draw_entity(t_cub3d *cub3d, t_entity *entity, int x)
 	draw_width = calculate_width_height_and_draw(cub3d, entity, &dr_h, x);
 	texture = get_entity_texture(cub3d, entity);
 	c.x = draw_width.x - 1;
-	while (++c.x < draw_width.y)
+	while (++c.x < draw_width.y && !entity->not_displayed)
 	{
 		texture_pos.x = (int)(256 * (c.x - (-entity->width / 2 + x))
 				* texture->width / entity->width) / 256;
@@ -99,7 +99,7 @@ void	render_entities(t_cub3d *cub3d)
 		cub3d->entities[i].y_offset = (int)(\
 		-cub3d->entities[i].distance_from_floor * (cub3d->distance_from_camera
 					/ cub3d->entities[i].transformed.y) / TILESIZE);
-		if (cub3d->entities[i].transformed.y > 0)
+		if (cub3d->entities[i].transformed.y > 0 && cub3d->entities[i].in_game)
 			draw_entity(cub3d, &cub3d->entities[i], (int)((SCREEN_W / 2.0) * (1
 						+ cub3d->entities[i].transformed.x
 						/ cub3d->entities[i].transformed.y)));

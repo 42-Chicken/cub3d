@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/22 14:26:04 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:00:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ assets/42.xpm\n\
 assets/minimap/minimap_border.xpm\n\
 assets/minimap/minimap_house.xpm\n\
 assets/minimap/bowser.xpm\n\
+assets/minimap/minimap_door.xpm\n\
+assets/minimap/minimap_money.xpm\n\
 assets/minimap/minimap_north_indication.xpm\n\
 assets/minimap/minimap_player.xpm\n\
 assets/pistol.xpm\n\
@@ -71,9 +73,9 @@ assets/entities/soldier/back.xpm\n\
 assets/entities/soldier/back_left.xpm\n\
 assets/entities/soldier/left.xpm\n\
 assets/entities/soldier/front_left.xpm\n\
-M assets/walls/townhall.xpm\n\
+assets/entities/money.xpm\n\
 F assets/walls/townhall.xpm\n\
-1 assets/walls/wall.xpm\n\
+D assets/walls/door.xpm\n\
 "
 
 typedef enum e_textures
@@ -83,6 +85,8 @@ typedef enum e_textures
 	TEXTURE_MINIMAP_BORDER,
 	TEXTURE_MINIMAP_HOUSE,
 	TEXTURE_MINIMAP_ENEMY,
+	TEXTURE_MINIMAP_DOOR,
+	TEXTURE_MINIMAP_MONEY,
 	TEXTURE_MINIMAP_NORTH_INDICATION,
 	TEXTURE_MINIMAP_PLAYER,
 	TEXTURE_HUD_PISTOL,
@@ -124,6 +128,7 @@ typedef enum e_textures
 	TEXTURE_ENTITY_SOLDIER_BACK_LEFT,
 	TEXTURE_ENTITY_SOLDIER_LEFT,
 	TEXTURE_ENTITY_SOLDIER_FRONT_LEFT,
+	TEXTURE_ENTITY_MONEY,
 	TEXTURE_WALL_NORTH,
 	TEXTURE_WALL_SOUTH,
 	TEXTURE_WALL_EAST,
