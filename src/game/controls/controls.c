@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 10:40:46 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:06:25 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,18 @@ void	on_key_released(int key, t_cub3d *cub3d)
 		}
 	}
 }
-
+void	handle_button_click(t_cub3d *cub3d)
+{
+	cub3d->animation[HAND].is_anim = true;
+}
 void	on_mouse_button_down(int key, int x, int y, t_cub3d *cub3d)
 {
 	(void)x;
 	(void)y;
 	if (key == 1)
 		handle_button_clicks(cub3d);
+	if (key == 1)
+		handle_button_click(cub3d);
 }
 
 void	on_mouse_move(int x, int y, t_cub3d *cub3d)

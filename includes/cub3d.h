@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 10:45:11 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:22:43 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,8 +225,8 @@ typedef struct s_inter
 typedef struct s_animation
 {
 	t_textures_definition		img[10];
+	bool						is_anim;
 	long						time_start;
-	long						time_end;
 }								t_animation;
 
 typedef struct s_ray
