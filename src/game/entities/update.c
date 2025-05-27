@@ -6,11 +6,13 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/27 23:18:45 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/27 23:53:43 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+#define EPSILON 0.001
 
 static void	swap_entities(t_cub3d *cub3d, size_t i, size_t j)
 {
@@ -133,9 +135,9 @@ void	soldier_patern(t_entity *soldier, t_cub3d *cub3d)
 	(void)(cub3d);
 	if (soldier->locked == false)
 	{
-		if (soldier->location.x == soldier->target.x && soldier->location.y == soldier->target.y)
+		if (fabs(soldier->location.x - soldier->target.x) < EPSILON
+			&& fabs(soldier->location.y - soldier->target.y) < EPSILON)
 		{
-			printf("cc\n");
 			soldier->targeton = false;
 		}
 		if (soldier->targeton == false)
@@ -152,8 +154,6 @@ void	soldier_patern(t_entity *soldier, t_cub3d *cub3d)
 			soldier->location.y += 0.01;
 		else if (soldier->location.y > soldier->target.y)
 			soldier->location.y -= 0.01;
-		printf("x : %f || y : %f\n", soldier->location.x, soldier->location.y);
-		printf("xT : %f || yT : %f\n", soldier->target.x, soldier->target.y);
 	}
 	else
 	{
@@ -180,6 +180,7 @@ void	update_entities(t_cub3d *cub3d)
 			cub3d->entities[i].flag_dir.right_flag = false;
 			cub3d->entities[i].flag_dir.left_flag = false;
 			soldier_patern(&cub3d->entities[i], cub3d);
+			soldier_attaque();
 			cub3d->entities[i].distance_from_player = distance_between(cub3d->entities[i].location,
 					cub3d->player.location);
 			update_interactions(cub3d, &cub3d->entities[i]);
