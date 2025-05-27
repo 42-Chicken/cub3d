@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 15:10:17 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/27 22:48:55 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,14 @@ typedef enum e_cub3d_entity_textures_rotations
 	__ENTITY_ROTATIONS_COUNT__,
 }								t_e_cub3d_entity_textures_rotations;
 
+typedef struct s_flag
+{
+	bool up_flag;
+	bool down_flag;
+	bool right_flag;
+	bool left_flag;
+} t_flag;
+
 typedef struct s_entity
 {
 	bool						in_game;
@@ -183,6 +191,11 @@ typedef struct s_entity
 	t_textures_definition		minimap_texture;
 	t_textures_definition		textures[__ENTITY_ROTATIONS_COUNT__];
 	double						rotation_angle;
+	t_flag						flag_dir;
+	bool						locked;
+	t_dvec2						target;
+	t_dvec2						spawn;
+	bool						targeton;
 }								t_entity;
 
 typedef struct s_argb
