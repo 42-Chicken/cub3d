@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/27 22:48:55 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/28 15:44:15 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+#include <cub3d_astar.h>
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -196,6 +197,7 @@ typedef struct s_entity
 	t_dvec2						target;
 	t_dvec2						spawn;
 	bool						targeton;
+	bool						modattack;
 }								t_entity;
 
 typedef struct s_argb
@@ -332,6 +334,7 @@ typedef struct s_button
 	t_uvec2						pos;
 	t_texture					*texture;
 }								t_button;
+
 
 typedef struct s_cub3d
 {
