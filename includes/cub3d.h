@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/02 11:08:07 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:09:41 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ typedef struct s_ray
 	int							x;
 	size_t						skip;
 	size_t						o_skip;
+	bool						only_hori;
 }								t_ray;
 
 typedef struct s_player

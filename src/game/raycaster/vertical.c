@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:53:24 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/02 10:42:19 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:05:29 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,7 @@ void	get_vertical_intersection(t_cub3d *data, t_ray *ray)
 		if (map_is_wall(data, check_x / TILESIZE, next.y / TILESIZE))
 		{
 			if (ray->skip > 0)
-			{
-				next.x += step.x;
-				next.y += step.y;
 				ray->skip -= 1;
-			}
 			else
 			{
 				ray->vertical_hit_x = check_x;
