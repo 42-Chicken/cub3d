@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/02 15:09:41 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/02 15:49:53 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,6 +252,10 @@ typedef struct s_ray
 	size_t						skip;
 	size_t						o_skip;
 	bool						only_hori;
+	int skip_horizontal;
+    int skip_vertical;
+    int o_skip_horizontal;
+    int o_skip_vertical;
 }								t_ray;
 
 typedef struct s_player
