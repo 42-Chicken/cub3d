@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 10:32:02 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 12:26:10 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ void	on_key_released(int key, t_cub3d *cub3d)
 void	handle_button_click(t_cub3d *cub3d)
 {
 	cub3d->animation[HAND].is_anim = true;
+	if (cub3d->entity_count + 1 < MAX_ENTITIES)
+	{
+		cub3d->entities[cub3d->entity_count] = new_bullet((t_uvec2){cub3d->player.location.x, cub3d->player.location.y});
+		cub3d->entities[cub3d->entity_count].rotation_angle = cub3d->player.rotation_angle;
+		cub3d->entity_count++;
+	}
+
 }
 void	on_mouse_button_down(int key, int x, int y, t_cub3d *cub3d)
 {
