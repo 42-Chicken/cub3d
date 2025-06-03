@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 15:49:32 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/03 17:24:37 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,7 +242,7 @@ void	soldier_shot(t_cub3d *cub3d, t_entity *soldier)
 	time = gettime();
 	if (soldier->distance_from_player < 5 && time - soldier->cd > 2000)
 	{
-		cub3d->player.health -= 5;
+		cub3d->player.health -= 25;
 		soldier->cd = time;
 		cub3d->damage_screen.is_anim = true;
 		cub3d->damage_screen.time_start = gettime();

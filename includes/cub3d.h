@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 15:33:28 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/03 17:08:39 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,6 +398,8 @@ typedef struct s_cub3d
 
 	t_e_cub3d_menu				menu;
 	t_e_cub3d_menu				last_frame_menu;
+
+	bool						alive;
 
 	t_animation					animation[3];
 	t_animation					damage_screen;

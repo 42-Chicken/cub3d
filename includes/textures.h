@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 15:46:27 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/03 16:43:17 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ assets/entities/money.xpm\n\
 assets/road.xpm\n\
 assets/sky.xpm\n\
 assets/damage_screen.xpm\n\
+assets/wastedd.xpm\n\
 F assets/walls/wall3.xpm\n\
 D assets/walls/door.xpm\n\
 B assets/walls/building.xpm\n\
@@ -139,7 +140,8 @@ typedef enum e_textures
 	TEXTURE_ENTITY_MONEY,
 	TEXTURE_FLOOR,
 	TEXTURE_SKY,
-	TEXTURE_DAMAGE ,
+	TEXTURE_DAMAGE,
+	TEXTURE_WASTED,
 	TEXTURE_WALL_NORTH,
 	TEXTURE_WALL_SOUTH,
 	TEXTURE_WALL_EAST,
