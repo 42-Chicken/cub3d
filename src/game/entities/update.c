@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 10:56:51 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/03 14:16:25 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define EPSILON 0.001
-
 
 static void	swap_entities(t_cub3d *cub3d, size_t i, size_t j)
 {
@@ -73,6 +72,7 @@ t_dvec2	generate_random_patrol_target(t_entity *entity, t_cub3d *cub3d)
 	{
 		if (!map_is_wall(cub3d, entity->location.x, entity->location.y - 1))
 		{
+			entity->rotation_angle = M_PI / 2;
 			new_target.x = entity->location.x;
 			new_target.y = entity->location.y - 1;
 			entity->targeton = true;
@@ -88,6 +88,7 @@ t_dvec2	generate_random_patrol_target(t_entity *entity, t_cub3d *cub3d)
 	{
 		if (!map_is_wall(cub3d, entity->location.x, entity->location.y + 1))
 		{
+			entity->rotation_angle = M_PI + M_PI / 2;
 			new_target.x = entity->location.x;
 			new_target.y = entity->location.y + 1;
 			entity->targeton = true;
@@ -103,6 +104,7 @@ t_dvec2	generate_random_patrol_target(t_entity *entity, t_cub3d *cub3d)
 	{
 		if (!map_is_wall(cub3d, entity->location.x + 1, entity->location.y))
 		{
+			entity->rotation_angle = M_PI;
 			new_target.x = entity->location.x + 1;
 			new_target.y = entity->location.y;
 			entity->targeton = true;
@@ -118,6 +120,7 @@ t_dvec2	generate_random_patrol_target(t_entity *entity, t_cub3d *cub3d)
 	{
 		if (!map_is_wall(cub3d, entity->location.x - 1, entity->location.y))
 		{
+			entity->rotation_angle = 0;
 			new_target.x = entity->location.x - 1;
 			new_target.y = entity->location.y;
 			entity->targeton = true;
@@ -171,6 +174,7 @@ void	soldier_patern(t_entity *soldier, t_cub3d *cub3d)
 		return ;
 	}
 }
+
 static void	update_interactions(t_cub3d *cub3d, t_entity *entity)
 {
 	if (entity->type == CUB3D_ENTITY_MONEY)
@@ -178,6 +182,7 @@ static void	update_interactions(t_cub3d *cub3d, t_entity *entity)
 	if (entity->type == CUB3D_ENTITY_BULLET)
 		update_bullet(cub3d, entity);
 }
+
 double	entity_look_at_player(t_cub3d *cub3d, t_entity *soldier)
 {
 	double	dx;
@@ -186,19 +191,18 @@ double	entity_look_at_player(t_cub3d *cub3d, t_entity *soldier)
 
 	dx = cub3d->player.location.x - soldier->location.x;
 	dy = cub3d->player.location.y - soldier->location.y;
-
 	angle_to_player = atan2(dy, dx);
-
 	if (angle_to_player < 0)
 		angle_to_player += 2.0 * M_PI;
 	return (angle_to_player);
 }
 void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 {
-	t_cub3d_map map_info;
-	t_dvec2 target_angle;
+	t_cub3d_map	map_info;
+	t_dvec2		target_angle;
 
-	if (soldier->distance_from_player < 30 && is_walkable(cub3d->map.buffer, (t_dvec2){soldier->location.x, soldier->location.y}))
+	if (soldier->distance_from_player < 30 && is_walkable(cub3d->map.buffer,
+			(t_dvec2){soldier->location.x, soldier->location.y}))
 	{
 		map_info.map = cub3d->map.buffer;
 		map_info.width = SCREEN_W / TILESIZE;
@@ -207,14 +211,16 @@ void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 		map_info.soldier_pos.y = soldier->location.y;
 		map_info.target_pos.x = cub3d->player.location.x;
 		map_info.target_pos.y = cub3d->player.location.y;
-
 		target_angle = a_star_cub3d(map_info);
 		if (target_angle.x != -1.0 && target_angle.y != -1.0)
 		{
-			if (soldier->distance_from_player > 1.5  && is_walkable(cub3d->map.buffer, (t_dvec2){soldier->location.x, soldier->location.y}))
+			if (soldier->distance_from_player > 1.5
+				&& is_walkable(cub3d->map.buffer, (t_dvec2){soldier->location.x,
+					soldier->location.y}))
 			{
 				soldier->modattack = true;
-				soldier->rotation_angle = entity_look_at_player(cub3d, soldier) + M_PI;
+				soldier->rotation_angle = entity_look_at_player(cub3d, soldier)
+					+ M_PI;
 				soldier->location.x += target_angle.x * 0.04;
 				soldier->location.y += target_angle.y * 0.04;
 			}
@@ -241,14 +247,17 @@ void	update_entities(t_cub3d *cub3d)
 		j = i + 1;
 		if (cub3d->entities[i].in_game)
 		{
-			cub3d->entities[i].flag_dir.up_flag = false;
-			cub3d->entities[i].flag_dir.down_flag = false;
-			cub3d->entities[i].flag_dir.right_flag = false;
-			cub3d->entities[i].flag_dir.left_flag = false;
 			cub3d->entities[i].distance_from_player = distance_between(cub3d->entities[i].location,
-				cub3d->player.location);
-			soldier_patern(&cub3d->entities[i], cub3d);
-			soldier_attaque(cub3d, &cub3d->entities[i]);
+					cub3d->player.location);
+			if (cub3d->entities[i].type == CUB3D_ENTITY_OFFICER)
+			{
+				cub3d->entities[i].flag_dir.up_flag = false;
+				cub3d->entities[i].flag_dir.down_flag = false;
+				cub3d->entities[i].flag_dir.right_flag = false;
+				cub3d->entities[i].flag_dir.left_flag = false;
+				soldier_patern(&cub3d->entities[i], cub3d);
+				soldier_attaque(cub3d, &cub3d->entities[i]);
+			}
 			update_interactions(cub3d, &cub3d->entities[i]);
 		}
 		else
