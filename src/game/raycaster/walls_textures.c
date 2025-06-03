@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:42:21 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 12:40:01 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:21:07 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw_textured_wall(t_cub3d *data, t_ray *ray, double begin,
 	wall_texture = get_wall_texture(data, ray);
 	texture_loc.x = get_texture_x(wall_texture, ray);
 	half_height = get_wall_height(data, ray) / 2;
-	while (y < SCREEN_H - begin)
+	while (y < ray->floor_start - ray->skip)
 	{
 		distance_top = y + (half_height) - (SCREEN_H / 2);
 		texture_loc.y = (1LL * distance_top * wall_texture->height

@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 14:04:12 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/03 13:45:40 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ typedef enum e_cub3d_entity_type
 	CUB3D_ENTITY_OFFICER = 'S',
 	CUB3D_ENTITY_MONEY = 'M',
 	CUB3D_ENTITY_DOOR = 'D',
-	CUB3D_ENTITY_CAR,
+	CUB3D_ENTITY_BULLET,
 	__ENTITY_TYPES_COUNT__,
 }								t_e_cub3d_entity_type;
 
@@ -264,7 +264,12 @@ typedef struct s_ray
 	float						distance;
 	char						wall;
 	int							x;
-
+	size_t						skip;
+	size_t						o_skip;
+	bool						only_hori;
+	double						min_height;
+	double						standard_wall_height;
+	double						floor_start;
 }								t_ray;
 
 typedef struct s_player
@@ -500,10 +505,12 @@ void							update_entities(t_cub3d *cub3d);
 void							render_entities(t_cub3d *cub3d);
 t_texture						*get_entity_texture(t_cub3d *cub3d,
 									t_entity *entity);
+t_entity						new_bullet(t_dvec2 pos);
 t_entity						new_soldier(t_uvec2 pos);
 t_entity						new_money(t_uvec2 pos);
 void							update_door(t_cub3d *cub3d, t_entity *entity);
 t_entity						new_door(t_uvec2 pos);
+void							update_bullet(t_cub3d *cub3d, t_entity *entity);
 void							update_money(t_cub3d *cub3d, t_entity *entity);
 void							handle_door_interaction(t_cub3d *cub3d);
 // PLAYER
@@ -553,14 +560,14 @@ void							*balloc_(size_t size);
 
 // RAYCASTER
 
-void							draw_floor(t_cub3d *data, t_ray *ray,
-									double height, double begin);
+void							draw_floor(t_cub3d *data, t_ray *ray);
 void							render_raycasting(t_cub3d *data);
 void							draw_sky(t_cub3d *data, t_ray *ray,
 									double begin);
-void							draw_wall(t_cub3d *data, t_ray *ray);
-double							get_wall_height(t_cub3d *cub3d,
-									t_ray *ray);
+void							draw_wall(t_cub3d *data, t_ray *ray,
+									t_ray *tmp_ray);
+double							get_wall_height(t_cub3d *cub3d, t_ray *ray);
+double							get_wall_type_height(char c);
 void							draw_textured_wall(t_cub3d *data, t_ray *ray,
 									double begin, double half_height);
 double							normalizeangle(double angle);

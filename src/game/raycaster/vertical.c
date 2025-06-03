@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:53:24 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 09:41:33 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 09:12:41 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,24 @@ static t_dvec2	get_vertical_step(double angle)
 	return (step);
 }
 
+static bool	wall_handler(t_cub3d *data, t_ray *ray, t_dvec2 next, float check_x)
+{
+	char	c;
+
+	if (map_is_wall(data, check_x / TILESIZE, next.y / TILESIZE))
+	{
+		c = map_get_wall(data, check_x / TILESIZE, next.y / TILESIZE);
+		if (get_wall_type_height(c) > ray->min_height)
+		{
+			ray->vertical_hit_x = check_x;
+			ray->vertical_hit_y = next.y;
+			ray->found_vertical_wall = true;
+			return (true);
+		}
+	}
+	return (false);
+}
+
 void	get_vertical_intersection(t_cub3d *data, t_ray *ray)
 {
 	double	angle;
@@ -58,13 +76,8 @@ void	get_vertical_intersection(t_cub3d *data, t_ray *ray)
 			check_x = next.x;
 		else
 			check_x = next.x - 0.001f;
-		if (map_is_wall(data, check_x / TILESIZE, next.y / TILESIZE))
-		{
-			ray->vertical_hit_x = check_x;
-			ray->vertical_hit_y = next.y;
-			ray->found_vertical_wall = true;
+		if (wall_handler(data, ray, next, check_x))
 			break ;
-		}
 		next.x += step.x;
 		next.y += step.y;
 	}

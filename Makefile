@@ -98,6 +98,7 @@ SRCS				=	src/main.c\
 						src/game/entities/render.c\
 						src/game/entities/door.c\
 						src/game/entities/soldier.c\
+						src/game/entities/bullet.c\
 						src/game/entities/money.c\
 						src/game/entities/multitextures.c\
 						src/game/a_star/a_star.c\
