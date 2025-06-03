@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 12:22:04 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 13:45:40 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -489,7 +489,7 @@ void							update_entities(t_cub3d *cub3d);
 void							render_entities(t_cub3d *cub3d);
 t_texture						*get_entity_texture(t_cub3d *cub3d,
 									t_entity *entity);
-t_entity						new_bullet(t_uvec2 pos);
+t_entity						new_bullet(t_dvec2 pos);
 t_entity						new_soldier(t_uvec2 pos);
 t_entity						new_money(t_uvec2 pos);
 void							update_door(t_cub3d *cub3d, t_entity *entity);

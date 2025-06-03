@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 12:30:48 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 14:02:10 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef enum e_textures
 	TEXTURE_WALL_WEST,
 	__TEXTURES_COUNT__,
 	__TEXTURE_MINIMAP__,
+	__TEXTURE_NONE__,
 }						t_textures_definition;
 
 typedef struct s_texture_link
