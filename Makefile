@@ -101,6 +101,10 @@ SRCS				=	src/main.c\
 						src/game/entities/bullet.c\
 						src/game/entities/money.c\
 						src/game/entities/multitextures.c\
+						src/game/a_star/a_star.c\
+						src/game/a_star/a_star_utils.c\
+						src/game/a_star/cub3d_astar_validation.c\
+						src/game/a_star/cub3d_astar_list.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a

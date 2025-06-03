@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   soldier.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 10:31:54 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:18:26 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_entity	new_soldier(t_uvec2 pos)
 {
 	t_entity	soldier;
 
+	soldier.modattack = false;
+	soldier.targeton = false;
 	soldier.health = 10;
 	soldier.location = (t_dvec2){pos.x + 0.5, pos.y + 0.5};
 	setup_textures(&soldier);

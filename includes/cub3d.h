@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
 /*   Updated: 2025/06/03 13:45:40 by rguigneb         ###   ########.fr       */
@@ -35,6 +35,7 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+#include <cub3d_astar.h>
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -164,6 +165,14 @@ typedef enum e_cub3d_entity_textures_rotations
 	__ENTITY_ROTATIONS_COUNT__,
 }								t_e_cub3d_entity_textures_rotations;
 
+typedef struct s_flag
+{
+	bool up_flag;
+	bool down_flag;
+	bool right_flag;
+	bool left_flag;
+} t_flag;
+
 typedef struct s_entity
 {
 	bool						in_game;
@@ -183,6 +192,12 @@ typedef struct s_entity
 	t_textures_definition		minimap_texture;
 	t_textures_definition		textures[__ENTITY_ROTATIONS_COUNT__];
 	double						rotation_angle;
+	t_flag						flag_dir;
+	bool						locked;
+	t_dvec2						target;
+	t_dvec2						spawn;
+	bool						targeton;
+	bool						modattack;
 }								t_entity;
 
 typedef struct s_argb
@@ -324,6 +339,7 @@ typedef struct s_button
 	t_uvec2						pos;
 	t_texture					*texture;
 }								t_button;
+
 
 typedef struct s_cub3d
 {
