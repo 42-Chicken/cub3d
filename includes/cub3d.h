@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 13:45:40 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:33:28 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "mlx_int.h"
 # include "textures.h"
 # include "vectors.h"
+# include <cub3d_astar.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
@@ -35,7 +36,6 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-#include <cub3d_astar.h>
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -167,11 +167,11 @@ typedef enum e_cub3d_entity_textures_rotations
 
 typedef struct s_flag
 {
-	bool up_flag;
-	bool down_flag;
-	bool right_flag;
-	bool left_flag;
-} t_flag;
+	bool						up_flag;
+	bool						down_flag;
+	bool						right_flag;
+	bool						left_flag;
+}								t_flag;
 
 typedef struct s_entity
 {
@@ -198,6 +198,7 @@ typedef struct s_entity
 	t_dvec2						spawn;
 	bool						targeton;
 	bool						modattack;
+	long						cd;
 }								t_entity;
 
 typedef struct s_argb
@@ -286,6 +287,7 @@ typedef struct s_player
 	t_dvec2						plane;
 	double						cos_r;
 	double						sin_r;
+
 }								t_player;
 
 typedef struct s_minimap
@@ -339,7 +341,6 @@ typedef struct s_button
 	t_uvec2						pos;
 	t_texture					*texture;
 }								t_button;
-
 
 typedef struct s_cub3d
 {
@@ -399,6 +400,7 @@ typedef struct s_cub3d
 	t_e_cub3d_menu				last_frame_menu;
 
 	t_animation					animation[3];
+	t_animation					damage_screen;
 	double						z_buffer[SCREEN_W];
 
 	void						*mlx;
@@ -581,5 +583,5 @@ float							fdistance_between(float x1, float y1, float x2,
 // ANIMATION
 void							load_animation(t_cub3d *data);
 void							render_hand(t_cub3d *data);
-
+long							gettime(void);
 #endif

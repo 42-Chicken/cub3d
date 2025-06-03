@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 14:16:25 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:49:32 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,19 @@ void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 		soldier->modattack = false;
 	}
 }
+void	soldier_shot(t_cub3d *cub3d, t_entity *soldier)
+{
+	long	time;
+
+	time = gettime();
+	if (soldier->distance_from_player < 5 && time - soldier->cd > 2000)
+	{
+		cub3d->player.health -= 5;
+		soldier->cd = time;
+		cub3d->damage_screen.is_anim = true;
+		cub3d->damage_screen.time_start = gettime();
+	}
+}
 void	update_entities(t_cub3d *cub3d)
 {
 	size_t	i;
@@ -257,6 +270,7 @@ void	update_entities(t_cub3d *cub3d)
 				cub3d->entities[i].flag_dir.left_flag = false;
 				soldier_patern(&cub3d->entities[i], cub3d);
 				soldier_attaque(cub3d, &cub3d->entities[i]);
+				soldier_shot(cub3d, &cub3d->entities[i]);
 			}
 			update_interactions(cub3d, &cub3d->entities[i]);
 		}
