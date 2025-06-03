@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 13:45:40 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 15:26:07 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "mlx_int.h"
 # include "textures.h"
 # include "vectors.h"
+# include <cub3d_astar.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
@@ -35,7 +36,6 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
-#include <cub3d_astar.h>
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -90,7 +90,7 @@
 typedef struct timeval			t_time;
 
 # define MAP_SUPPORTED_CHARS "01TBGFH"
-# define MAP_SUPPORTED_ENTITIES_CHARS "VMD"
+# define MAP_SUPPORTED_ENTITIES_CHARS "VMDLA"
 
 typedef enum e_hand
 {
@@ -140,6 +140,8 @@ typedef enum e_cub3d_entity_type
 	CUB3D_ENTITY_OFFICER = 'S',
 	CUB3D_ENTITY_MONEY = 'M',
 	CUB3D_ENTITY_DOOR = 'D',
+	CUB3D_ENTITY_LAMP = 'L',
+	CUB3D_ENTITY_FIRE_HYDRANT = 'A',
 	CUB3D_ENTITY_BULLET,
 	__ENTITY_TYPES_COUNT__,
 }								t_e_cub3d_entity_type;
@@ -167,11 +169,11 @@ typedef enum e_cub3d_entity_textures_rotations
 
 typedef struct s_flag
 {
-	bool up_flag;
-	bool down_flag;
-	bool right_flag;
-	bool left_flag;
-} t_flag;
+	bool						up_flag;
+	bool						down_flag;
+	bool						right_flag;
+	bool						left_flag;
+}								t_flag;
 
 typedef struct s_entity
 {
@@ -340,7 +342,6 @@ typedef struct s_button
 	t_texture					*texture;
 }								t_button;
 
-
 typedef struct s_cub3d
 {
 	const char					**av;
@@ -508,6 +509,7 @@ t_texture						*get_entity_texture(t_cub3d *cub3d,
 t_entity						new_bullet(t_dvec2 pos);
 t_entity						new_soldier(t_uvec2 pos);
 t_entity						new_money(t_uvec2 pos);
+t_entity						new_fire_hydrant(t_uvec2 pos);
 void							update_door(t_cub3d *cub3d, t_entity *entity);
 t_entity						new_door(t_uvec2 pos);
 void							update_bullet(t_cub3d *cub3d, t_entity *entity);
@@ -566,6 +568,7 @@ void							draw_sky(t_cub3d *data, t_ray *ray,
 									double begin);
 void							draw_wall(t_cub3d *data, t_ray *ray,
 									t_ray *tmp_ray);
+t_entity						new_lamp(t_uvec2 pos);
 double							get_wall_height(t_cub3d *cub3d, t_ray *ray);
 double							get_wall_type_height(char c);
 void							draw_textured_wall(t_cub3d *data, t_ray *ray,
