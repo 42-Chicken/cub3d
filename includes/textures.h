@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 15:12:28 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 11:51:38 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ assets/entities/soldier/left.xpm\n\
 assets/entities/soldier/front_left.xpm\n\
 assets/entities/money.xpm\n\
 assets/road.xpm\n\
+assets/sky.xpm\n\
 F assets/walls/wall3.xpm\n\
 D assets/walls/door.xpm\n\
 B assets/walls/building.xpm\n\
@@ -134,6 +135,7 @@ typedef enum e_textures
 	TEXTURE_ENTITY_SOLDIER_FRONT_LEFT,
 	TEXTURE_ENTITY_MONEY,
 	TEXTURE_FLOOR,
+	TEXTURE_SKY,
 	TEXTURE_WALL_NORTH,
 	TEXTURE_WALL_SOUTH,
 	TEXTURE_WALL_EAST,
