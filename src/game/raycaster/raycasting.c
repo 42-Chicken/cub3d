@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 15:43:43 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/23 14:19:54 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:30:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,27 @@ void	get_wall_hit(t_cub3d *data, t_ray *ray)
 
 void	render_raycasting(t_cub3d *data)
 {
-	t_ray	ray;
+	t_ray	ray[2];
 	double	angle;
 	size_t	i;
+	double	base_height;
+	double	angle_step;
 
-	i = 0;
+	angle_step = data->fov / data->num_rays;
+	i = -1;
 	angle = data->player.rotation_angle - data->fov / 2;
-	while (i < data->num_rays)
+	while (++i < data->num_rays)
 	{
-		ft_bzero(&ray, sizeof(t_ray));
-		ray.rayangle = normalizeangle(angle);
-		ray.x = i;
-		angle += data->fov / data->num_rays;
-		get_wall_hit(data, &ray);
-		data->z_buffer[i] = ray.distance;
-		draw_wall(data, &ray);
-		i++;
+		ft_bzero(&ray, sizeof(t_ray) * 2);
+		angle += angle_step;
+		ray[0].rayangle = normalizeangle(angle);
+		ray[0].x = i;
+		get_wall_hit(data, &ray[0]);
+		base_height = get_wall_type_height(ray[0].wall);
+		ray[1].rayangle = normalizeangle(angle);
+		ray[1].x = i;
+		ray[1].min_height = base_height;
+		get_wall_hit(data, &ray[1]);
+		draw_wall(data, &ray[0], &ray[1]);
 	}
 }
