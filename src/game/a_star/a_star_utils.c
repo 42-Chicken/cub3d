@@ -38,16 +38,12 @@ t_node	*create_node(t_node *parent, t_dvec2 coord_start, t_dvec2 coord_goal,
 	node->x = coord_start.x;
 	node->y = coord_start.y;
 	node->viewed = false;
-
-	// Calcul des coûts G, H et F
 	if (parent)
-		node->g = parent->g + 1.0;  // Coût depuis le début
+		node->g = parent->g + 1.0;
 	else
 		node->g = 0.0;
-
-	node->h = distance_between(coord_start, coord_goal);  // Heuristique
-	node->f = node->g + node->h;  // Coût total
-
+	node->h = distance_between(coord_start, coord_goal);
+	node->f = node->g + node->h;
 	node->prev = parent;
 	node->prev_direction = prev_direction;
 	init_adjacent_positions(node);

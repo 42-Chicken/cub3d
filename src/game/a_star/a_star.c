@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:26:37 by efranco           #+#    #+#             */
-/*   Updated: 2025/05/28 16:24:58 by efranco          ###   ########.fr       */
+/*   Updated: 2025/05/28 17:00:33 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ t_dvec2	calculate_direction_to_target(t_dvec2 soldier, t_dvec2 target)
 
 	direction.x = target.x - soldier.x;
 	direction.y = target.y - soldier.y;
-
-	// Normalise le vecteur pour obtenir une direction unitaire
 	return (normalize_vector(direction));
 }
 
@@ -61,16 +59,12 @@ t_dvec2	a_star_cub3d(t_cub3d_map map_info)
 
 		current_node->viewed = true;
 
-		// Si on a atteint la cible
-		// printf("Exploring node: (%.2f, %.2f)\n", current_node->x, current_node->y);
-		// printf("Target position: (%.2f, %.2f)\n", map_info.target_pos.x, map_info.target_pos.y);
-		if (fabs(current_node->x - map_info.target_pos.x) < 0.1 &&
-			fabs(current_node->y - map_info.target_pos.y) < 0.1)
+		if (fabs(current_node->x - map_info.target_pos.x) < 5 &&
+			fabs(current_node->y - map_info.target_pos.y) < 5)
 		{
 			target_direction = calculate_direction_to_target(map_info.soldier_pos,
 					map_info.target_pos);
 			free_node_list(open_list);
-			printf("Target reached!\n");
 			return (target_direction);
 		}
 
@@ -78,6 +72,5 @@ t_dvec2	a_star_cub3d(t_cub3d_map map_info)
 	}
 
 	free_node_list(open_list);
-	// Retourne un vecteur d'erreur si aucun chemin trouvé
 	return (error_vec);
 }

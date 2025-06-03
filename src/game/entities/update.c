@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/28 16:29:43 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/03 10:56:51 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,10 @@ void	soldier_patern(t_entity *soldier, t_cub3d *cub3d)
 {
 	(void)(cub3d);
 	if (soldier->modattack == true)
+	{
+		soldier->targeton = false;
 		return ;
+	}
 	if (soldier->locked == false)
 	{
 		if (fabs(soldier->location.x - soldier->target.x) < EPSILON
@@ -145,7 +148,9 @@ void	soldier_patern(t_entity *soldier, t_cub3d *cub3d)
 			soldier->targeton = false;
 		}
 		if (soldier->targeton == false)
+		{
 			soldier->target = generate_random_patrol_target(soldier, cub3d);
+		}
 		soldier->flag_dir.up_flag = false;
 		soldier->flag_dir.down_flag = false;
 		soldier->flag_dir.right_flag = false;
@@ -175,12 +180,11 @@ double	entity_look_at_player(t_cub3d *cub3d, t_entity *soldier)
 	double	dy;
 	double	angle_to_player;
 
-	// Vecteur de l'entité vers le joueur
 	dx = cub3d->player.location.x - soldier->location.x;
 	dy = cub3d->player.location.y - soldier->location.y;
-	// Calcul de l'angle avec atan2
+
 	angle_to_player = atan2(dy, dx);
-	// Normaliser l'angle entre 0 et 2π
+
 	if (angle_to_player < 0)
 		angle_to_player += 2.0 * M_PI;
 	return (angle_to_player);
@@ -190,38 +194,34 @@ void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 	t_cub3d_map map_info;
 	t_dvec2 target_angle;
 
-	if (soldier->distance_from_player < 5)
+	if (soldier->distance_from_player < 30 && is_walkable(cub3d->map.buffer, (t_dvec2){soldier->location.x, soldier->location.y}))
 	{
-		// Initialisation des données de la map
 		map_info.map = cub3d->map.buffer;
 		map_info.width = SCREEN_W / TILESIZE;
 		map_info.height = SCREEN_H / TILESIZE;
 		map_info.soldier_pos.x = soldier->location.x;
 		map_info.soldier_pos.y = soldier->location.y;
-		map_info.target_pos.x = cub3d->player.location.x; // Position du joueur
+		map_info.target_pos.x = cub3d->player.location.x;
 		map_info.target_pos.y = cub3d->player.location.y;
 
-		// Calcul du vecteur directionnel
 		target_angle = a_star_cub3d(map_info);
-		printf("x : %f y : %f\n", target_angle.x , target_angle.y);
-		//printf("player.x : %f || player.y : %f\ntarget.x : %f || target.y : %f\n", cub3d->player.location.x, cub3d->player.location.y, soldier->location.x, soldier->location.y);
-		// Si un chemin est trouvé
 		if (target_angle.x != -1.0 && target_angle.y != -1.0)
 		{
-			soldier->modattack = true;
-			soldier->rotation_angle = entity_look_at_player(cub3d, soldier) + M_PI;
-			soldier->location.x += target_angle.x * 0.1;
-			soldier->location.y += target_angle.y * 0.1;
+			if (soldier->distance_from_player > 1.5  && is_walkable(cub3d->map.buffer, (t_dvec2){soldier->location.x, soldier->location.y}))
+			{
+				soldier->modattack = true;
+				soldier->rotation_angle = entity_look_at_player(cub3d, soldier) + M_PI;
+				soldier->location.x += target_angle.x * 0.04;
+				soldier->location.y += target_angle.y * 0.04;
+			}
 		}
 		else
 		{
-			// Aucun chemin trouvé, désactive le mode attaque
 			soldier->modattack = false;
 		}
 	}
 	else
 	{
-		// Distance trop grande, désactive le mode attaque
 		soldier->modattack = false;
 	}
 }
@@ -240,8 +240,8 @@ void	update_entities(t_cub3d *cub3d)
 			cub3d->entities[i].flag_dir.left_flag = false;
 			cub3d->entities[i].distance_from_player = distance_between(cub3d->entities[i].location,
 				cub3d->player.location);
-			soldier_attaque(cub3d, &cub3d->entities[i]);
 			soldier_patern(&cub3d->entities[i], cub3d);
+			soldier_attaque(cub3d, &cub3d->entities[i]);
 			update_interactions(cub3d, &cub3d->entities[i]);
 		}
 		i++;
