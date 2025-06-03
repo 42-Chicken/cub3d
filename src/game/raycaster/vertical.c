@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:53:24 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/02 15:56:21 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 09:12:41 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,44 @@ static t_dvec2	get_vertical_step(double angle)
 	return (step);
 }
 
-void get_vertical_intersection(t_cub3d *data, t_ray *ray)
+static bool	wall_handler(t_cub3d *data, t_ray *ray, t_dvec2 next, float check_x)
 {
-    double angle;
-    t_dvec2 next;
-    t_dvec2 step;
-    float check_x;
+	char	c;
 
-    angle = ray->rayangle;
-    next = get_vertical_intercept(data, angle);
-    step = get_vertical_step(angle);
-    while (next.x >= 0 && next.x <= data->map.width * TILESIZE && next.y >= 0
-        && next.y <= data->map.height * TILESIZE)
-    {
-        if (angle < M_PI_2 || angle > 3 * M_PI_2)
-            check_x = next.x;
-        else
-            check_x = next.x - 0.001f;
-        if (map_is_wall(data, check_x / TILESIZE, next.y / TILESIZE))
-        {
-            if (ray->skip_vertical > 0)  // Use vertical skip counter
-                ray->skip_vertical -= 1;
-            else
-            {
-                ray->vertical_hit_x = check_x;
-                ray->vertical_hit_y = next.y;
-                ray->found_vertical_wall = true;
-                break;
-            }
-        }
-        next.x += step.x;
-        next.y += step.y;
-    }
+	if (map_is_wall(data, check_x / TILESIZE, next.y / TILESIZE))
+	{
+		c = map_get_wall(data, check_x / TILESIZE, next.y / TILESIZE);
+		if (get_wall_type_height(c) > ray->min_height)
+		{
+			ray->vertical_hit_x = check_x;
+			ray->vertical_hit_y = next.y;
+			ray->found_vertical_wall = true;
+			return (true);
+		}
+	}
+	return (false);
+}
+
+void	get_vertical_intersection(t_cub3d *data, t_ray *ray)
+{
+	double	angle;
+	t_dvec2	next;
+	t_dvec2	step;
+	float	check_x;
+
+	angle = ray->rayangle;
+	next = get_vertical_intercept(data, angle);
+	step = get_vertical_step(angle);
+	while (next.x >= 0 && next.x <= data->map.width * TILESIZE && next.y >= 0
+		&& next.y <= data->map.height * TILESIZE)
+	{
+		if (angle < M_PI_2 || angle > 3 * M_PI_2)
+			check_x = next.x;
+		else
+			check_x = next.x - 0.001f;
+		if (wall_handler(data, ray, next, check_x))
+			break ;
+		next.x += step.x;
+		next.y += step.y;
+	}
 }

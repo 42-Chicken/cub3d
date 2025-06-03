@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:59:16 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/02 15:50:16 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 09:09:31 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,36 +41,44 @@ static t_dvec2	get_horizontal_step(double angle)
 	return (step);
 }
 
-void get_horizontal_intersection(t_cub3d *data, t_ray *ray)
+static bool	wall_handler(t_cub3d *data, t_ray *ray, t_dvec2 next, float check_y)
 {
-    float angle;
-    t_dvec2 step;
-    t_dvec2 next;
-    float check_y;
+	char	c;
 
-    angle = ray->rayangle;
-    next = get_horizontal_intercept(data, angle);
-    step = get_horizontal_step(angle);
-    while (next.x >= 0 && next.x <= data->map.width * TILESIZE && next.y >= 0
-        && next.y <= data->map.height * TILESIZE)
-    {
-        if (angle > 0 && angle < M_PI)
-            check_y = next.y;
-        else
-            check_y = next.y - 0.001f;
-        if (map_is_wall(data, next.x / TILESIZE, check_y / TILESIZE))
-        {
-            if (ray->skip_horizontal > 0)  // Use horizontal skip counter
-                ray->skip_horizontal -= 1;
-            else
-            {
-                ray->horizontal_hit_x = next.x;
-                ray->horizontal_hit_y = check_y;
-                ray->found_horizontal_wall = true;
-                break;
-            }
-        }
-        next.x += step.x;
-        next.y += step.y;
-    }
+	if (map_is_wall(data, next.x / TILESIZE, check_y / TILESIZE))
+	{
+		c = map_get_wall(data, next.x / TILESIZE, check_y / TILESIZE);
+		if (get_wall_type_height(c) > ray->min_height)
+		{
+			ray->horizontal_hit_x = next.x;
+			ray->horizontal_hit_y = check_y;
+			ray->found_horizontal_wall = true;
+			return (true);
+		}
+	}
+	return (false);
+}
+
+void	get_horizontal_intersection(t_cub3d *data, t_ray *ray)
+{
+	float	angle;
+	t_dvec2	step;
+	t_dvec2	next;
+	float	check_y;
+
+	angle = ray->rayangle;
+	next = get_horizontal_intercept(data, angle);
+	step = get_horizontal_step(angle);
+	while (next.x >= 0 && next.x <= data->map.width * TILESIZE && next.y >= 0
+		&& next.y <= data->map.height * TILESIZE)
+	{
+		if (angle > 0 && angle < M_PI)
+			check_y = next.y;
+		else
+			check_y = next.y - 0.001f;
+		if (wall_handler(data, ray, next, check_y))
+			break ;
+		next.x += step.x;
+		next.y += step.y;
+	}
 }

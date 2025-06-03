@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/02 15:49:53 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 10:26:07 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,10 +252,9 @@ typedef struct s_ray
 	size_t						skip;
 	size_t						o_skip;
 	bool						only_hori;
-	int skip_horizontal;
-    int skip_vertical;
-    int o_skip_horizontal;
-    int o_skip_vertical;
+	double						min_height;
+	double						standard_wall_height;
+	double						floor_start;
 }								t_ray;
 
 typedef struct s_player
@@ -543,12 +542,12 @@ void							*balloc_(size_t size);
 
 // RAYCASTER
 
-void							draw_floor(t_cub3d *data, t_ray *ray,
-									double height, double begin);
+void							draw_floor(t_cub3d *data, t_ray *ray);
 void							render_raycasting(t_cub3d *data);
 void							draw_sky(t_cub3d *data, t_ray *ray,
 									double begin);
-void							draw_wall(t_cub3d *data, t_ray *ray);
+void							draw_wall(t_cub3d *data, t_ray *ray,
+									t_ray *tmp_ray);
 double							get_wall_height(t_cub3d *cub3d, t_ray *ray);
 double							get_wall_type_height(char c);
 void							draw_textured_wall(t_cub3d *data, t_ray *ray,
