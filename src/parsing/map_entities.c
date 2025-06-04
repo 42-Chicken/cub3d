@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:04:49 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 15:25:52 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/04 14:55:00 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	setup_entity(t_cub3d *cub3d, char c, t_uvec2 pos)
 		entity = new_lamp(pos);
 	else if (c == 'A')
 		entity = new_fire_hydrant(pos);
+	else if (c == 'T')
+		entity = new_trashcan(pos);
 	else if (c == 'D')
 	{
 		cub3d->map.buffer[pos.y][pos.x] = CUB3D_MAP_DOOR;

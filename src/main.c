@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/28 17:28:23 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/04 14:59:38 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char const *argv[])
 	cub3d.player.item = TEXTURE_HUD_PISTOL;
 	cub3d.player.health = 100;
 	cub3d.key_pressed_index = 0;
-	cub3d.settings.player_speed = 1;
+	cub3d.settings.player_speed = 3;
 	cub3d.settings.player_rotation_speed = 4;
 	if (parse(&cub3d) == false)
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
