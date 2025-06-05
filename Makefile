@@ -97,12 +97,16 @@ SRCS				=	src/main.c\
 						src/game/entities/update.c\
 						src/game/entities/render.c\
 						src/game/entities/door.c\
+						src/game/entities/rat.c\
 						src/game/entities/lamp.c\
 						src/game/entities/trashcan.c\
 						src/game/entities/fire_hydrant.c\
+						src/game/entities/fire_baril.c\
 						src/game/entities/soldier.c\
 						src/game/entities/bullet.c\
 						src/game/entities/money.c\
+						src/game/entities/tree1.c\
+						src/game/entities/tree2.c\
 						src/game/entities/multitextures.c\
 						src/game/a_star/a_star.c\
 						src/game/a_star/a_star_utils.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:02:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 17:22:24 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/05 09:47:19 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,18 @@ void	update_damage(t_cub3d *cub3d)
 		}
 	}
 }
-static t_color	color_to_grayscale(t_color color)
-{
-	t_argb	rgb;
-	t_color	gray_value;
 
-	rgb = (t_argb){(color >> 24) & 0xFF, (color >> 16) & 0xFF,
-		(color >> 8) & 0xFF, color & 0xFF};
-	gray_value = (t_color)(0.299 * rgb.red + 0.587 * rgb.green + 0.114
-			* rgb.blue);
-	return (((t_color)rgb.alpha << 24) | (gray_value << 16) | (gray_value << 8) | gray_value);
-}
 void	igmlx_apply_gray_filter(t_cub3d *cub3d, double intensity)
 {
 	t_uvec2	pos;
 	t_color	*pixel;
-	t_color	gray_color;
 	t_color	original_color;
 
 	if (!cub3d || !cub3d->rendering_buffer || intensity < 0.0
 		|| intensity > 1.0)
 		return ;
-	pos = (t_uvec2){0, 0};
-	while (pos.y < (unsigned int)cub3d->rendering_buffer->height)
+	pos = (t_uvec2){0, cub3d->rendering_buffer->height / 3};
+	while (pos.y < (unsigned int)cub3d->rendering_buffer->height / 1.5)
 	{
 		pos.x = 0;
 		while (pos.x < (unsigned int)cub3d->rendering_buffer->width)
@@ -66,8 +55,7 @@ void	igmlx_apply_gray_filter(t_cub3d *cub3d, double intensity)
 			if (*pixel != 0xFF000000)
 			{
 				original_color = *pixel;
-				gray_color = color_to_grayscale(original_color);
-				*pixel = igmlx_melt_colors_weigthed(original_color, gray_color,
+				*pixel = igmlx_melt_colors_weigthed(original_color, 0x000000,
 						intensity);
 			}
 			pos.x++;
@@ -84,9 +72,9 @@ void	update_death(t_cub3d *cub3d)
 	{
 		cub3d->alive = false;
 		cub3d->player.health = 0;
+		igmlx_apply_gray_filter(cub3d, 0.65);
 		igmlx_simple_copy_to_dest(img, cub3d->rendering_buffer,
-			(t_uvec2){SCREEN_W / 2 - 250, SCREEN_H / 2 - 100});
-		igmlx_apply_gray_filter(cub3d, 0.5);
+			(t_uvec2){SCREEN_W / 2 - 250, SCREEN_H / 2 - 75});
 		usleep(5000);
 	}
 }
@@ -117,7 +105,7 @@ void	render_game(t_cub3d *cub3d)
 		{
 			usleep(10000);
 		}
-		exit(EXIT_SUCCESS);
+		end_loop(cub3d);
 	}
 		update_death(cub3d);
 }

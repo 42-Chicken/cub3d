@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 09:35:27 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:52:08 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,10 @@ assets/entities/money.xpm\n\
 assets/entities/lamp.xpm\n\
 assets/entities/fire_hydrant.xpm\n\
 assets/entities/trashcan.xpm\n\
+assets/entities/fire_baril.xpm\n\
+assets/entities/rat.xpm\n\
+assets/entities/tree1.xpm\n\
+assets/entities/tree2.xpm\n\
 assets/road.xpm\n\
 assets/sky.xpm\n\
 assets/damage_screen.xpm\n\
@@ -144,6 +148,10 @@ typedef enum e_textures
 	TEXTURE_ENTITY_LAMP,
 	TEXTURE_ENTITY_FIRE_HYDRANT,
 	TEXTURE_ENTITY_TRASHCAN,
+	TEXTURE_ENTITY_FIRE_BARIL,
+	TEXTURE_ENTITY_RAT,
+	TEXTURE_ENTITY_TREE1,
+	TEXTURE_ENTITY_TREE2,
 	TEXTURE_FLOOR,
 	TEXTURE_SKY,
 	TEXTURE_DAMAGE,

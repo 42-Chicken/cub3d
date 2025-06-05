@@ -6,11 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/06/05 09:11:26 by rguigneb         ###   ########.fr       */
-=======
-/*   Updated: 2025/06/03 17:08:39 by efranco          ###   ########.fr       */
->>>>>>> 902212bd74da042cefc07557c325271eb7521455
+/*   Updated: 2025/06/05 10:50:03 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +90,7 @@
 typedef struct timeval			t_time;
 
 # define MAP_SUPPORTED_CHARS "01BGFH"
-# define MAP_SUPPORTED_ENTITIES_CHARS "VMDLAT"
+# define MAP_SUPPORTED_ENTITIES_CHARS "VMDLATfRt2"
 
 typedef enum e_hand
 {
@@ -145,7 +141,11 @@ typedef enum e_cub3d_entity_type
 	CUB3D_ENTITY_DOOR = 'D',
 	CUB3D_ENTITY_LAMP = 'L',
 	CUB3D_ENTITY_FIRE_HYDRANT = 'A',
+	CUB3D_ENTITY_FIRE_BARIL = 'f',
+	CUB3D_ENTITY_RAT = 'R',
 	CUB3D_ENTITY_TRASHCAN = 'T',
+	CUB3D_ENTITY_TREE1 = 't',
+	CUB3D_ENTITY_TREE2 = '2',
 	CUB3D_ENTITY_BULLET,
 	__ENTITY_TYPES_COUNT__,
 }								t_e_cub3d_entity_type;
@@ -516,11 +516,15 @@ void							render_entities(t_cub3d *cub3d);
 t_texture						*get_entity_texture(t_cub3d *cub3d,
 									t_entity *entity);
 t_entity						new_bullet(t_dvec2 pos);
+t_entity						new_tree1(t_uvec2 pos);
+t_entity						new_tree2(t_uvec2 pos);
+t_entity						new_rat(t_uvec2 pos);
 t_entity						new_soldier(t_uvec2 pos);
 t_entity						new_money(t_uvec2 pos);
 
 t_entity						new_trashcan(t_uvec2 pos);
 t_entity						new_fire_hydrant(t_uvec2 pos);
+t_entity						new_fire_baril(t_uvec2 pos);
 void							update_door(t_cub3d *cub3d, t_entity *entity);
 t_entity						new_door(t_uvec2 pos);
 void							update_bullet(t_cub3d *cub3d, t_entity *entity);

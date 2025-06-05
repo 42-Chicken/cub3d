@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 17:24:37 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/05 10:25:23 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,9 +240,12 @@ void	soldier_shot(t_cub3d *cub3d, t_entity *soldier)
 	long	time;
 
 	time = gettime();
-	if (soldier->distance_from_player < 5 && time - soldier->cd > 2000)
+	if (((soldier->type == CUB3D_ENTITY_OFFICER && soldier->distance_from_player < 5) || (soldier->type == CUB3D_ENTITY_RAT && soldier->distance_from_player < 1.5)) && time - soldier->cd > 2000)
 	{
-		cub3d->player.health -= 25;
+		if (soldier->type == CUB3D_ENTITY_OFFICER)
+			cub3d->player.health -= 25;
+		else if (soldier->type == CUB3D_ENTITY_RAT)
+			cub3d->player.health -= 5;
 		soldier->cd = time;
 		cub3d->damage_screen.is_anim = true;
 		cub3d->damage_screen.time_start = gettime();
@@ -262,7 +265,7 @@ void	update_entities(t_cub3d *cub3d)
 		{
 			cub3d->entities[i].distance_from_player = distance_between(cub3d->entities[i].location,
 					cub3d->player.location);
-			if (cub3d->entities[i].type == CUB3D_ENTITY_OFFICER)
+			if (cub3d->entities[i].type == CUB3D_ENTITY_OFFICER || cub3d->entities[i].type == CUB3D_ENTITY_RAT)
 			{
 				cub3d->entities[i].flag_dir.up_flag = false;
 				cub3d->entities[i].flag_dir.down_flag = false;

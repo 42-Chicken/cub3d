@@ -27,7 +27,8 @@
 		"pthread.h": "c",
 		"vectors.h": "c",
 		"ft_strings.h": "c",
-		"cub3d_astar.h": "c"
+		"cub3d_astar.h": "c",
+		"limits.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }
