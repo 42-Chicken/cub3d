@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 15:28:12 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 08:59:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ t_entity	new_fire_hydrant(t_uvec2 pos)
 	fire_hydrant.type = CUB3D_ENTITY_FIRE_HYDRANT;
 	fire_hydrant.minimap_texture = __TEXTURE_NONE__;
 	fire_hydrant.distance_from_floor = -19;
-	fire_hydrant.scale = (t_dvec2){0.3, 0.45};
+	fire_hydrant.scale = (t_dvec2){0.3, 0.5};
 	return (fire_hydrant);
 }
