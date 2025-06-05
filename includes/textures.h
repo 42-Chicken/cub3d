@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/04 14:52:37 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 16:43:17 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ assets/entities/fire_hydrant.xpm\n\
 assets/entities/trashcan.xpm\n\
 assets/road.xpm\n\
 assets/sky.xpm\n\
+assets/damage_screen.xpm\n\
+assets/wastedd.xpm\n\
 F assets/walls/wall3.xpm\n\
 D assets/walls/door.xpm\n\
 B assets/walls/building.xpm\n\
@@ -144,6 +146,8 @@ typedef enum e_textures
 	TEXTURE_ENTITY_TRASHCAN,
 	TEXTURE_FLOOR,
 	TEXTURE_SKY,
+	TEXTURE_DAMAGE,
+	TEXTURE_WASTED,
 	TEXTURE_WALL_NORTH,
 	TEXTURE_WALL_SOUTH,
 	TEXTURE_WALL_EAST,

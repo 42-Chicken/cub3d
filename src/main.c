@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/04 14:59:38 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/03 17:21:29 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char const *argv[])
 	cub3d.key_pressed_index = 0;
 	cub3d.settings.player_speed = 3;
 	cub3d.settings.player_rotation_speed = 4;
+	cub3d.alive = true;
 	if (parse(&cub3d) == false)
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
 	if (init_mlx(&cub3d) == false)
