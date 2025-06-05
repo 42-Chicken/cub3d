@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/04 14:58:43 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 11:14:35 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_entity	new_trashcan(t_uvec2 pos)
 	t_entity	trashcan;
 
 	trashcan.in_game = true;
+	trashcan.fade = true;
 	trashcan.location = (t_dvec2){pos.x + 0.5, pos.y + 0.5};
 	setup_textures(&trashcan);
 	trashcan.type = CUB3D_ENTITY_TRASHCAN;

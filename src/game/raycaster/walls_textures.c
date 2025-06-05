@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:42:21 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 10:21:07 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:59:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_texture	*get_wall_texture(t_cub3d *cub3d, t_ray *ray)
 	return (texture);
 }
 
-static double	get_darkness(double distance)
+double	get_darkness(double distance)
 {
 	double	darkness_weight;
 

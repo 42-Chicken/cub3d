@@ -6,23 +6,11 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 09:20:50 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 10:26:00 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:59:13 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static double	get_darkness(double distance)
-{
-	double	darkness_weight;
-
-	darkness_weight = (215 / distance);
-	if (darkness_weight < 0)
-		darkness_weight = 0;
-	if (darkness_weight > 1)
-		darkness_weight = 1;
-	return (darkness_weight);
-}
 
 static void	draw_floor_pixel_color(t_cub3d *data, t_uvec2 pos,
 		t_color pixel_color, double row_distance)

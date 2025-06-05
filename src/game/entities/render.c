@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 10:45:45 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 11:15:59 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ t_vec2	calculate_width_height_and_draw(t_cub3d *cub3d, t_entity *entity,
 	return (get_draw_width(entity, x));
 }
 
+
+t_color fade_color(t_entity *entity, t_texture *texture, t_uvec2 pos)
+{
+	t_color color;
+
+	color = get_pixel_color(texture, pos);
+	if (entity->fade && color != 0xFF000000)
+		return (igmlx_melt_colors_weigthed(color, 0x000000, 1 - get_darkness(entity->distance_from_player * 50))); // igmlx_melt_colors_weigthed(color, 0x000000, get_darkness(entity->distance_from_player * 0)));
+	return (color);
+}
+
 void	draw_entity(t_cub3d *cub3d, t_entity *entity, int x)
 {
 	t_vec2		c;
@@ -73,7 +84,7 @@ void	draw_entity(t_cub3d *cub3d, t_entity *entity, int x)
 							* 128 + entity->height * 128) *texture->height)
 					/ entity->height) / 256;
 			put_pixel_to_buffer(cub3d->rendering_buffer, (t_uvec2){(size_t)c.x,
-				(size_t)c.y}, get_pixel_color(texture, texture_pos));
+				(size_t)c.y}, fade_color(entity, texture, texture_pos));
 		}
 	}
 }

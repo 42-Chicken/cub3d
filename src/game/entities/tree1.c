@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 10:45:44 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:59:55 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_entity	new_tree1(t_uvec2 pos)
 	t_entity	tree;
 
 	tree.in_game = true;
+	tree.fade = true;
 	tree.not_displayed = false;
 	tree.location = (t_dvec2){pos.x + 0.5, pos.y + 0.5};
 	setup_textures(&tree);

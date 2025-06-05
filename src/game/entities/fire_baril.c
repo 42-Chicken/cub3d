@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 09:58:55 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 11:06:11 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_entity	new_fire_baril(t_uvec2 pos)
 	t_entity	fire_baril;
 
 	fire_baril.in_game = true;
+	fire_baril.fade = false;
 	fire_baril.not_displayed = false;
 	fire_baril.location = (t_dvec2){pos.x + 0.5, pos.y + 0.5};
 	setup_textures(&fire_baril);

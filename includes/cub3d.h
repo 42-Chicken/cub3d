@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 10:50:03 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 10:59:27 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ typedef struct s_entity
 	bool						locked;
 	t_dvec2						target;
 	t_dvec2						spawn;
+	bool						fade;
 	bool						targeton;
 	bool						modattack;
 	long						cd;
@@ -595,6 +596,7 @@ void							get_vertical_intersection(t_cub3d *data,
 									t_ray *ray);
 float							fdistance_between(float x1, float y1, float x2,
 									float y2);
+double							get_darkness(double distance);
 
 // ANIMATION
 void							load_animation(t_cub3d *data);
