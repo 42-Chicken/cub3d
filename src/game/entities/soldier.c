@@ -6,7 +6,7 @@
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/28 15:18:26 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/03 15:15:57 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_entity	new_soldier(t_uvec2 pos)
 {
 	t_entity	soldier;
 
+	soldier.cd = gettime();
 	soldier.modattack = false;
 	soldier.targeton = false;
 	soldier.health = 10;

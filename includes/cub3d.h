@@ -6,7 +6,11 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/06/05 09:11:26 by rguigneb         ###   ########.fr       */
+=======
+/*   Updated: 2025/06/03 17:08:39 by efranco          ###   ########.fr       */
+>>>>>>> 902212bd74da042cefc07557c325271eb7521455
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +204,7 @@ typedef struct s_entity
 	t_dvec2						spawn;
 	bool						targeton;
 	bool						modattack;
+	long						cd;
 }								t_entity;
 
 typedef struct s_argb
@@ -288,6 +293,7 @@ typedef struct s_player
 	t_dvec2						plane;
 	double						cos_r;
 	double						sin_r;
+
 }								t_player;
 
 typedef struct s_minimap
@@ -399,7 +405,10 @@ typedef struct s_cub3d
 	t_e_cub3d_menu				menu;
 	t_e_cub3d_menu				last_frame_menu;
 
+	bool						alive;
+
 	t_animation					animation[3];
+	t_animation					damage_screen;
 	double						z_buffer[SCREEN_W];
 
 	void						*mlx;
@@ -586,5 +595,5 @@ float							fdistance_between(float x1, float y1, float x2,
 // ANIMATION
 void							load_animation(t_cub3d *data);
 void							render_hand(t_cub3d *data);
-
+long							gettime(void);
 #endif
