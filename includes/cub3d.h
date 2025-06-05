@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 10:59:27 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:34:36 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@
 
 typedef struct timeval			t_time;
 
-# define MAP_SUPPORTED_CHARS "01BGFH"
+# define MAP_SUPPORTED_CHARS "01BGFHZh"
 # define MAP_SUPPORTED_ENTITIES_CHARS "VMDLATfRt2"
 
 typedef enum e_hand
@@ -106,6 +106,7 @@ typedef enum e_cub3d_map_values
 	CUB3D_MAP_DOOR = 'D',
 	CUB3D_MAP_WALL = '1',
 	CUB3D_MAP_BUILDING = 'B',
+	CUB3D_MAP_BUILDING2 = 'Z',
 	__CUB3D_MAP_CHARS_COUNT__
 }								t_e_cub3d_map_values;
 

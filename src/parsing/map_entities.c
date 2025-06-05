@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:04:49 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 10:50:52 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/05 12:21:25 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	setup_entity(t_cub3d *cub3d, char c, t_uvec2 pos)
 {
 	t_entity	entity;
 
+	if (cub3d->entity_count >= MAX_ENTITIES)
+		return ;
 	cub3d->map.buffer[pos.y][pos.x] = CUB3D_MAP_FLOOR;
 	if (c == 'V')
 		entity = new_soldier(pos);
