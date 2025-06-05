@@ -75,6 +75,9 @@ assets/entities/soldier/left.xpm\n\
 assets/entities/soldier/front_left.xpm\n\
 assets/entities/bullet/bullet.xpm\n\
 assets/entities/money.xpm\n\
+assets/entities/lamp.xpm\n\
+assets/entities/fire_hydrant.xpm\n\
+assets/entities/trashcan.xpm\n\
 assets/road.xpm\n\
 assets/sky.xpm\n\
 assets/damage_screen.xpm\n\
@@ -138,6 +141,9 @@ typedef enum e_textures
 	TEXTURE_ENTITY_SOLDIER_FRONT_LEFT,
 	TEXTURE_ENTITY_BULLET,
 	TEXTURE_ENTITY_MONEY,
+	TEXTURE_ENTITY_LAMP,
+	TEXTURE_ENTITY_FIRE_HYDRANT,
+	TEXTURE_ENTITY_TRASHCAN,
 	TEXTURE_FLOOR,
 	TEXTURE_SKY,
 	TEXTURE_DAMAGE,
