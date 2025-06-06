@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 14:26:56 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 14:56:57 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:48:22 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static t_list	*parsing_get_map_lines(int fd)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (ft_strlen(line) <= 0 || is_not_only_spaces(line) == false)
-			continue ;
 		tmp = ft_lstnew(line);
 		ft_lstadd_back(&head, tmp);
 	}
