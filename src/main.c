@@ -6,24 +6,27 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:08:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 17:21:29 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/06 10:20:42 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void print_average_fps(t_cub3d *cub3d)
+void	print_average_fps(t_cub3d *cub3d)
 {
-	struct timeval end_time;
+	struct timeval	end_time;
+	double			start_sec;
+	double			end_sec;
+	double			elapsed;
+	double			avg_fps;
+
 	gettimeofday(&end_time, NULL);
-
-	double start_sec = cub3d->start_time.tv_sec + cub3d->start_time.tv_usec / 1e6;
-	double end_sec = end_time.tv_sec + end_time.tv_usec / 1e6;
-	double elapsed = end_sec - start_sec;
-
+	start_sec = cub3d->start_time.tv_sec + cub3d->start_time.tv_usec / 1e6;
+	end_sec = end_time.tv_sec + end_time.tv_usec / 1e6;
+	elapsed = end_sec - start_sec;
 	if (elapsed > 0)
 	{
-		double avg_fps = cub3d->tick / elapsed;
+		avg_fps = cub3d->tick / elapsed;
 		printf("Average FPS: %.2f\n", avg_fps);
 	}
 	else
@@ -31,15 +34,10 @@ void print_average_fps(t_cub3d *cub3d)
 		printf("Elapsed time too small to compute FPS.\n");
 	}
 }
-// day night cycle
 
-int	main(int argc, char const *argv[])
+void	init_data(t_cub3d *cub3d)
 {
-	t_cub3d	cub3d;
-
-	ft_bzero(&cub3d, sizeof(t_cub3d));
-	cub3d.ac = argc;
-	cub3d.av = argv;
+	ft_bzero(cub3d, sizeof(t_cub3d));
 	cub3d.menu = CUB3D_MENU_NONE;
 	cub3d.settings.fov = 60;
 	cub3d.settings.mouse_sens = 5;
@@ -49,20 +47,21 @@ int	main(int argc, char const *argv[])
 	cub3d.settings.player_speed = 3;
 	cub3d.settings.player_rotation_speed = 4;
 	cub3d.alive = true;
+}
+
+int	main(int argc, char const *argv[])
+{
+	t_cub3d	cub3d;
+
+	cub3d.ac = argc;
+	cub3d.av = argv;
+	init_data(&cub3d);
 	if (parse(&cub3d) == false)
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
 	if (init_mlx(&cub3d) == false)
 		return (free_all_contexts_garbage(), EXIT_FAILURE);
 	init_menus(&cub3d);
 	init_settings(&cub3d);
-	printf("F %x \n", cub3d.floor_color);
-	printf("C %x \n", cub3d.ceiling_color);
-	printf("NO %s \n", cub3d.north_texture_path);
-	printf("SO %s \n", cub3d.south_texture_path);
-	printf("WE %s \n", cub3d.west_texture_path);
-	printf("EA %s \n", cub3d.east_texture_path);
-	printf("MAP width %zu \n", cub3d.map.width);
-	printf("MAP height %zu \n", cub3d.map.height);
 	init_mlx_hooks(&cub3d);
 	cub3d.loaded = true;
 	gettimeofday(&cub3d.start_time, NULL);

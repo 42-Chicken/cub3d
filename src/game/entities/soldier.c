@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 08:57:26 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:08:14 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ t_entity	new_soldier(t_uvec2 pos)
 		1.2,
 		1.3,
 	};
-	soldier.distance_from_floor = 0;
+	soldier.dst_from_floor = 0;
 	return (soldier);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hand.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 18:57:47 by efranco           #+#    #+#             */
-/*   Updated: 2025/06/03 15:42:09 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/06 10:12:36 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,9 @@ void	load_animation(t_cub3d *data)
 	data->animation[GUN].time_start = 0;
 	data->animation[SHOTGUN].time_start = 0;
 }
-void	render_hand(t_cub3d *data)
-{
-	t_img		*img;
-	static int	i = 0;
 
-	img = NULL;
+void	handle_animation(t_cub3d *data, int *i)
+{
 	if (data->animation[HAND].is_anim == true)
 	{
 		if (data->animation[HAND].time_start == 0)
@@ -53,17 +50,26 @@ void	render_hand(t_cub3d *data)
 		if (gettime() - data->animation[HAND].time_start > 60)
 		{
 			data->animation[HAND].time_start = gettime();
-			i++;
+			(*i)++;
 		}
-		if ((i >= 3 && data->player.item == TEXTURE_HUD_HAND) || (i >= 5
+		if ((*i >= 3 && data->player.item == TEXTURE_HUD_HAND) || (*i >= 5
 				&& (data->player.item == TEXTURE_HUD_PISTOL
 					|| data->player.item == TEXTURE_HUD_SHOTGUN)))
 		{
 			data->animation[HAND].is_anim = false;
 			data->animation[HAND].time_start = 0;
-			i = 0;
+			*i = 0;
 		}
 	}
+}
+
+void	render_hand(t_cub3d *data)
+{
+	t_img		*img;
+	static int	i = 0;
+
+	img = NULL;
+	handle_animation(data, &i);
 	if (data->player.item == TEXTURE_HUD_HAND)
 		img = get_texture(data, data->animation[HAND].img[i]);
 	if (data->player.item == TEXTURE_HUD_PISTOL)

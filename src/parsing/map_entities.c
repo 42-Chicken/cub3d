@@ -6,11 +6,39 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:04:49 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 12:21:25 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:12:22 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static bool	spawn_props(t_cub3d *cub3d, t_entity *entity, char c, t_uvec2 pos)
+{
+	if (c == 'V')
+		*entity = new_soldier(pos);
+	else if (c == 'M')
+		*entity = new_money(pos);
+	else if (c == 'L')
+		*entity = new_lamp(pos);
+	else if (c == 'A')
+		*entity = new_fire_hydrant(pos);
+	else if (c == 'f')
+		*entity = new_fire_baril(pos);
+	else if (c == 'R')
+		*entity = new_rat(pos);
+	else if (c == 'T')
+		*entity = new_trashcan(pos);
+	else if (c == 't')
+		*entity = new_tree1(pos);
+	else if (c == '2')
+		*entity = new_tree2(pos);
+	else if (c == 'D')
+	{
+		cub3d->map.buffer[pos.y][pos.x] = CUB3D_MAP_DOOR;
+		*entity = new_door(pos);
+	}
+	return (entity->in_game);
+}
 
 static void	setup_entity(t_cub3d *cub3d, char c, t_uvec2 pos)
 {
@@ -18,33 +46,10 @@ static void	setup_entity(t_cub3d *cub3d, char c, t_uvec2 pos)
 
 	if (cub3d->entity_count >= MAX_ENTITIES)
 		return ;
+	ft_bzero(&entity, sizeof(t_entity));
 	cub3d->map.buffer[pos.y][pos.x] = CUB3D_MAP_FLOOR;
-	if (c == 'V')
-		entity = new_soldier(pos);
-	else if (c == 'M')
-		entity = new_money(pos);
-	else if (c == 'L')
-		entity = new_lamp(pos);
-	else if (c == 'A')
-		entity = new_fire_hydrant(pos);
-	else if (c == 'f')
-		entity = new_fire_baril(pos);
-	else if (c == 'R')
-		entity = new_rat(pos);
-	else if (c == 'T')
-		entity = new_trashcan(pos);
-	else if (c == 't')
-		entity = new_tree1(pos);
-	else if (c == '2')
-		entity = new_tree2(pos);
-	else if (c == 'D')
-	{
-		cub3d->map.buffer[pos.y][pos.x] = CUB3D_MAP_DOOR;
-		entity = new_door(pos);
-	}
-	else
-		return ;
-	cub3d->entities[cub3d->entity_count++] = entity;
+	if (spawn_props(cub3d, &entity, c, pos))
+		cub3d->entities[cub3d->entity_count++] = entity;
 }
 
 void	parse_map_entities(t_cub3d *cub3d)

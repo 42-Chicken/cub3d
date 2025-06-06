@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 11:20:48 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:11:45 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	on_key_released(int key, t_cub3d *cub3d)
 		}
 	}
 }
+
 void	handle_button_click(t_cub3d *cub3d)
 {
 	float	gun_x;
@@ -63,7 +64,8 @@ void	handle_button_click(t_cub3d *cub3d)
 	t_dvec2	gun_position;
 
 	cub3d->animation[HAND].is_anim = true;
-	if (cub3d->menu != CUB3D_MENU_NONE || cub3d->player.item == TEXTURE_HUD_HAND)
+	if (cub3d->menu != CUB3D_MENU_NONE
+		|| cub3d->player.item == TEXTURE_HUD_HAND)
 		return ;
 	if (cub3d->entity_count + 1 < MAX_ENTITIES)
 	{
@@ -73,10 +75,12 @@ void	handle_button_click(t_cub3d *cub3d)
 				+ 0.5f) * 0.7f;
 		gun_position = (t_dvec2){gun_x, gun_y};
 		cub3d->entities[cub3d->entity_count] = new_bullet(gun_position);
-		cub3d->entities[cub3d->entity_count].rotation_angle = cub3d->player.rotation_angle;
+		cub3d->entities[cub3d->entity_count].rotation_angle = \
+		cub3d->player.rotation_angle;
 		cub3d->entity_count++;
 	}
 }
+
 void	on_mouse_button_down(int key, int x, int y, t_cub3d *cub3d)
 {
 	(void)x;

@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 09:24:18 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:08:25 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	setup_textures(t_entity *money)
 	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_LEFT] = TEXTURE_ENTITY_BULLET;
 }
 
-static bool handle_player_damage(t_cub3d *cub3d, t_entity *entity)
+static bool	handle_player_damage(t_cub3d *cub3d, t_entity *entity)
 {
 	if (entity->distance_from_player < 1.25 && entity->flag == 1)
 	{
@@ -50,7 +50,7 @@ static bool	handle_damage(t_cub3d *cub3d, t_entity *entity)
 					|| cub3d->entities[i].type == CUB3D_ENTITY_RAT)
 				&& distance_between((t_dvec2){entity->location.x + 0.5,
 					entity->location.y + 0.5},
-					cub3d->entities[i].location) < 1.25)
+				cub3d->entities[i].location) < 1.25)
 			{
 				entity->in_game = false;
 				cub3d->entities[i].health -= 10;
@@ -88,7 +88,7 @@ t_entity	new_bullet(t_dvec2 pos)
 	setup_textures(&bullet);
 	bullet.type = CUB3D_ENTITY_BULLET;
 	bullet.minimap_texture = __TEXTURE_NONE__;
-	bullet.distance_from_floor = -5;
+	bullet.dst_from_floor = -5;
 	bullet.scale = (t_dvec2){0.07, 0.07};
 	return (bullet);
 }

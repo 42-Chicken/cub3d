@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 13:08:39 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 14:02:39 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:05:42 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	minimap_handle_enemies(t_cub3d *cub3d, t_texture *border)
 	i = 0;
 	while (i < cub3d->entity_count)
 	{
-		if (cub3d->entities[i].in_game && cub3d->entities[i].minimap_texture != __TEXTURE_NONE__)
+		if (cub3d->entities[i].in_game && cub3d->entities[i].minimap_texture != \
+			__TEXTURE_NONE__)
 			minimap_draw_entity(cub3d, &cub3d->entities[i], border, \
 				get_texture(cub3d, cub3d->entities[i].minimap_texture));
 		i++;

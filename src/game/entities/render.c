@@ -6,48 +6,11 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 08:56:37 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:07:37 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-t_vec2	get_draw_width(t_entity *entity, int x)
-{
-	t_vec2	draw_x;
-
-	draw_x.x = x - entity->width / 2;
-	if (draw_x.x < 0)
-		draw_x.x = 0;
-	draw_x.y = x + entity->width / 2;
-	if (draw_x.y >= SCREEN_W)
-		draw_x.y = SCREEN_W - 1;
-	return (draw_x);
-}
-
-t_vec2	get_draw_height(t_entity *entity)
-{
-	t_vec2	draw_y;
-
-	draw_y.x = -entity->height / 2 + SCREEN_H / 2 + entity->y_offset;
-	if (draw_y.x < 0)
-		draw_y.x = 0;
-	draw_y.y = entity->height / 2 + SCREEN_H / 2 + entity->y_offset;
-	if (draw_y.y >= SCREEN_H)
-		draw_y.y = SCREEN_H - 1;
-	return (draw_y);
-}
-
-t_vec2	calculate_width_height_and_draw(t_cub3d *cub3d, t_entity *entity,
-		t_vec2 *draw_height, int x)
-{
-	entity->width = fabs(entity->scale.x * cub3d->distance_from_camera
-			/ entity->transformed.y);
-	entity->height = fabs(entity->scale.y * cub3d->distance_from_camera
-			/ entity->transformed.y);
-	*draw_height = get_draw_height(entity);
-	return (get_draw_width(entity, x));
-}
 
 t_color	fade_color(t_entity *entity, t_texture *texture, t_uvec2 pos)
 {
@@ -56,7 +19,8 @@ t_color	fade_color(t_entity *entity, t_texture *texture, t_uvec2 pos)
 	color = get_pixel_color(texture, pos);
 	if (entity->max_health != 0 && color != 0xFF000000)
 	{
-		color = igmlx_melt_colors_weigthed(color, 0xFF0000, 1.0f - (double)entity->health / (double)entity->max_health);
+		color = igmlx_melt_colors_weigthed(color, 0xFF0000, 1.0f
+				- (double)entity->health / (double)entity->max_health);
 	}
 	if (entity->fade && color != 0xFF000000)
 		return (igmlx_melt_colors_weigthed(color, 0x000000, 1
@@ -85,7 +49,7 @@ void	draw_entity(t_cub3d *cub3d, t_entity *entity, int x)
 			&& ++c.y < dr_h.y)
 		{
 			texture_pos.y = (((double)((c.y - entity->y_offset) * 256 - SCREEN_H
-							* 128 + entity->height * 128) * texture->height)
+							* 128 + entity->height * 128) *texture->height)
 					/ entity->height) / 256;
 			put_pixel_to_buffer(cub3d->rendering_buffer, (t_uvec2){(size_t)c.x,
 				(size_t)c.y}, fade_color(entity, texture, texture_pos));
@@ -111,7 +75,7 @@ void	render_entities(t_cub3d *cub3d)
 		cub3d->entities[i].transformed = (t_dvec2){inv_det * (player.direction.y
 				* pos.x - player.direction.x * pos.y), inv_det
 			* (-player.plane.y * pos.x + player.plane.x * pos.y)};
-		cub3d->entities[i].y_offset = (int)(-cub3d->entities[i].distance_from_floor
+		cub3d->entities[i].y_offset = (int)(-cub3d->entities[i].dst_from_floor
 				* (cub3d->distance_from_camera
 					/ cub3d->entities[i].transformed.y) / TILESIZE);
 		if (cub3d->entities[i].transformed.y > 0 && cub3d->entities[i].in_game)

@@ -38,6 +38,7 @@ SRCS				=	src/main.c\
 						src/game/hud/stats/money_render.c\
 						src/game/hud/stats/time_render.c\
 						src/game/hud/screens/loading_screen.c\
+						src/game/hud/render.c\
 						src/game/game_render.c\
 						src/game/hud/menus/pause_menu.c\
 						src/game/hud/menus/options_menu.c\
@@ -107,6 +108,7 @@ SRCS				=	src/main.c\
 						src/game/entities/money.c\
 						src/game/entities/tree1.c\
 						src/game/entities/tree2.c\
+						src/game/entities/utils.c\
 						src/game/entities/multitextures.c\
 						src/game/a_star/a_star.c\
 						src/game/a_star/a_star_utils.c\

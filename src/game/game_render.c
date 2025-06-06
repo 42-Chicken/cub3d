@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:02:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 09:47:19 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:19:43 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	render_rendering_buffer(t_cub3d *cub3d)
 	mlx_put_image_to_window(cub3d->mlx, cub3d->win, cub3d->rendering_buffer, 0,
 		0);
 }
+
 void	update_damage(t_cub3d *cub3d)
 {
 	t_img	*img;
@@ -63,6 +64,7 @@ void	igmlx_apply_gray_filter(t_cub3d *cub3d, double intensity)
 		pos.y++;
 	}
 }
+
 void	update_death(t_cub3d *cub3d)
 {
 	t_img	*img;
@@ -78,8 +80,10 @@ void	update_death(t_cub3d *cub3d)
 		usleep(5000);
 	}
 }
+
 void	render_game(t_cub3d *cub3d)
 {
+	long	time;
 
 	if (cub3d->alive == true)
 	{
@@ -92,20 +96,16 @@ void	render_game(t_cub3d *cub3d)
 		update_entities(cub3d);
 		render_raycasting(cub3d);
 		render_entities(cub3d);
-		render_hand(cub3d);
-		render_minimap(cub3d);
-		render_stats(cub3d);
+		render_hud(cub3d);
 		render_rendering_buffer(cub3d);
 		update_damage(cub3d);
 	}
 	else
 	{
-		long time = gettime();
+		time = gettime();
 		while (gettime() - time < 3000)
-		{
 			usleep(10000);
-		}
 		end_loop(cub3d);
 	}
-		update_death(cub3d);
+	update_death(cub3d);
 }

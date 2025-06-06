@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 11:06:27 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:07:37 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_entity	new_lamp(t_uvec2 pos)
 	setup_textures(&lamp);
 	lamp.type = CUB3D_ENTITY_LAMP;
 	lamp.minimap_texture = __TEXTURE_NONE__;
-	lamp.distance_from_floor = 55;
+	lamp.dst_from_floor = 55;
 	lamp.scale = (t_dvec2){0.5, 3};
 	return (lamp);
 }

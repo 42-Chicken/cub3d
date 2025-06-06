@@ -28,14 +28,12 @@ void	add_to_open_list(t_list **lst, t_node *node)
 
 	new = create_list_node(node);
 	if (!lst || !new)
-		return;
-
+		return ;
 	if (!*lst)
 	{
 		*lst = new;
-		return;
+		return ;
 	}
-
 	last = get_last_node(*lst);
 	last->next = new;
 }
@@ -48,7 +46,6 @@ t_node	*get_cheapest_node(t_list *open_list)
 
 	min_cost = INFINITY;
 	cheapest_node = NULL;
-
 	while (open_list)
 	{
 		current_node = (t_node *)open_list->content;

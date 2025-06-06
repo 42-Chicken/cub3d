@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 09:20:25 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:23:47 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,44 +196,39 @@ double	entity_look_at_player(t_cub3d *cub3d, t_entity *soldier)
 		angle_to_player += 2.0 * M_PI;
 	return (angle_to_player);
 }
+
+void	soldier_thing(t_cub3d *cub3d, t_entity *soldier)
+{
+	if (soldier->distance_from_player > 1.5 && is_walkable(cub3d->map.buffer,
+			(t_dvec2){soldier->location.x, soldier->location.y}))
+	{
+		soldier->modattack = true;
+		soldier->rotation_angle = entity_look_at_player(cub3d, soldier) + M_PI;
+		soldier->location.x += target_angle.x * 0.04;
+		soldier->location.y += target_angle.y * 0.04;
+	}
+}
+
 void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 {
 	t_cub3d_map	map_info;
 	t_dvec2		target_angle;
 
 	if (soldier->distance_from_player < 50 && is_walkable(cub3d->map.buffer,
-			(t_dvec2){soldier->location.x, soldier->location.y}))
+			soldier->location))
 	{
 		map_info.map = cub3d->map.buffer;
 		map_info.width = SCREEN_W / TILESIZE;
 		map_info.height = SCREEN_H / TILESIZE;
-		map_info.soldier_pos.x = soldier->location.x;
-		map_info.soldier_pos.y = soldier->location.y;
-		map_info.target_pos.x = cub3d->player.location.x;
-		map_info.target_pos.y = cub3d->player.location.y;
+		map_info.soldier_pos = soldier->location map_info.target_pos = cub3d->player.location;
 		target_angle = a_star_cub3d(map_info);
 		if (target_angle.x != -1.0 && target_angle.y != -1.0)
-		{
-			if (soldier->distance_from_player > 1.5
-				&& is_walkable(cub3d->map.buffer, (t_dvec2){soldier->location.x,
-					soldier->location.y}))
-			{
-				soldier->modattack = true;
-				soldier->rotation_angle = entity_look_at_player(cub3d, soldier)
-					+ M_PI;
-				soldier->location.x += target_angle.x * 0.04;
-				soldier->location.y += target_angle.y * 0.04;
-			}
-		}
+			soldier_thing(cub3d, soldier);
 		else
-		{
 			soldier->modattack = false;
-		}
 	}
 	else
-	{
 		soldier->modattack = false;
-	}
 }
 
 void	soldier_shot(t_cub3d *cub3d, t_entity *soldier)

@@ -12,8 +12,6 @@
 
 #include "cub3d_astar.h"
 
-
-
 void	init_adjacent_positions(t_node *node)
 {
 	node->up.x = node->x;
@@ -34,7 +32,6 @@ t_node	*create_node(t_node *parent, t_dvec2 coord_start, t_dvec2 coord_goal,
 	node = malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);
-
 	node->x = coord_start.x;
 	node->y = coord_start.y;
 	node->viewed = false;
@@ -47,7 +44,6 @@ t_node	*create_node(t_node *parent, t_dvec2 coord_start, t_dvec2 coord_goal,
 	node->prev = parent;
 	node->prev_direction = prev_direction;
 	init_adjacent_positions(node);
-
 	return (node);
 }
 

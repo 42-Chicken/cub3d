@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/23 10:52:41 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:07:37 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	update_money(t_cub3d *cub3d, t_entity *entity)
 {
 	if (!entity->flag)
 	{
-		entity->distance_from_floor += 0.05;
-		if (entity->distance_from_floor > -23)
+		entity->dst_from_floor += 0.05;
+		if (entity->dst_from_floor > -23)
 			entity->flag = true;
 	}
 	else
 	{
-		entity->distance_from_floor -= 0.05;
-		if (entity->distance_from_floor <= -25)
+		entity->dst_from_floor -= 0.05;
+		if (entity->dst_from_floor <= -25)
 			entity->flag = false;
 	}
 	if (entity->distance_from_player <= 0.5)
@@ -60,6 +60,6 @@ t_entity	new_money(t_uvec2 pos)
 		0.2,
 		0.2,
 	};
-	money.distance_from_floor = -25;
+	money.dst_from_floor = -25;
 	return (money);
 }

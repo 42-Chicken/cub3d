@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 11:03:29 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:07:37 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_entity	new_tree2(t_uvec2 pos)
 	setup_textures(&tree);
 	tree.type = CUB3D_ENTITY_TREE2;
 	tree.minimap_texture = __TEXTURE_NONE__;
-	tree.distance_from_floor = 65;
+	tree.dst_from_floor = 65;
 	tree.scale = (t_dvec2){2.5, 3.5};
 	return (tree);
 }

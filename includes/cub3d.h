@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 08:39:20 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:18:25 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 # define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
 
 # define MENU_MAX_BTNS 15
-# define MAX_ENTITIES 125
+# define MAX_ENTITIES 150
 
 # define PLAYER_SPEED 0.1f
 # define PLAYER_COLLISION_RADIUS 0.18f
@@ -194,7 +194,7 @@ typedef struct s_entity
 	t_dvec2						transformed;
 	int							y_offset;
 	bool						anchored;
-	double						distance_from_floor;
+	double						dst_from_floor;
 	bool						flag;
 	bool						not_displayed;
 	t_textures_definition		minimap_texture;
@@ -430,6 +430,7 @@ void							exit_error(const char *msg);
 void							render_game(t_cub3d *cub3d);
 void							render_rendering_buffer(t_cub3d *cub3d);
 void							init_settings(t_cub3d *cub3d);
+void							render_hud(t_cub3d *cub3d);
 
 // THREADS
 size_t							r_size_t(pthread_mutex_t *mutex, size_t *value);
@@ -599,6 +600,9 @@ void							get_vertical_intersection(t_cub3d *data,
 float							fdistance_between(float x1, float y1, float x2,
 									float y2);
 double							get_darkness(double distance);
+t_vec2							calculate_width_height_and_draw(t_cub3d *cub3d,
+									t_entity *entity, t_vec2 *draw_height,
+									int x);
 
 // ANIMATION
 void							load_animation(t_cub3d *data);

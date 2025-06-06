@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 11:06:11 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:08:04 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 static void	setup_textures(t_entity *money)
 {
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT] = TEXTURE_ENTITY_FIRE_BARIL;
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_RIGHT] = TEXTURE_ENTITY_FIRE_BARIL;
-	money->textures[CUB3D_ENTITY_TEXTURE_RIGHT] = TEXTURE_ENTITY_FIRE_BARIL;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK_RIGHT] = TEXTURE_ENTITY_FIRE_BARIL;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK] = TEXTURE_ENTITY_FIRE_BARIL;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK_LEFT] = TEXTURE_ENTITY_FIRE_BARIL;
-	money->textures[CUB3D_ENTITY_TEXTURE_LEFT] = TEXTURE_ENTITY_FIRE_BARIL;
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_LEFT] = TEXTURE_ENTITY_FIRE_BARIL;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT] = \
+	TEXTURE_ENTITY_FIRE_BARIL;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_RIGHT] = \
+	TEXTURE_ENTITY_FIRE_BARIL;
+	money->textures[CUB3D_ENTITY_TEXTURE_RIGHT] = \
+	TEXTURE_ENTITY_FIRE_BARIL;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK_RIGHT] = \
+	TEXTURE_ENTITY_FIRE_BARIL;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK] = \
+	TEXTURE_ENTITY_FIRE_BARIL;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK_LEFT] = \
+	TEXTURE_ENTITY_FIRE_BARIL;
+	money->textures[CUB3D_ENTITY_TEXTURE_LEFT] = \
+	TEXTURE_ENTITY_FIRE_BARIL;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_LEFT] = \
+	TEXTURE_ENTITY_FIRE_BARIL;
 }
 
 t_entity	new_fire_baril(t_uvec2 pos)
@@ -35,7 +43,7 @@ t_entity	new_fire_baril(t_uvec2 pos)
 	setup_textures(&fire_baril);
 	fire_baril.type = CUB3D_ENTITY_FIRE_BARIL;
 	fire_baril.minimap_texture = __TEXTURE_NONE__;
-	fire_baril.distance_from_floor = 10;
+	fire_baril.dst_from_floor = 10;
 	fire_baril.scale = (t_dvec2){0.55, 1.5};
 	return (fire_baril);
 }

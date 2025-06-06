@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:24:00 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/03 14:29:15 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:09:51 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ bool	load_texture(t_cub3d *cub3d, const char *path, int id)
 	return (false);
 }
 
+void	apply_color_settings(t_cub3d *cub3d)
+{
+	igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_FLOOR),
+		cub3d->floor_color);
+	if (cub3d->ceiling_color != 0)
+		igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_SKY),
+			cub3d->ceiling_color);
+}
+
 bool	load_assets(t_cub3d *cub3d)
 {
 	bool	error;
@@ -57,13 +66,9 @@ bool	load_assets(t_cub3d *cub3d)
 	{
 		error |= load_texture(cub3d, textures_paths[i], i);
 		update_loading_screen(cub3d);
-		// usleep(100000);
+		usleep(100000);
 	}
-	igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_FLOOR),
-		cub3d->floor_color);
-	if (cub3d->ceiling_color != 0)
-		igmlx_apply_color_filter(get_texture(cub3d, TEXTURE_SKY),
-		cub3d->ceiling_color);
+	apply_color_settings(cub3d);
 	if (!error)
 		error |= init_minimap(cub3d);
 	exit_safe_memory_context();
