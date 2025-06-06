@@ -6,22 +6,30 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 10:08:25 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:14:18 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	setup_textures(t_entity *money)
+static void	setup_textures(t_entity *money, int flag)
 {
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT] = TEXTURE_ENTITY_BULLET;
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_RIGHT] = TEXTURE_ENTITY_BULLET;
-	money->textures[CUB3D_ENTITY_TEXTURE_RIGHT] = TEXTURE_ENTITY_BULLET;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK_RIGHT] = TEXTURE_ENTITY_BULLET;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK] = TEXTURE_ENTITY_BULLET;
-	money->textures[CUB3D_ENTITY_TEXTURE_BACK_LEFT] = TEXTURE_ENTITY_BULLET;
-	money->textures[CUB3D_ENTITY_TEXTURE_LEFT] = TEXTURE_ENTITY_BULLET;
-	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_LEFT] = TEXTURE_ENTITY_BULLET;
+	t_textures_definition	def;
+
+	if (flag == 0)
+		def = TEXTURE_ENTITY_BULLET_BACK;
+	if (flag == 1)
+		def = TEXTURE_ENTITY_BULLET_FRONT;
+	if (flag == 2)
+		def = TEXTURE_ENTITY_SHOTGUN_BULLET;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT] = def;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_RIGHT] = def;
+	money->textures[CUB3D_ENTITY_TEXTURE_RIGHT] = def;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK_RIGHT] = def;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK] = def;
+	money->textures[CUB3D_ENTITY_TEXTURE_BACK_LEFT] = def;
+	money->textures[CUB3D_ENTITY_TEXTURE_LEFT] = def;
+	money->textures[CUB3D_ENTITY_TEXTURE_FRONT_LEFT] = def;
 }
 
 static bool	handle_player_damage(t_cub3d *cub3d, t_entity *entity)
@@ -78,14 +86,14 @@ void	update_bullet(t_cub3d *cub3d, t_entity *entity)
 	entity->location.y += sin(entity->rotation_angle) * 0.5;
 }
 
-t_entity	new_bullet(t_dvec2 pos)
+t_entity	new_bullet(t_dvec2 pos, int flag)
 {
 	t_entity	bullet;
 
 	bullet.in_game = true;
 	bullet.not_displayed = false;
 	bullet.location = (t_dvec2){pos.x, pos.y};
-	setup_textures(&bullet);
+	setup_textures(&bullet, flag);
 	bullet.type = CUB3D_ENTITY_BULLET;
 	bullet.minimap_texture = __TEXTURE_NONE__;
 	bullet.dst_from_floor = -5;

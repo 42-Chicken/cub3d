@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 10:18:25 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:10:33 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -519,7 +519,7 @@ void							update_entities(t_cub3d *cub3d);
 void							render_entities(t_cub3d *cub3d);
 t_texture						*get_entity_texture(t_cub3d *cub3d,
 									t_entity *entity);
-t_entity						new_bullet(t_dvec2 pos);
+t_entity						new_bullet(t_dvec2 pos, int flag);
 t_entity						new_tree1(t_uvec2 pos);
 t_entity						new_tree2(t_uvec2 pos);
 t_entity						new_rat(t_uvec2 pos);

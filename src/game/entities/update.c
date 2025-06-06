@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 10:25:26 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:11:53 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,18 @@ void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 		soldier->modattack = false;
 }
 
+void	spawn_bullet(t_cub3d *cub3d, t_entity *soldier)
+{
+	if (cub3d->entity_count + 1 < MAX_ENTITIES)
+	{
+		cub3d->entities[cub3d->entity_count] = new_bullet(soldier->location, 1);
+		cub3d->entities[cub3d->entity_count].rotation_angle = soldier->rotation_angle
+			+ M_PI;
+		cub3d->entities[cub3d->entity_count].flag = 1;
+		cub3d->entity_count++;
+	}
+}
+
 void	soldier_shot(t_cub3d *cub3d, t_entity *soldier)
 {
 	long	time;
@@ -245,14 +257,7 @@ void	soldier_shot(t_cub3d *cub3d, t_entity *soldier)
 	{
 		if (soldier->type == CUB3D_ENTITY_OFFICER)
 		{
-			if (cub3d->entity_count + 1 < MAX_ENTITIES)
-			{
-				cub3d->entities[cub3d->entity_count] = new_bullet(soldier->location);
-				cub3d->entities[cub3d->entity_count].rotation_angle = soldier->rotation_angle
-					+ M_PI;
-				cub3d->entities[cub3d->entity_count].flag = 1;
-				cub3d->entity_count++;
-			}
+			spawn_bullet(cub3d, soldier);
 			soldier->cd = time;
 		}
 		else if (soldier->type == CUB3D_ENTITY_RAT)

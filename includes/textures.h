@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:06:34 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 12:31:39 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:06:40 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ assets/img/shotgun2.xpm\n\
 assets/img/shotgun3.xpm\n\
 assets/img/shotgun4.xpm\n\
 assets/img/shotgun5.xpm\n\
+assets/sky.xpm\n\
 assets/walls/wall.xpm\n\
 assets/entities/soldier/front.xpm\n\
 assets/entities/soldier/front_right.xpm\n\
@@ -73,7 +74,9 @@ assets/entities/soldier/back.xpm\n\
 assets/entities/soldier/back_left.xpm\n\
 assets/entities/soldier/left.xpm\n\
 assets/entities/soldier/front_left.xpm\n\
-assets/entities/bullet/bullet.xpm\n\
+assets/entities/bullet/bullet_front.xpm\n\
+assets/entities/bullet/bullet_back.xpm\n\
+assets/entities/bullet/shotgun.xpm\n\
 assets/entities/money.xpm\n\
 assets/entities/lamp.xpm\n\
 assets/entities/fire_hydrant.xpm\n\
@@ -83,7 +86,6 @@ assets/entities/rat.xpm\n\
 assets/entities/tree1.xpm\n\
 assets/entities/tree2.xpm\n\
 assets/road.xpm\n\
-assets/sky.xpm\n\
 assets/damage_screen.xpm\n\
 assets/wastedd.xpm\n\
 F assets/walls/wall3.xpm\n\
@@ -136,6 +138,7 @@ typedef enum e_textures
 	TEXTURE_SHOTGUN3,
 	TEXTURE_SHOTGUN4,
 	TEXTURE_SHOTGUN5,
+	TEXTURE_SKY,
 	TEXTURE_WALL_DEFAULT,
 	TEXTURE_ENTITY_SOLDIER_FRONT,
 	TEXTURE_ENTITY_SOLDIER_FRONT_RIGHT,
@@ -145,7 +148,9 @@ typedef enum e_textures
 	TEXTURE_ENTITY_SOLDIER_BACK_LEFT,
 	TEXTURE_ENTITY_SOLDIER_LEFT,
 	TEXTURE_ENTITY_SOLDIER_FRONT_LEFT,
-	TEXTURE_ENTITY_BULLET,
+	TEXTURE_ENTITY_BULLET_FRONT,
+	TEXTURE_ENTITY_BULLET_BACK,
+	TEXTURE_ENTITY_SHOTGUN_BULLET,
 	TEXTURE_ENTITY_MONEY,
 	TEXTURE_ENTITY_LAMP,
 	TEXTURE_ENTITY_FIRE_HYDRANT,
@@ -155,7 +160,6 @@ typedef enum e_textures
 	TEXTURE_ENTITY_TREE1,
 	TEXTURE_ENTITY_TREE2,
 	TEXTURE_FLOOR,
-	TEXTURE_SKY,
 	TEXTURE_DAMAGE,
 	TEXTURE_WASTED,
 	TEXTURE_WALL_NORTH,

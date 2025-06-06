@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 10:28:13 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 11:12:34 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ void	handle_button_click(t_cub3d *cub3d)
 		gun_y = cub3d->player.location.y + sin(cub3d->player.rotation_angle
 				+ 0.5f) * 0.7f;
 		gun_position = (t_dvec2){gun_x, gun_y};
-		cub3d->entities[cub3d->entity_count] = new_bullet(gun_position);
+		if (cub3d->player.item == TEXTURE_HUD_PISTOL)
+			cub3d->entities[cub3d->entity_count] = new_bullet(gun_position, 0);
+		else
+			cub3d->entities[cub3d->entity_count] = new_bullet(gun_position, 2);
 		cub3d->entities[cub3d->entity_count].rotation_angle = \
 		cub3d->player.rotation_angle;
 		cub3d->entity_count++;
