@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 08:29:17 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 11:15:59 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 08:56:37 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,18 @@ t_vec2	calculate_width_height_and_draw(t_cub3d *cub3d, t_entity *entity,
 	return (get_draw_width(entity, x));
 }
 
-
-t_color fade_color(t_entity *entity, t_texture *texture, t_uvec2 pos)
+t_color	fade_color(t_entity *entity, t_texture *texture, t_uvec2 pos)
 {
-	t_color color;
+	t_color	color;
 
 	color = get_pixel_color(texture, pos);
+	if (entity->max_health != 0 && color != 0xFF000000)
+	{
+		color = igmlx_melt_colors_weigthed(color, 0xFF0000, 1.0f - (double)entity->health / (double)entity->max_health);
+	}
 	if (entity->fade && color != 0xFF000000)
-		return (igmlx_melt_colors_weigthed(color, 0x000000, 1 - get_darkness(entity->distance_from_player * 50))); // igmlx_melt_colors_weigthed(color, 0x000000, get_darkness(entity->distance_from_player * 0)));
+		return (igmlx_melt_colors_weigthed(color, 0x000000, 1
+				- get_darkness(entity->distance_from_player * 50)));
 	return (color);
 }
 
@@ -81,7 +85,7 @@ void	draw_entity(t_cub3d *cub3d, t_entity *entity, int x)
 			&& ++c.y < dr_h.y)
 		{
 			texture_pos.y = (((double)((c.y - entity->y_offset) * 256 - SCREEN_H
-							* 128 + entity->height * 128) *texture->height)
+							* 128 + entity->height * 128) * texture->height)
 					/ entity->height) / 256;
 			put_pixel_to_buffer(cub3d->rendering_buffer, (t_uvec2){(size_t)c.x,
 				(size_t)c.y}, fade_color(entity, texture, texture_pos));
@@ -107,8 +111,8 @@ void	render_entities(t_cub3d *cub3d)
 		cub3d->entities[i].transformed = (t_dvec2){inv_det * (player.direction.y
 				* pos.x - player.direction.x * pos.y), inv_det
 			* (-player.plane.y * pos.x + player.plane.x * pos.y)};
-		cub3d->entities[i].y_offset = (int)(\
-		-cub3d->entities[i].distance_from_floor * (cub3d->distance_from_camera
+		cub3d->entities[i].y_offset = (int)(-cub3d->entities[i].distance_from_floor
+				* (cub3d->distance_from_camera
 					/ cub3d->entities[i].transformed.y) / TILESIZE);
 		if (cub3d->entities[i].transformed.y > 0 && cub3d->entities[i].in_game)
 			draw_entity(cub3d, &cub3d->entities[i], (int)((SCREEN_W / 2.0) * (1

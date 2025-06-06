@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 12:34:36 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 08:39:20 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@
 # define MINIMAP_BACKGROUND_CIRCLE_RADIUS 95
 
 # define MENU_MAX_BTNS 15
-# define MAX_ENTITIES 100
+# define MAX_ENTITIES 125
 
 # define PLAYER_SPEED 0.1f
 # define PLAYER_COLLISION_RADIUS 0.18f
@@ -185,6 +185,7 @@ typedef struct s_entity
 	bool						in_game;
 	t_e_cub3d_entity_type		type;
 	int							health;
+	int							max_health;
 	double						distance_from_player;
 	t_dvec2						location;
 	int							height;

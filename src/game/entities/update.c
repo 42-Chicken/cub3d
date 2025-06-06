@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 11:08:44 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 09:20:25 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 	t_cub3d_map	map_info;
 	t_dvec2		target_angle;
 
-	if (soldier->distance_from_player < 30 && is_walkable(cub3d->map.buffer,
+	if (soldier->distance_from_player < 50 && is_walkable(cub3d->map.buffer,
 			(t_dvec2){soldier->location.x, soldier->location.y}))
 	{
 		map_info.map = cub3d->map.buffer;
@@ -235,20 +235,37 @@ void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 		soldier->modattack = false;
 	}
 }
+
 void	soldier_shot(t_cub3d *cub3d, t_entity *soldier)
 {
 	long	time;
 
 	time = gettime();
-	if (((soldier->type == CUB3D_ENTITY_OFFICER && soldier->distance_from_player < 5) || (soldier->type == CUB3D_ENTITY_RAT && soldier->distance_from_player < 1.5)) && time - soldier->cd > 2000)
+	if (((soldier->type == CUB3D_ENTITY_OFFICER
+				&& soldier->distance_from_player < 5)
+			|| (soldier->type == CUB3D_ENTITY_RAT
+				&& soldier->distance_from_player < 1.5)) && time
+		- soldier->cd > 1000)
 	{
 		if (soldier->type == CUB3D_ENTITY_OFFICER)
-			cub3d->player.health -= 25;
+		{
+			if (cub3d->entity_count + 1 < MAX_ENTITIES)
+			{
+				cub3d->entities[cub3d->entity_count] = new_bullet(soldier->location);
+				cub3d->entities[cub3d->entity_count].rotation_angle = soldier->rotation_angle
+					+ M_PI;
+				cub3d->entities[cub3d->entity_count].flag = 1;
+				cub3d->entity_count++;
+			}
+			soldier->cd = time;
+		}
 		else if (soldier->type == CUB3D_ENTITY_RAT)
+		{
 			cub3d->player.health -= 5;
-		soldier->cd = time;
-		cub3d->damage_screen.is_anim = true;
-		cub3d->damage_screen.time_start = gettime();
+			soldier->cd = time;
+			cub3d->damage_screen.is_anim = true;
+			cub3d->damage_screen.time_start = gettime();
+		}
 	}
 }
 void	update_entities(t_cub3d *cub3d)
@@ -265,7 +282,8 @@ void	update_entities(t_cub3d *cub3d)
 		{
 			cub3d->entities[i].distance_from_player = distance_between(cub3d->entities[i].location,
 					cub3d->player.location);
-			if (cub3d->entities[i].type == CUB3D_ENTITY_OFFICER || cub3d->entities[i].type == CUB3D_ENTITY_RAT)
+			if (cub3d->entities[i].type == CUB3D_ENTITY_OFFICER
+				|| cub3d->entities[i].type == CUB3D_ENTITY_RAT)
 			{
 				cub3d->entities[i].flag_dir.up_flag = false;
 				cub3d->entities[i].flag_dir.down_flag = false;
@@ -280,6 +298,7 @@ void	update_entities(t_cub3d *cub3d)
 		else
 		{
 			d = 0;
+			ft_bzero(&cub3d->entities[i], sizeof(t_entity));
 			while (j < cub3d->entity_count)
 			{
 				swap_entities(cub3d, i + d++, j++);

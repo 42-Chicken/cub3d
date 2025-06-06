@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 10:13:51 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 10:23:01 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 08:39:31 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_entity	new_rat(t_uvec2 pos)
 
 	rat.in_game = true;
 	rat.not_displayed = false;
+	rat.health = 10;
+	rat.max_health = 10;
 	rat.location = (t_dvec2){pos.x + 0.5, pos.y + 0.5};
 	setup_textures(&rat);
 	rat.type = CUB3D_ENTITY_RAT;
