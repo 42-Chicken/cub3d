@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:26:37 by efranco           #+#    #+#             */
-/*   Updated: 2025/06/06 10:21:10 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:25:48 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_dvec2	a_star_cub3d(t_cub3d_map map_info)
 	t_dvec2	target_direction;
 	t_dvec2	error_vec;
 
-	error_vec = {-1.0, -1.0};
+	error_vec = (t_dvec2){-1.0, -1.0};
 	open_list = NULL;
 	current_node = create_node(NULL, map_info.soldier_pos, map_info.target_pos,
 			(t_direction)-1);

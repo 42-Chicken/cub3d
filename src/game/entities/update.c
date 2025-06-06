@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 10:23:47 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:25:26 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,7 +197,7 @@ double	entity_look_at_player(t_cub3d *cub3d, t_entity *soldier)
 	return (angle_to_player);
 }
 
-void	soldier_thing(t_cub3d *cub3d, t_entity *soldier)
+void	soldier_thing(t_cub3d *cub3d, t_entity *soldier, t_dvec2 target_angle)
 {
 	if (soldier->distance_from_player > 1.5 && is_walkable(cub3d->map.buffer,
 			(t_dvec2){soldier->location.x, soldier->location.y}))
@@ -220,10 +220,11 @@ void	soldier_attaque(t_cub3d *cub3d, t_entity *soldier)
 		map_info.map = cub3d->map.buffer;
 		map_info.width = SCREEN_W / TILESIZE;
 		map_info.height = SCREEN_H / TILESIZE;
-		map_info.soldier_pos = soldier->location map_info.target_pos = cub3d->player.location;
+		map_info.soldier_pos = soldier->location;
+		map_info.target_pos = cub3d->player.location;
 		target_angle = a_star_cub3d(map_info);
 		if (target_angle.x != -1.0 && target_angle.y != -1.0)
-			soldier_thing(cub3d, soldier);
+			soldier_thing(cub3d, soldier, target_angle);
 		else
 			soldier->modattack = false;
 	}

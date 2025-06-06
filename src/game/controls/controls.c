@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 09:25:54 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 10:11:45 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 10:28:13 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	handle_button_click(t_cub3d *cub3d)
 	float	gun_y;
 	t_dvec2	gun_position;
 
-	cub3d->animation[HAND].is_anim = true;
 	if (cub3d->menu != CUB3D_MENU_NONE
 		|| cub3d->player.item == TEXTURE_HUD_HAND)
 		return ;
+	cub3d->animation[HAND].is_anim = true;
 	if (cub3d->entity_count + 1 < MAX_ENTITIES)
 	{
 		gun_x = cub3d->player.location.x + cos(cub3d->player.rotation_angle
