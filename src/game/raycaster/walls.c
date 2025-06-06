@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 08:32:07 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/05 12:35:39 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 09:57:28 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,17 @@ double	get_wall_type_height(char c)
 
 	base_height = 150;
 	if (c == 'G')
-	{
 		base_height = 135;
-	}
+	if (c == '1')
+		base_height = 32;
 	if (c == 'Z')
-	{
 		base_height = 500;
-	}
 	if (c == 'F')
-	{
 		base_height = 250;
-	}
 	if (c == 'h')
-	{
 		base_height = 550;
-	}
 	if (c == 'B')
-	{
 		base_height = 300;
-	}
 	return (base_height);
 }
 
