@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_render.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 10:02:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 10:19:43 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:14:28 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	igmlx_apply_gray_filter(t_cub3d *cub3d, double intensity)
 			if (*pixel != 0xFF000000)
 			{
 				original_color = *pixel;
-				*pixel = igmlx_melt_colors_weigthed(original_color, 0x000000,
-						intensity);
+				*pixel = igmlx_melt_colors_weigthed(original_color,
+						0x000000, intensity);
 			}
 			pos.x++;
 		}

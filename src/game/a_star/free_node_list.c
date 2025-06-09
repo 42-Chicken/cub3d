@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   free_node_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/21 12:08:55 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 16:23:39 by efranco          ###   ########.fr       */
+/*   Created: 2025/06/06 16:39:37 by efranco           #+#    #+#             */
+/*   Updated: 2025/06/06 16:41:56 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_astar.h"
 
-void	update_entities(t_cub3d *cub3d)
+void	free_node_list(t_list *lst)
 {
-	size_t	i;
+	t_list	*tmp;
 
-	i = 0;
-	while (i < cub3d->entity_count)
+	while (lst)
 	{
-		if (cub3d->entities[i].in_game)
-		{
-			update_active_entity(cub3d, &cub3d->entities[i]);
-			i++;
-		}
-		else
-		{
-			remove_inactive_entity(cub3d, i);
-		}
+		tmp = lst;
+		free(lst->content);
+		lst = lst->next;
+		free(tmp);
 	}
-	sort_entities(cub3d);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 11:10:33 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/06 16:46:00 by efranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h>
+
+# define EPSILON 0.001
 
 # define SCREEN_W 1550
 # define SCREEN_H 850
@@ -418,6 +420,8 @@ typedef struct s_cub3d
 	void						*win;
 }								t_cub3d;
 
+t_dvec2							generate_random_patrol_target(t_entity *entity,
+									t_cub3d *cub3d);
 // MAIN
 bool							init_mlx(t_cub3d *cub3d);
 void							init_mlx_hooks(t_cub3d *cub3d);
@@ -447,7 +451,8 @@ void							switch_to_pause_menu(t_cub3d *cub3d);
 // PARSING
 bool							parse(t_cub3d *cube3d);
 bool							parsing_is_correct_file_path(t_cub3d *cub3d);
-bool							parsing_map_only_contains_allowed_chars(t_cub3d *cub3d);
+bool							parsing_map_only_contains_allowed_chars(
+									t_cub3d *cub3d);
 void							parse_map_entities(t_cub3d *cub3d);
 bool							parsing_check_map(t_cub3d *cub3d);
 int								parsing_open_file(t_cub3d *cub3d);
@@ -597,8 +602,8 @@ void							get_horizontal_intersection(t_cub3d *data,
 									t_ray *ray);
 void							get_vertical_intersection(t_cub3d *data,
 									t_ray *ray);
-float							fdistance_between(float x1, float y1, float x2,
-									float y2);
+float							fdistance_between(float x1, float y1,
+									float x2, float y2);
 double							get_darkness(double distance);
 t_vec2							calculate_width_height_and_draw(t_cub3d *cub3d,
 									t_entity *entity, t_vec2 *draw_height,
@@ -608,4 +613,41 @@ t_vec2							calculate_width_height_and_draw(t_cub3d *cub3d,
 void							load_animation(t_cub3d *data);
 void							render_hand(t_cub3d *data);
 long							gettime(void);
+
+// ENTITY
+
+void							update_entities(t_cub3d *cub3d);
+void							remove_inactive_entity(t_cub3d *cub3d,
+									size_t i);
+void							update_active_entity(t_cub3d *cub3d,
+									t_entity *entity);
+void							soldier_shot(t_cub3d *cub3d, t_entity *soldier);
+void							spawn_bullet(t_cub3d *cub3d, t_entity *soldier);
+void							soldier_attaque(t_cub3d *cub3d,
+									t_entity *soldier);
+void							soldier_thing(t_cub3d *cub3d, t_entity *soldier,
+									t_dvec2 target_angle);
+double							entity_look_at_player(t_cub3d *cub3d,
+									t_entity *soldier);
+void							update_interactions(t_cub3d *cub3d,
+									t_entity *entity);
+void							soldier_patern(t_entity *soldier,
+									t_cub3d *cub3d);
+void							apply_movement(t_entity *soldier);
+void							set_movement_flags(t_entity *soldier);
+void							reset_entity_flags(t_entity *entity);
+t_dvec2							generate_random_patrol_target(t_entity *entity,
+									t_cub3d *cub3d);
+t_dvec2							try_direction(t_entity *entity, t_cub3d *cub3d,
+									int direction);
+void							block_direction(t_entity *entity,
+									int direction);
+t_dvec2							get_direction_target(int direction,
+									t_entity *entity);
+int								build_available_directions(t_entity *entity,
+									int *tab);
+bool							is_entity_locked(t_entity *entity);
+void							sort_entities(t_cub3d *cub3d);
+void							swap_entities(t_cub3d *cub3d, size_t i,
+									size_t j);
 #endif

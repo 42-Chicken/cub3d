@@ -95,6 +95,10 @@ SRCS				=	src/main.c\
 						src/game/raycaster/horizontal.c\
 						src/game/hud/hand/hand.c\
 						src/game/entities/init.c\
+						src/game/entities/generate_random.c\
+						src/game/entities/get_direction.c\
+						src/game/entities/soldier_patern.c\
+						src/game/entities/soldier_status.c\
 						src/game/entities/update.c\
 						src/game/entities/render.c\
 						src/game/entities/door.c\
@@ -114,6 +118,7 @@ SRCS				=	src/main.c\
 						src/game/a_star/a_star_utils.c\
 						src/game/a_star/cub3d_astar_validation.c\
 						src/game/a_star/cub3d_astar_list.c\
+						src/game/a_star/free_node_list.c\
 						src/logs/logs.c
 
 FT_LIBC 			= ./libs/ft_libc/ft_libc.a
