@@ -6,7 +6,7 @@
 /*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 09:50:29 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/05/06 10:30:44 by rguigneb         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:04:14 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ static int	parsing_get_identifier(char **line, char **buffer)
 
 static bool	parsing_set_and_read_id_value(char **target, char *value)
 {
+	if (*target != NULL)
+		return (_error("duplicate texture in map data!"), *target = NULL,
+			false);
 	*target = ft_strtrim(value, SPACES);
 	if (ft_strlen(*target) <= 0)
 		return (_error("invalid path in map data!"), *target = NULL, false);
@@ -78,12 +81,12 @@ static bool	parsing_map_identifier(t_cub3d *cub3d, char *buffer, char *value)
 	if (is_same_str("EA", buffer))
 		return (parsing_set_and_read_id_value(&cub3d->east_texture_path,
 				value));
-	if (is_same_str("F", buffer))
-		return (parsing_set_and_read_color_id_value(&cub3d->floor_color,
-				value));
-	if (is_same_str("C", buffer))
-		return (parsing_set_and_read_color_id_value(&cub3d->ceiling_color,
-				value));
+	if (is_same_str("F", buffer) && !cub3d->b_floor_color)
+		return (cub3d->b_floor_color = true,
+			parsing_set_and_read_color_id_value(&cub3d->floor_color, value));
+	if (is_same_str("C", buffer) && !cub3d->b_ceiling_color)
+		return (cub3d->b_ceiling_color = true,
+			parsing_set_and_read_color_id_value(&cub3d->ceiling_color, value));
 	return (_error("invalid map data!"), false);
 }
 

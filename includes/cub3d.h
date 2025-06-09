@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efranco <efranco@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rguigneb <rguigneb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:26:37 by rguigneb          #+#    #+#             */
-/*   Updated: 2025/06/06 16:46:00 by efranco          ###   ########.fr       */
+/*   Updated: 2025/06/09 15:03:10 by rguigneb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -375,7 +375,9 @@ typedef struct s_cub3d
 
 	t_img						hand;
 	t_color						floor_color;
+	bool						b_floor_color;
 	t_color						ceiling_color;
+	bool						b_ceiling_color;
 	t_player					player;
 	t_map						map;
 

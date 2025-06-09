@@ -18,9 +18,10 @@ SO ./assets/walls/north_wall.xpm
 
 
 
+
 WE 					    ./assets/walls/west_wall.xpm
 
-HHH
+FHH
 HVH
 HHH
 H0H
