@@ -4,6 +4,11 @@
 
 ---
 
+# One Line Execution
+```bash
+git clone git@github.com:42-Chicken/cub3d.git && cd cub3d && make &&./cub3d maps/valids/light_city.cub
+```
+
 ## Overview
 
 `cub3D` is a compact game engine that turns a 2D grid into a pseudo-3D maze. It parses configuration files, validates the map, builds the world state, and renders a first-person view with textured walls, floors, and sky. On top of the core raycasting loop the project adds menus, HUD overlays, interactable entities (doors, pickups, enemies), mouse and keyboard controls, and an optional A* pathfinding layer for smarter NPCs.

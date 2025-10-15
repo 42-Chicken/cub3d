@@ -4,7 +4,7 @@ CC					=	clang
 
 CFLAGS				=	-Wall -Werror -Wextra -O3 -march=native -pipe -flto -fomit-frame-pointer -ffast-math  -Ilibs/ft_libc/includes -Ilibs/minilibx-linux -Iincludes -fPIE -g
 RM					=	rm -rf
-MAKE				=	make --no-print-directory -C
+MAKE				=	make --silent --no-print-directory -C
 
 # Colors
 RESET				=	\033[0m
@@ -16,6 +16,16 @@ BLUE				=	\033[0;34m
 PURPLE				=	\033[1;35m
 CYAN				=	\033[1;36m
 WHITE				=	\033[0;37m
+GRADIENT_1			=	\033[38;2;13;71;161m
+GRADIENT_2			=	\033[38;2;21;101;192m
+GRADIENT_3			=	\033[38;2;33;150;243m
+GRADIENT_4			=	\033[38;2;94;53;177m
+GRADIENT_5			=	\033[38;2;123;31;162m
+GRADIENT_6			=	\033[38;2;171;71;188m
+HIGHLIGHT			=	\033[38;2;224;64;251m
+BUILD_COLOR			=	\033[38;2;41;182;246m
+LINK_COLOR			=	\033[38;2;149;117;205m
+LOG_COLOR			=	\033[38;2;100;181;246m
 
 # Symbols
 OK					=	✓
@@ -133,62 +143,73 @@ OBJ_DIR				=	objects
 all : $(NAME)
 
 $(NAME) : header $(MLX_LIB) $(FT_LIBC) $(OBJ_DIR)
+		@printf "$(LOG_COLOR)$(INFO) Linking $(NAME)...$(RESET)\n"
 		@$(CC) -lXext -lX11 -lm -lz $(CFLAGS) $(OBJS) $(FT_LIBC) $(MLX_LIB) -o $(NAME)
+		@printf "$(LINK_COLOR)$(OK) Build complete: $(NAME)$(RESET)\n"
 
 $(OBJ_DIR)/%.o: %.c
 		@mkdir -p $(dir $@)
 		@$(CC) $(CFLAGS) -c $< -o $@
-		@printf "$(GREEN)$(OK)$(RESET)"
+		@printf "$(BUILD_COLOR)[BUILD] %-32s -> %s$(RESET)\n" "$(notdir $<)" "$(notdir $@)"
 
 $(OBJ_DIR): $(OBJS)
 		@if [ ! -d "$(OBJ_DIR)" ]; \
 			then mkdir -p "$(OBJ_DIR)"; \
 		fi
-		@if [ ! -e "$(NAME)" ]; then \
-			printf "]" ; \
-			printf "\n" ; \
-		fi
 
 $(MLX_LIB):
 	@if [ ! -d "$(shell dirname $@)" ]; then \
-		git clone https://github.com/42Paris/minilibx-linux.git $(shell dirname $@); \
-		cd $(shell dirname $@) && ./configure && cd .. ;\
-	fi;
-	make re -C $(MLX_LIB_PATH) --no-print-directory
+		printf "$(LOG_COLOR)$(INFO) Fetching MinilibX sources...$(RESET)\n"; \
+		git clone https://github.com/42Paris/minilibx-linux.git $(shell dirname $@) >/dev/null; \
+		printf "$(LOG_COLOR)$(INFO) MinilibX repository ready.$(RESET)\n"; \
+		printf "$(LOG_COLOR)$(INFO) Configuring MinilibX...$(RESET)\n"; \
+		cd $(shell dirname $@) && ./configure >/dev/null && cd .. ;\
+		printf "$(LINK_COLOR)$(OK) MinilibX configured$(RESET)\n"; \
+	fi
+	@printf "$(LOG_COLOR)$(INFO) Building MinilibX...$(RESET)\n"
+	@$(MAKE) $(MLX_LIB_PATH) re
+	@printf "$(LINK_COLOR)$(OK) MinilibX ready$(RESET)\n"
 
 $(FT_LIBC) :
 	@if [ ! -e "$($@)" ]; then \
+		printf "$(LOG_COLOR)$(INFO) Refreshing ft_libc sources...$(RESET)\n"; \
 		rm -rf $(shell dirname $@); \
-		git clone git@github.com:R0-main/ft_libc.git $(shell dirname $@); \
-	fi;
+		git clone git@github.com:R0-main/ft_libc.git $(shell dirname $@) >/dev/null; \
+		printf "$(LOG_COLOR)$(INFO) ft_libc repository ready.$(RESET)\n"; \
+	fi
+	@printf "$(LOG_COLOR)$(INFO) Building ft_libc...$(RESET)\n"
 	@$(MAKE) $(shell dirname $@) SAFE=1
+	@printf "$(LINK_COLOR)$(OK) ft_libc ready$(RESET)\n"
 
 dev	 : clean-objs all
 	valgrind --track-fds=yes --trace-children=yes --show-leak-kinds=all --leak-check=full -q ./cub3d maps/valids/map.cub
 
 header:
-		@printf "\
-		 _____         _      _____ ______\n\
-		/  __ \       | |    |____ ||  _  \\n\
-		| /  \/ _   _ | |__      / /| | | |\n\
-		| |    | | | || '_ \     \ \| | | |\n\
-		| \__/\| |_| || |_) |.___/ /| |/ /\n\
-		\____/ \__,_||_.__/ \____/ |___/\n\
-		" ;
-		@printf  "\n";
-		@if [ ! -e "$(NAME)" ]; \
-			then printf "Compiling Project : ["; \
-		fi
+		@printf "$(GRADIENT_1)  _____         _      _____ ______$(RESET)\n"
+		@printf "$(GRADIENT_2) /  __ \\       | |    |____ ||  _  \\ $(RESET)\n"
+		@printf "$(GRADIENT_3) | /  \\/ _   _ | |__      / /| | | |$(RESET)\n"
+		@printf "$(GRADIENT_4) | |    | | | || '_ \\     \\ \\| | | |$(RESET)\n"
+		@printf "$(GRADIENT_5) | \\__/\\| |_| || |_) |.___/ /| |/ /$(RESET)\n"
+		@printf "$(GRADIENT_6) \\____/ \\__,_||_.___/ \\____/ |___/$(RESET)\n"
+		@printf "\n"
+		@printf "$(HIGHLIGHT)Launching gradient build for $(NAME)...$(RESET)\n"
 
 clean-objs :
+		@printf "$(LOG_COLOR)$(INFO) Removing object files...$(RESET)\n"
 		@$(RM) $(OBJ_DIR)
+		@printf "$(LINK_COLOR)$(OK) Objects cleaned$(RESET)\n"
 
 clean : clean-objs
+		@printf "$(LOG_COLOR)$(INFO) Cleaning ft_libc artifacts...$(RESET)\n"
 		@$(MAKE) $(shell dirname $(FT_LIBC)) fclean
+		@printf "$(LOG_COLOR)$(INFO) Cleaning MinilibX artifacts...$(RESET)\n"
 		@$(MAKE) $(shell dirname $(MLX_LIB)) clean
+		@printf "$(LINK_COLOR)$(OK) External libraries cleaned$(RESET)\n"
 
 fclean : clean
+		@printf "$(LOG_COLOR)$(INFO) Removing binary $(NAME)...$(RESET)\n"
 		@$(RM) $(NAME)
+		@printf "$(LINK_COLOR)$(OK) Binary removed$(RESET)\n"
 
 re : fclean all
 
