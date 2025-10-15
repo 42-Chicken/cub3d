@@ -1,187 +1,116 @@
-# cub3D — A tiny Wolfenstein-style raycaster
+# cub3D
 
-> A 42 project that explores ray‑casting by rendering a 3D view of a 2D maze using **C** and **MiniLibX**.
-
-<!-- Optional: drop a demo GIF/screenshot here (e.g., docs/preview.gif) -->
-
----
-
-## Table of contents
-
-* [Overview](#overview)
-* [Tech stack](#tech-stack)
-* [Implementation details](#implementation-details)
-
-  * [Ray‑casting pipeline (DDA)](#ray-casting-pipeline-dda)
-  * [Subsystems](#subsystems)
-* [Project layout](#project-layout)
-* [Getting started](#getting-started)
-
-  * [Prerequisites](#prerequisites)
-  * [Clone](#clone)
-  * [Build](#build)
-  * [Run](#run)
-* [Map (`.cub`) format](#map-cub-format)
-* [Controls](#controls)
-* [Troubleshooting](#troubleshooting)
-* [Contributing](#contributing)
-* [License](#license)
+> Wolfenstein-inspired raycaster written in C for 42. Reads a `.cub` config, projects the maze with textured walls, and layers HUD, entities, and gameplay systems on top of MiniLibX.
 
 ---
 
 ## Overview
 
-`cub3D` renders a first‑person view inside a maze by casting rays from the player’s camera to the scene’s walls.
-You provide a configuration/map file (`.cub`) that defines textures, colors and a 2D map grid; the engine turns that into a simple, real‑time 3D experience.
+`cub3D` is a compact game engine that turns a 2D grid into a pseudo-3D maze. It parses configuration files, validates the map, builds the world state, and renders a first-person view with textured walls, floors, and sky. On top of the core raycasting loop the project adds menus, HUD overlays, interactable entities (doors, pickups, enemies), mouse and keyboard controls, and an optional A* pathfinding layer for smarter NPCs.
 
-Core goals:
-
-* Parse a `.cub` file (textures, colors, map, player spawn)
-* Validate the map (closed, valid chars, single spawn)
-* Render walls via **ray‑casting** (DDA)
-* Draw textured columns with correct perspective
-* Handle input & collision
-* (Optionally) render sprites, minimap, UI, doors, etc.
+**Highlights**
+- Textured raycasting with per-column DDA.
+- Animated HUD, minimap, pause/options menus, and weapon hand.
+- Entity system handling static props, doors, collectible money, projectiles, and AI soldiers.
+- Optional threaded loader and logging utilities to keep the main loop smooth.
 
 ---
 
-## Tech stack
+## Tech Stack
 
-* **Language:** C (C99‑ish, 42 Norm)
-* **Graphics:** [MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx)
-
-  * **macOS:** `-lmlx -framework OpenGL -framework AppKit`
-  * **Linux:** `-lmlx -lXext -lX11 -lm` (plus X11 dev packages)
-* **Build:** `Makefile` (targets typically: `all`, `clean`, `fclean`, `re`, and sometimes `bonus`)
-* **OS:** macOS or Linux (X11)
-
-> ℹ️ Exact targets and library paths may differ in your Makefile; adjust the commands below accordingly.
+- **Language:** ISO C (42 Norm compliant, compiled with `clang`).
+- **Graphics:** [MiniLibX Linux](https://harm-smits.github.io/42docs/libs/minilibx) (`libX11`, `libXext`, `libm`, `z`).
+- **Utility library:** `libs/ft_libc` (custom libc-style helpers).
+- **Build system:** `Makefile` with optimized `-O3 -flto` flags and incremental object cache.
+- **OS targets:** Linux (X11). Porting to macOS requires adjusting the MLX variant and linker flags.
 
 ---
 
-## Implementation details
+## Architecture & Implementation
 
-### Ray‑casting pipeline (DDA)
+### Rendering pipeline
+1. Build a camera ray for each column based on the player pose and FOV.
+2. Run DDA to march the ray through the map grid until a wall or door is hit.
+3. Compute perpendicular distance to avoid fisheye distortion and derive the projected wall height.
+4. Sample the correct texture column, blend with floor/sky, and draw the pixel strip into an off-screen buffer.
+5. Copy the buffer to the MiniLibX window; overlay HUD elements and weapon sprites.
 
-1. For each vertical screen column, cast a ray from the camera through that column in camera space.
-2. Step the ray across the grid using **DDA** until it hits a wall.
-3. Compute distance to the hit, then determine the wall slice height by inverse‑distance projection.
-4. Sample the correct texture column (based on which face was hit and hit coordinate) and draw the vertical strip.
-5. Repeat for all columns to form the frame.
+### Core subsystems
+- **Parsing (`src/parsing/`)**  
+  Validates `.cub` files (texture paths, RGB colors), constructs the map matrix, and populates the initial player spawn and entity descriptors.
+- **Gameplay & controls (`src/game/`)**  
+  Handles WASD/arrow input, mouse look, collision, entity updates, door logic, enemy AI, and minimap rendering.
+- **HUD (`src/game/hud/`)**  
+  Draws stats, timers, menus, loading screen, and weapon animations using bitmap fonts loaded from `src/fonts/`.
+- **Textures & assets (`src/game/textures/`, `assets/`)**  
+  Loads XPM sprites for walls, props, and the skybox; exposes helpers for multi-textured entities.
+- **Threads & logs (`src/threads/`, `src/logs/`)**  
+  Optional background loader prints progress while assets initialize, keeping startup responsive.
+- **Utility layer (`src/utils/`)**  
+  Custom allocators (`balloc`), vector math, string helpers, and rendering primitives.
 
-### Subsystems
-
-* **Parser & validator:**
-
-  * Reads `.cub` file: texture paths for `NO/SO/WE/EA`, floor/ceiling colors, then the map.
-  * Ensures a single player start (`N/S/E/W`) and a **closed** map (no leaks into the void).
-* **Game loop:**
-
-  * Polls events, updates player movement with collision, renders a new frame each tick.
-* **Textures:**
-
-  * Loads XPM (or PNG if your MLX variant supports it); computes texture X coordinate from hit point.
-* **(Optional) Sprites:**
-
-  * Projected and depth‑sorted using a **z‑buffer** (re‑use column distances).
-* **(Optional) Minimap & HUD:**
-
-  * 2D overlay for debugging/navigation.
+The engine keeps most state inside a single `t_cub3d` structure, passed through initialization, MLX setup, and the main loop (`src/loop.c`). Average FPS is printed on shutdown to help track performance regressions.
 
 ---
 
-## Project layout
-
-> Your tree may differ slightly; this is the conventional structure.
+## Repository Layout
 
 ```
-cub3d/
-├─ inc/                 # headers (engine, parser, math, mlx glue)
-├─ src/
-│  ├─ core/             # main, init, loop
-│  ├─ render/           # raycasting, dda, textures, sprites, zbuf
-│  ├─ parse/            # .cub parsing, validation, errors
-│  ├─ game/             # input, movement, collision
-│  └─ utils/            # lib-style helpers
-├─ assets/
-│  ├─ textures/         # .xpm textures (NO/SO/WE/EA, sprites)
-│  └─ maps/             # example .cub maps
-├─ mlx/                 # MiniLibX (vendored or submodule) [optional]
-├─ Makefile
-└─ README.md
+assets/          # textures, maps, fonts, HUD images
+includes/        # public headers (cub3d.h, structs, constants)
+libs/            # ft_libc and minilibx-linux (cloned on demand)
+maps/            # subject-compliant sample maps
+objects/         # build artifacts (created by make)
+src/             # engine sources: parsing, raycaster, HUD, entities, AI
+Makefile
+README.md
 ```
 
 ---
 
-## Getting started
+## Getting Started
 
 ### Prerequisites
-
-**macOS**
-
-* Xcode Command Line Tools:
-
-  ```bash
-  xcode-select --install
-  ```
-* MiniLibX: vendored in `mlx/` *or* installed system‑wide (paths must match your Makefile).
-
-**Linux (Debian/Ubuntu)**
-
-```bash
-sudo apt update
-sudo apt install build-essential libx11-dev libxext-dev
-# Some MLX forks also need:
-# sudo apt install libbsd-dev libxrandr-dev libxi-dev
-```
-
-> If MLX is a submodule, you’ll init it after cloning.
+- A Linux environment with X11 development packages (`build-essential`, `libx11-dev`, `libxext-dev`, `zlib1g-dev`, `libm`).  
+- `clang`, `make`, and Git.  
+- Network access during the first build so the `Makefile` can clone `minilibx-linux` and `ft_libc` if they are missing.
 
 ### Clone
-
 ```bash
-git clone https://github.com/42Chicken/cub3d.git
+git clone git@github.com:42-Chicken/cub3d.git
 cd cub3d
-# If MiniLibX (or any deps) are submodules:
-git submodule update --init --recursive
 ```
 
 ### Build
-
 ```bash
-# Standard build (adjust if your Makefile uses a different target)
+# Compile everything (assets and external libs are fetched automatically if absent)
 make
 
-# Rebuild from scratch
+# Clean intermediate objects / binaries
+make clean
+make fclean
+
+# Full rebuild
 make re
 
-# Cleanup
-make clean    # object files only
-make fclean   # binaries + objects
-
-# Optional bonus target if provided by your Makefile
-make bonus
+# Development helpers (valgrind run with a sample map)
+make dev
 ```
-
-If you see linker errors about `AppKit`/`OpenGL` on macOS or `X11` on Linux, double‑check the library flags and include/library paths in your `Makefile`.
 
 ### Run
-
 ```bash
-# Basic run with an example map
-./cub3D assets/maps/example.cub
+# Launch with any valid .cub map
+./cub3d maps/valids/map.cub
 
-# Or (if you built a bonus target)
-./cub3D_bonus assets/maps/example_bonus.cub
+# Use your own map
+./cub3d path/to/your_map.cub
 ```
 
-> Replace paths with your actual map files in `assets/maps/`.
+Run the binary from the project root so relative texture paths resolve correctly. While in-game you can pause, tweak settings, or inspect the minimap depending on the compiled features.
 
 ---
 
-## Map (`.cub`) format
-
-A typical file looks like:
+## `.cub` Map Format (Quick Reference)
 
 ```
 NO assets/textures/wall_north.xpm
@@ -189,67 +118,43 @@ SO assets/textures/wall_south.xpm
 WE assets/textures/wall_west.xpm
 EA assets/textures/wall_east.xpm
 
-F  100,100,100       # floor color (R,G,B)
-C  200,200,255       # ceiling color (R,G,B)
+F 120,120,120       # floor color (RGB 0-255)
+C 210,210,255       # ceiling color
 
-/* Map: 1=wall, 0=floor, space=void,
-   N/S/E/W = player spawn + facing,
-   2 (optional) = sprite/object */
 1111111111
-1000000001
 10N0000001
-1000200001
+1000203001
+1000000001
 1111111111
 ```
 
-**Rules:**
-
-* Exactly one player start (`N`, `S`, `E`, or `W`).
-* Map must be **closed** by walls (no leaks to spaces outside).
-* Only the allowed characters appear.
-* All texture paths are valid/readable.
-* Colors are valid `0–255` RGB triples.
+- One player spawn (`N`, `S`, `E`, or `W`).
+- Map closed by walls (`1`) and padded with spaces outside.
+- Optional entity markers (`2`, `3`, etc.) map to in-game props defined in `src/game/entities/`.
 
 ---
 
-## Controls
-
-* **W / A / S / D** – Move/strafe
-* **← / →** or **Q / E** – Rotate view
-* **Esc** – Quit
-* *(Optional extras if implemented)* **M** minimap, **I** HUD, **O** crosshair, **L** shadows
-
-> The exact bindings depend on your input module; adjust here if you use different keys.
+## Controls (default)
+- `W / A / S / D` - Move and strafe.
+- `Arrow Left / Arrow Right` or mouse - Rotate camera.
+- `E` - Interact with doors and menus.
+- `Space` - Fire current weapon.
+- `Esc` - Leave the game (also accessible in pause menu).
 
 ---
 
 ## Troubleshooting
-
-* **Black window / nothing renders**
-  Check texture paths and map validity; ensure your `dda` hits compute wall orientation and texture X correctly.
-
-* **Weird fisheye / wrong wall heights**
-  Use the **perpendicular** distance to the wall (correct the ray length by removing the camera plane component).
-
-* **Gaps at map edges / crashes**
-  Your map likely isn’t closed; run a flood‑fill validator from the player position to ensure no leak to the void.
-
-* **Linker errors (macOS)**
-  Ensure `-lmlx -framework OpenGL -framework AppKit` and your `mlx` headers/libs paths are correct.
-
-* **Linker errors (Linux)**
-  Ensure `-lmlx -lXext -lX11 -lm` and that `libx11-dev libxext-dev` (and optionally `libbsd-dev libxrandr-dev libxi-dev`) are installed.
-
----
-
-## Contributing
-
-PRs and issues are welcome!
-For 42 students, please respect the **Norm** and keep the mandatory vs. bonus parts separate if your subject requires it.
+- **Window opens but nothing draws**  
+  Verify the `.cub` file paths and ensure textures exist and are readable.
+- **Player slips through walls**  
+  Check the map is fully enclosed and run the validator inside `src/parsing/map_checks*.c`.
+- **Linker errors about X11**  
+  Install `libx11-dev libxext-dev libm-dev zlib1g-dev` (package names may vary by distro).
+- **Segfault during load**  
+  Run `make dev` to launch under Valgrind with verbose logging; inspect the output in `logs/`.
 
 ---
 
 ## License
 
-This project is part of the 42 curriculum. See the repository’s **LICENSE** file (if present) for details.
-Textures and third‑party assets in `assets/` keep their original licenses.
+This repository accompanies the 42 curriculum. Unless otherwise noted, the code is shared under the repository's default license; third-party textures and fonts in `assets/` retain their original licenses.
