@@ -4,6 +4,8 @@
 
 ---
 
+![screenshot](assets/demo.gif)
+
 # One Line Execution
 ```bash
 git clone git@github.com:42-Chicken/cub3d.git && cd cub3d && make &&./cub3d maps/valids/light_city.cub
